@@ -1,4 +1,4 @@
-package com.yztc.lovetv.fragment.tabhost;
+package com.yztc.lovetv.fragment.other;
 
 
 import android.os.Bundle;
@@ -12,14 +12,19 @@ import com.yztc.lovetv.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Tuijian_Fragment_Vp extends Fragment {
+public class ManyFragment extends Fragment {
+
+
+    public ManyFragment() {
+        // Required empty public constructor
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tuijian_vp, container, false);
+        return inflater.inflate(R.layout.fragment_many, container, false);
     }
 
 }
