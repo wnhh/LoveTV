@@ -1,13 +1,63 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.yztc.lovetv.fragment.tabhost.LanmuFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/thirdTabhost"
+                android:textSize="18sp"
+                android:layout_centerInParent="true"
+                android:textColor="#000000" />
+
+            <TextView
+                android:clickable="true"
+                android:id="@+id/toolbar_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/selector_toolbar_search"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <!--分割线-->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="3px"
+        android:background="@drawable/abc_list_divider_mtrl_alpha"/>
 
-</FrameLayout>
+    <!--设置整体滚动布局-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--设置滚动布局最外层-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--页面布局插入-->
+            <include layout="@layout/layout"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
