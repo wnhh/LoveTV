@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">全民直播</string>
+    <string name="firstTabhost">推荐</string>
+    <string name="secondTabhost">栏目</string>
+    <string name="thirdTabhost">直播</string>
+    <string name="fourthTabhost">我的</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

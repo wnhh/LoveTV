@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/activity_grid"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yztc.lovetv.activity.GridActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/welcome_background"
+        />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
+
+    <TextView
+        android:id="@+id/mian_tiyan"
+        android:gravity="center"
+        android:layout_width="190dp"
+        android:layout_height="42dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:text="立即体验"
+        android:textSize="21sp"
+        android:textColor="@color/colorRed"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/grid_tiyan"
+        />
+    <com.yztc.lovetv.viewall.FlowIndicator
+        android:id="@+id/fl_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="90dp"
+        android:layout_centerHorizontal="true"
+        app:point_normal_color="#FF8A80"
+        app:point_radius="3dip"
+        app:point_seleted_color="@color/colorRed"
+        app:point_size="3dip"
+        app:space="8dip"/>
+</RelativeLayout>
