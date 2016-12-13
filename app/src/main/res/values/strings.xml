@@ -4,7 +4,9 @@
     <string name="secondTabhost">栏目</string>
     <string name="thirdTabhost">直播</string>
     <string name="fourthTabhost">我的</string>
-
+    <string name="coinyue">账户余额</string>
+    <string name="zero">0</string>
+    <string name="choosecoin">选择充值金额</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

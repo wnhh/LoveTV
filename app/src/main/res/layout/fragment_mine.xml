@@ -53,22 +53,39 @@
                 />
         </RelativeLayout>
 
+        <!--充值（种子 金币）-->
+
         <RelativeLayout
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:background="@color/colorWhite">
+            <ImageView
+                android:id="@+id/iv_zhongzi"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/new_seed"/>
 
             <TextView
                 android:id="@+id/picone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_zhongzi"
                 android:layout_centerVertical="true"
                 android:layout_margin="10dp"
                 android:text="0"
                 android:textColor="#000000"
                 android:textSize="18sp"/>
+
+            <ImageView
+                android:id="@+id/iv_jinbi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/new_coin"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/picone"/>
 
             <TextView
                 android:id="@+id/pictwo"
@@ -76,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_margin="10dp"
-                android:layout_toRightOf="@+id/picone"
+                android:layout_toRightOf="@+id/iv_jinbi"
                 android:text="0"
                 android:textColor="#000000"
                 android:textSize="18sp"/>
@@ -101,12 +118,13 @@
             android:background="@color/colorWhite"
             android:orientation="vertical">
 
+            <!--房间管理-->
             <LinearLayout
+                android:id="@+id/ll_houseguanli"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -123,15 +141,15 @@
                     android:drawableRight="@mipmap/more"
                     android:gravity="center_vertical"
                     android:paddingRight="10dp"
-                    android:text="房间管理"
-                    />
+                    android:text="房间管理" />
             </LinearLayout>
 
+            <!--我的关注-->
             <LinearLayout
+                android:id="@+id/ll_myguanzhu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -148,16 +166,16 @@
                     android:drawableRight="@mipmap/more"
                     android:gravity="center_vertical"
                     android:paddingRight="10dp"
-                    android:text="我的关注"
-                    />
+                    android:text="我的关注" />
             </LinearLayout>
 
+            <!--观看历史-->
             <LinearLayout
+                android:id="@+id/ll_guankanlishi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -174,16 +192,16 @@
                     android:drawableRight="@mipmap/more"
                     android:gravity="center_vertical"
                     android:paddingRight="10dp"
-                    android:text="观看历史"
-                    />
+                    android:text="观看历史" />
             </LinearLayout>
 
+            <!--开播提醒-->
             <LinearLayout
+                android:id="@+id/ll_kaibotixing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -200,16 +218,16 @@
                     android:drawableRight="@mipmap/more"
                     android:gravity="center_vertical"
                     android:paddingRight="10dp"
-                    android:text="开播提醒"
-                    />
+                    android:text="开播提醒" />
             </LinearLayout>
 
+            <!--种子任务-->
             <LinearLayout
+                android:id="@+id/ll_zhongzirenwu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -223,20 +241,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-
                     android:drawableRight="@mipmap/more"
                     android:gravity="center_vertical"
                     android:paddingRight="10dp"
-                    android:text="种子任务"
-                    />
+                    android:text="种子任务" />
             </LinearLayout>
 
+            <!--游戏中心-->
             <LinearLayout
+                android:id="@+id/ll_gamecenter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -253,13 +270,13 @@
                     android:drawableRight="@mipmap/more"
                     android:gravity="center_vertical"
                     android:paddingRight="10dp"
-                    android:text="游戏中心"
-                    />
+                    android:text="游戏中心" />
             </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
 
+    <!--开播-->
     <ImageView
         android:id="@+id/kaibonormal"
         android:layout_width="100dp"
