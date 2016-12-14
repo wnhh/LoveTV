@@ -4,9 +4,37 @@
     <string name="secondTabhost">栏目</string>
     <string name="thirdTabhost">直播</string>
     <string name="fourthTabhost">我的</string>
+
+
+    <!--充值界面-->
     <string name="coinyue">账户余额</string>
     <string name="zero">0</string>
     <string name="choosecoin">选择充值金额</string>
+    <string name="oneHundred">100</string>
+    <string name="twoHundredFifty">250</string>
+    <string name="fiveHundred">500</string>
+    <string name="oneThousand">1,000</string>
+    <string name="fiveThousand">5,000</string>
+    <string name="tenThousand">10,000</string>
+    <string name="shiWan">100,000</string>
+    <string name="tenYuan">10元</string>
+    <string name="ershiwuYuan">25元</string>
+    <string name="wushiYuan">50元</string>
+    <string name="yibaiYuan">100元</string>
+    <string name="wubaiYuan">500元</string>
+    <string name="yiqianYuan">1000元</string>
+    <string name="yiwanYuan">10000元</string>
+    <string name="tishichongzhi">提示：充值成功会在十分钟内到账</string>
+    <string name="questionchoose">有问题点我</string>
+
+
+     <!--dp-->
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_15">15dp</dimen>
+    <dimen name="dp_5">5dp</dimen>
+    <dimen name="dp_108">108dp</dimen>
+    <dimen name="px_1">1px</dimen>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
