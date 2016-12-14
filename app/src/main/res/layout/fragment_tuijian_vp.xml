@@ -2,9 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+             android:background="@color/colorbg"
     tools:context="com.yztc.lovetv.fragment.other.Tuijian_Fragment_Vp">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/tf_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

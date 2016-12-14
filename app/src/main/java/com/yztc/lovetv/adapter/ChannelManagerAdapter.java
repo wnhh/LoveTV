@@ -42,6 +42,7 @@ public class ChannelManagerAdapter extends BaseQuickAdapter<String>{
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, String s) {
+
         baseViewHolder.setText(R.id.channelname_tv,s);
     }
 }
