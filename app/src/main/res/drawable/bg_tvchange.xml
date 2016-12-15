@@ -2,7 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_selected="true"
-        android:state_pressed="true"
         >
         <shape
             android:shape="rectangle">
@@ -12,9 +11,9 @@
                 android:color="#FF0000"/>
 
             <corners
-                android:bottomRightRadius="0dp"
+                android:bottomLeftRadius="0dp"
                 android:radius="60dp"
-                android:topRightRadius="0dp"
+                android:topLeftRadius="0dp"
                 />
 
         </shape>

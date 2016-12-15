@@ -30,19 +30,20 @@
             android:layout_height="@dimen/dp_30"
             tools:context="com.yztc.lovetv.activity.mine.HouseActivity">
 
-            <Button
+            <TextView
                 android:id="@+id/tv_see"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:clickable="true"
                 android:text="正在直播"
                 android:gravity="center"
                 android:textColor="@color/tvchange_zi"
                 android:layout_height="@dimen/dp_30"
                 android:textSize="@dimen/sp_15"
-                android:background="@drawable/bg_tvchange" />
+                android:background="@drawable/bg_change" />
 
 
-            <Button
+            <TextView
                 android:id="@+id/tv_busee"
                 android:layout_width="0dp"
                 android:layout_weight="1"
