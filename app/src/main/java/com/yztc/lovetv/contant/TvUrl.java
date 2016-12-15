@@ -58,5 +58,6 @@ public class TvUrl {
 	//传奇专区
 	public static final String CHUANGQI = "http://www.quanmin.tv/json/categories/chuanqi/list.json?11212128&v=2.2.4&os=1&ver=4";
 
+	
 
 }
