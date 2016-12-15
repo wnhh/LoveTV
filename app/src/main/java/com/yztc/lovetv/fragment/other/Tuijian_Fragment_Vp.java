@@ -60,7 +60,6 @@ public class Tuijian_Fragment_Vp extends Fragment {
         liststr=new ArrayList<>();
         listTj=new ArrayList<>();
         TuijianStringitem ttitem=new TuijianStringitem(true,"精彩推荐",true);
-
         listTj.add(ttitem);
         //获得接口对象
         litchias=rfit.create(LitchiapiService.class);
