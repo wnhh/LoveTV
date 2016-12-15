@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.mine.ChongzhiActivity;
@@ -19,6 +20,7 @@ import com.yztc.lovetv.activity.mine.ChongzhiActivity;
 public class MineFragment extends Fragment implements View.OnClickListener{
 
     Button chongzhiBtn;
+    LinearLayout houseguanlill;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,6 +33,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private void initView(View v) {
         chongzhiBtn = (Button) v.findViewById(R.id.chongzhi_btn);
         chongzhiBtn.setOnClickListener(this);
+        houseguanlill = (LinearLayout) v.findViewById(R.id.ll_houseguanli);
+        houseguanlill.setOnClickListener(this);
     }
 
     @Override
@@ -39,6 +43,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
             case R.id.chongzhi_btn:
                 Intent intent = new Intent(getActivity(), ChongzhiActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.ll_houseguanli:
+                //Intent
                 break;
         }
     }
