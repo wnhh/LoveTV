@@ -27,25 +27,33 @@
             android:text="精彩推荐"
             android:layout_marginLeft="15dp"
             android:layout_alignTop="@id/red_view"/>
-
+        <LinearLayout
+            android:id="@+id/intent_ll"
+            android:addStatesFromChildren="true"
+            android:clickable="true"
+            android:descendantFocusability="blocksDescendants"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
         <ImageView
             android:id="@+id/iv_chouchou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/chouchou"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp" />
+             />
 
         <TextView
             android:id="@+id/tv_chouchou"
+            android:layout_marginLeft="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="瞅瞅"
+            android:layout_gravity="center_vertical"
             android:textColor="@color/chouchou_selector"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/iv_chouchou"
-            android:layout_marginRight="5dp"/>
-
+           />
+        </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

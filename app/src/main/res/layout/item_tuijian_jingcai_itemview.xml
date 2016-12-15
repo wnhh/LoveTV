@@ -4,12 +4,14 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="8dp">
-              <ImageView
-                  android:id="@+id/largepic_iv"
-                  android:layout_width="match_parent"
-                  android:layout_height="95dp"
-                  android:scaleType="centerCrop"
-                  android:src="@mipmap/ic_launcher"/>
+
+    <ImageView
+        android:id="@+id/largepic_iv"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -29,7 +29,7 @@ public class SectionAdapter extends BaseSectionQuickAdapter<TuijianStringitem> {
     protected void convertHead(BaseViewHolder helper, final TuijianStringitem item) {
         helper.setText(R.id.perfitpro_tv, item.header);
         helper.setVisible(R.id.hahaha, item.isMore());
-        helper.addOnClickListener(R.id.hahaha);
+        helper.addOnClickListener(R.id.intent_ll);
     }
 
     @Override
