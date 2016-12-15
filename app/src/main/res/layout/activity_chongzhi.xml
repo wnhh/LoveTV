@@ -8,13 +8,26 @@
     android:orientation="vertical"
     tools:context="com.yztc.lovetv.activity.mine.ChongzhiActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_chongzhi"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="充值"
-        app:titleMarginStart="@dimen/dp_108"
-        android:background="@color/colorWhite"/>
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/iv_chongzhi_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/live_hor_back_normal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/sp_25"
+            android:textColor="@color/black"
+            android:text="@string/chongzhi"/>
+
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -42,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
+            android:textColor="@color/black"
             android:text="@string/coinyue"/>
 
         <ImageView
@@ -58,6 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/zero"
+            android:textColor="@color/black"
             android:layout_toRightOf="@id/iv_coin"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
@@ -102,6 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/oneHundred"
+            android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/iv_coin_100"/>
 
@@ -144,6 +160,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/twoHundredFifty"
+            android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/iv_coin_250"/>
 
@@ -186,6 +203,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fiveHundred"
+            android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/iv_coin_500"/>
 
@@ -228,6 +246,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/oneThousand"
+            android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/iv_coin_1000"/>
 
@@ -270,6 +289,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fiveThousand"
+            android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/iv_coin_5000"/>
 
@@ -312,6 +332,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tenThousand"
+            android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/iv_coin_10000"/>
 
@@ -354,6 +375,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/shiWan"
+
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/iv_coin_100000"/>
 

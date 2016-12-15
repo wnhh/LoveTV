@@ -1,13 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_house"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.yztc.lovetv.activity.mine.HouseActivity">
 
-</RelativeLayout>
+
+
+    <!--title-->
+    <RelativeLayout
+        android:id="@+id/house_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50">
+
+        <ImageView
+            android:id="@+id/iv_house_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/live_hor_back_normal"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="200dp"
+            android:weightSum="2"
+            android:layout_centerInParent="true"
+            android:layout_height="@dimen/dp_30"
+            tools:context="com.yztc.lovetv.activity.mine.HouseActivity">
+
+            <Button
+                android:id="@+id/tv_see"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="正在直播"
+                android:gravity="center"
+                android:textColor="@color/tvchange_zi"
+                android:layout_height="@dimen/dp_30"
+                android:textSize="@dimen/sp_15"
+                android:background="@drawable/bg_tvchange" />
+
+
+            <Button
+                android:id="@+id/tv_busee"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:layout_height="@dimen/dp_30"
+                android:text="不在直播"
+                android:gravity="center"
+                android:textSize="@dimen/sp_15"
+                android:textColor="@color/tvchange_zi"
+                android:background="@drawable/bg_tvchange"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <include layout="@layout/house_bottom_image"/>
+    <!--<ListView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+</LinearLayout>

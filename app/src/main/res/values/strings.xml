@@ -8,6 +8,7 @@
 
     <!--充值界面-->
     <string name="coinyue">账户余额</string>
+    <string name="chongzhi">充值</string>
     <string name="zero">0</string>
     <string name="choosecoin">选择充值金额</string>
     <string name="oneHundred">100</string>
@@ -26,6 +27,8 @@
     <string name="yiwanYuan">10000元</string>
     <string name="tishichongzhi">提示：充值成功会在十分钟内到账</string>
     <string name="questionchoose">有问题点我</string>
+    <string name="taican">太惨了</string>
+    <string name="bushifangguan">我还不是任何房间的房管</string>
 
 
     <!--dp-->
@@ -33,7 +36,16 @@
     <dimen name="dp_15">15dp</dimen>
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_108">108dp</dimen>
+    <dimen name="dp_50">50dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
+
+    <!--px-->
     <dimen name="px_1">1px</dimen>
+
+    <!--sp-->
+    <dimen name="sp_15">15sp</dimen>
+    <dimen name="sp_25">25sp</dimen>
+    <dimen name="sp_20">20sp</dimen>
 
 
     <!-- TODO: Remove or change this placeholder text -->

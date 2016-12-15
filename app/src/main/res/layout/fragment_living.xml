@@ -1,0 +1,33 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yztc.lovetv.fragment.other.LivingFragment">
+
+    <ImageView
+        android:id="@+id/iv_room_cry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/img_profile_room_management_empty"/>
+
+    <TextView
+        android:id="@+id/tv_can"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/iv_room_cry"
+        android:textSize="@dimen/sp_20"
+        android:text="@string/taican"/>
+
+    <TextView
+        android:id="@+id/tv_nohouse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/bushifangguan"
+        android:layout_below="@id/tv_can"
+        android:textSize="@dimen/sp_16"/>
+
+</RelativeLayout>

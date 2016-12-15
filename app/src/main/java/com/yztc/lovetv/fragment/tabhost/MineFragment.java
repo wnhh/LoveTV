@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.mine.ChongzhiActivity;
+import com.yztc.lovetv.activity.mine.HouseActivity;
 
 
 /**
@@ -39,14 +40,15 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        Intent intent = new Intent();
         switch (view.getId()){
             case R.id.chongzhi_btn:
-                Intent intent = new Intent(getActivity(), ChongzhiActivity.class);
-                startActivity(intent);
+                intent.setClass(getActivity(), ChongzhiActivity.class);
                 break;
             case R.id.ll_houseguanli:
-                //Intent
+                intent.setClass(getActivity(), HouseActivity.class);
                 break;
         }
+        startActivity(intent);
     }
 }
