@@ -6,19 +6,15 @@ import com.chad.library.adapter.base.entity.SectionEntity;
  * Created by My on 2016/12/14.
  */
 
-public class TuiJianItem extends SectionEntity<TuijianStringitem>{
+public class TuiJianItem {
 	private String bigPicUrl;
 	private String personalPicUrl;
 	private String name;
 	private String introduce;
 
-	public TuiJianItem(boolean isHeader, String header) {
-		super(isHeader, header);
-	}
 	public String getBigPicUrl() {
 		return bigPicUrl;
 	}
-
 	public void setBigPicUrl(String bigPicUrl) {
 		this.bigPicUrl = bigPicUrl;
 	}

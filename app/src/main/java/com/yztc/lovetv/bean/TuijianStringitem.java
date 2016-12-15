@@ -1,17 +1,27 @@
 package com.yztc.lovetv.bean;
 
+import com.chad.library.adapter.base.entity.SectionEntity;
+
 /**
  * Created by My on 2016/12/14.
  */
 
-public class TuijianStringitem {
-	private String name;
+public class TuijianStringitem extends SectionEntity<TuiJianItem> {
 
-	public String getName() {
-		return name;
+
+	private boolean isMore;
+	public TuijianStringitem(boolean isHeader, String header,boolean isMore) {
+		super(isHeader, header);
+		this.isMore=isMore;
+	}
+	public TuijianStringitem(TuiJianItem t) {
+		super(t);
+	}
+	public boolean isMore() {
+		return isMore;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMore(boolean more) {
+		isMore = more;
 	}
 }

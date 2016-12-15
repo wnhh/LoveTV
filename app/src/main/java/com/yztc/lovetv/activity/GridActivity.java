@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,7 +54,6 @@ public class GridActivity extends AppCompatActivity {
 		lg.add(gt4);
 
 	}
-
 	private void initView() {
 		fl= (FlowIndicator) findViewById(R.id.fl_indicator);
 		fl.setCount(4);
@@ -95,7 +95,7 @@ public class GridActivity extends AppCompatActivity {
 
 			}
 		});
-		gadapter=new GridPageAdapter(lg,this);
+		gadapter=new GridPageAdapter(lg,GridActivity.this);
 		main_vp.setAdapter(gadapter);
 	}
 }

@@ -7,5 +7,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="TextSelector">#FF5253</color>
     <color name="colorfont">#AAAAAA</color>
-    <color name="colorbg">#F6FCFF</color>
+    <color name="background">#F6FCFF</color>
+    <color name="questionchooseBlue">#35AAF6</color>
+    <color name="px_background">#EEEEEE</color>
 </resources>

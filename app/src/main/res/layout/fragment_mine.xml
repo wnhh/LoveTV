@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorbg"
+        android:background="@color/background"
         android:weightSum="7"
         android:orientation="vertical"
         >

@@ -3,29 +3,33 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_margin="15dp">
+              android:layout_margin="8dp">
               <ImageView
                   android:id="@+id/largepic_iv"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="95dp"
+                  android:scaleType="centerCrop"
                   android:src="@mipmap/ic_launcher"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:layout_marginTop="5dp"
             android:id="@+id/rtouxiang_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"/>
         <TextView
             android:id="@+id/name_tv"
+            android:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/rtouxiang_iv"
             android:layout_toRightOf="@id/rtouxiang_iv"
             android:text="MJR·"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="15sp"
         />
         <TextView
             android:id="@+id/introdece_tv"
@@ -39,8 +43,6 @@
             android:layout_alignBottom="@id/rtouxiang_iv"
             android:layout_below="@id/name_tv"
             android:textColor="@color/colorfont"
-            android:textSize="15sp"/>
+            android:textSize="11sp"/>
     </RelativeLayout>
-
-
 </LinearLayout>

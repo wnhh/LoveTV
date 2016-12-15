@@ -2,6 +2,7 @@ package com.yztc.lovetv.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +21,13 @@ import java.util.List;
 public class GridPageAdapter extends PagerAdapter {
 
 	private List<GridText> lg;
-	private Context con;
+	private Context context;
 	LayoutInflater inflater;
 
-	public GridPageAdapter(List<GridText> lg, Context con) {
+	public GridPageAdapter(List<GridText> lg, Context context) {
 		this.lg = lg;
-		this.con = con;
-		inflater=LayoutInflater.from(con);
+		this.context = context;
+		inflater=LayoutInflater.from(context);
 	}
 
 	@Override
