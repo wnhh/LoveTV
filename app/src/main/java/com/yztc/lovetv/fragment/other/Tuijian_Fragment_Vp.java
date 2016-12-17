@@ -60,6 +60,7 @@ public class Tuijian_Fragment_Vp extends Fragment {
 				if(ts.isHeader)
 				{
 					//陈雨晗你可以写跳转了！
+					int x=1;
 				}
 			}
 		});
