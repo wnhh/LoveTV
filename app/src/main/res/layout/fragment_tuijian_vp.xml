@@ -5,6 +5,10 @@
              android:background="@color/background"
     tools:context="com.yztc.lovetv.fragment.other.Tuijian_Fragment_Vp">
 
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tuijianitem_rv"
         android:background="@color/colorWhite"

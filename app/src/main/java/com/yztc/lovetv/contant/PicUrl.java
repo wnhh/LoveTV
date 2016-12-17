@@ -6,7 +6,6 @@ package com.yztc.lovetv.contant;
 
 public class PicUrl {
 
-
     public static final String LOLURL="http://image.quanmin.tv/4518e1f7c347c3e78fc5fd9bba6cb6b2png";
     public static final String BEAUTYURL="http://image.quanmin.tv/326cd56c155e07d7fca78535d611a318jpg";
     public static final String HEARTSTONEURL="http://image.quanmin.tv/0656f090299e5ad777a2f71d84b7fa11jpg";
