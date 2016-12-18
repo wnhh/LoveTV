@@ -5,6 +5,12 @@ package com.yztc.lovetv.contant;
  */
 
 public class PicUrl {
+    //首页轮播图url
+    public static final String PICTURE1 = "http://image.quanmin.tv/844e4a76ee4c2bb5a3f1de1c77e49de4jpg";//全民星盛典开赛
+    public static final String PICTURE2 = "http://image.quanmin.tv/b53794c0380f13d56cb073a88cf39fe5jpg";//TDT2016腾讯斗地主锦标赛
+    public static final String PICTURE3 = "http://image.quanmin.tv/ead585bb0952308d4159fb975ee07f2bjpg";//一脸懵逼
+    public static final String PICTURE4 = "http://image.quanmin.tv/34295968561c01df3ae61ac335a112cdjpg";//大号已前百
+    public static final String PICTURE5 = "http://image.quanmin.tv/6b63d4894e68fe277699bf5cc97b1918jpg";//治愈系歌声诗诗
 
     public static final String LOLURL="http://image.quanmin.tv/4518e1f7c347c3e78fc5fd9bba6cb6b2png";
     public static final String BEAUTYURL="http://image.quanmin.tv/326cd56c155e07d7fca78535d611a318jpg";

@@ -5,6 +5,9 @@ package com.yztc.lovetv.contant;
  */
 
 public class TvUrl {
+
+	//首页轮播图
+	public static final String LUNBO = "http://www.quanmin.tv/json/page/app-data/info.json?v=2.2.4&os=1&ver=4";
 	//推荐
 	public static final String TUIAJIN = "http://www.quanmin.tv/json/app/index/recommend/";
 	//英雄联盟

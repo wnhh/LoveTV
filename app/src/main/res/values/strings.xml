@@ -31,21 +31,7 @@
     <string name="bushifangguan">我还不是任何房间的房管</string>
 
 
-    <!--dp-->
-    <dimen name="dp_20">20dp</dimen>
-    <dimen name="dp_15">15dp</dimen>
-    <dimen name="dp_5">5dp</dimen>
-    <dimen name="dp_108">108dp</dimen>
-    <dimen name="dp_50">50dp</dimen>
-    <dimen name="dp_30">30dp</dimen>
 
-    <!--px-->
-    <dimen name="px_1">1px</dimen>
-
-    <!--sp-->
-    <dimen name="sp_15">15sp</dimen>
-    <dimen name="sp_25">25sp</dimen>
-    <dimen name="sp_20">20sp</dimen>
 
 
     <!-- TODO: Remove or change this placeholder text -->

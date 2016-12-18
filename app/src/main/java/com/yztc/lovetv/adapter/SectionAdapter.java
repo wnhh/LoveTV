@@ -35,7 +35,7 @@ public class SectionAdapter extends BaseSectionQuickAdapter<TuijianStringitem> {
     @Override
     protected void convert(BaseViewHolder helper, TuijianStringitem item) {
         TuiJianItem itemtj = item.t;
-        helper.setText(R.id.introdece_tv, itemtj.getIntroduce())
+          helper.setText(R.id.introdece_tv, itemtj.getIntroduce())
                 .setText(R.id.name_tv, itemtj.getName());
 
         Glide.with(mContext).load(itemtj.getBigPicUrl()).into((ImageView) helper.getView(R.id.largepic_iv));
