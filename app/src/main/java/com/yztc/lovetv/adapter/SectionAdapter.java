@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class SectionAdapter extends BaseSectionQuickAdapter<TuijianStringitem> {
     private Context context;
-    public SectionAdapter(Context context,List<TuijianStringitem> data) {
+    public SectionAdapter(Context context,List<TuijianStringitem> data,int Type) {
         super(R.layout.item_tuijian_jingcai_itemview, R.layout.item_tuijian_jingcai, data);
     }
 

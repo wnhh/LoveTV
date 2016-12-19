@@ -1,12 +1,13 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
+    android:orientation="vertical"
     tools:context="com.yztc.lovetv.fragment.other.Tuijian_Fragment_Vp">
 
-    <include layout="@layout/item_vp"/>
+    <!--<include layout="@layout/item_vp"/>-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tuijianitem_rv"
         android:background="@color/colorWhite"
@@ -14,4 +15,4 @@
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
 
-</RelativeLayout>
+</LinearLayout>

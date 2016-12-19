@@ -19,6 +19,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.mFragments = fragments;
         this.mTabs = tabs;
+        notifyDataSetChanged();
     }
 
     @Override

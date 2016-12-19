@@ -6,7 +6,7 @@ import java.util.List;
  * Created by My on 2016/12/14.
  */
 
-public class tuijian {
+public class Tuijian {
 	private List<RoomBean> room;
 	private List<?> ad;
 

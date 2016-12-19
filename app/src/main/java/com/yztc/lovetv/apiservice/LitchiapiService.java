@@ -1,5 +1,7 @@
 package com.yztc.lovetv.apiservice;
 
+import com.yztc.lovetv.bean.Tuijian;
+
 import java.util.HashMap;
 
 import okhttp3.ResponseBody;
@@ -8,6 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import rx.Observable;
 
 /**
  * Created by My on 2016/12/12.
@@ -16,7 +19,7 @@ import retrofit2.http.QueryMap;
 public interface LitchiapiService {
 	//get请求固定请求路径
 	@GET("list-android.json?11212054&v=2.2.4&os=1&ver=4")
-	Call<ResponseBody> getLitchCall();
+	Observable<Tuijian> getLitchCall();
 	//动态的url
 	@GET("{path}?column=0&PageSize=10&pageIndex=1")
 	Call<ResponseBody> getLitchCall(@Path("path") String path);

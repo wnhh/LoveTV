@@ -6,4 +6,5 @@ package com.yztc.lovetv.contant;
 
 public class BaseUrl {
     public static final String VpPicture = "http://www.quanmin.tv/json/page/app-data/";
+    public static final String TUIJIANITEM = "http://www.quanmin.tv/json/app/index/recommend/";
 }
