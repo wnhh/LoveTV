@@ -29,9 +29,12 @@
     <string name="questionchoose">有问题点我</string>
     <string name="taican">太惨了</string>
     <string name="bushifangguan">我还不是任何房间的房管</string>
-
-
-
+    <string name="touxiang">头像</string>
+    <string name="nicheng">昵称</string>
+    <string name="youxiang">邮箱</string>
+    <string name="phone">手机号</string>
+    <string name="name">haha</string>
+    <string name="tuichudenglu">退出登录</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

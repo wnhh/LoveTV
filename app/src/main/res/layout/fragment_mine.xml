@@ -120,30 +120,30 @@
 
             <!--房间管理-->
             <LinearLayout
-                android:id="@+id/ll_houseguanli"
+            android:id="@+id/ll_houseguanli"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:addStatesFromChildren="true"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="10dp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_profile_host_room"/>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:addStatesFromChildren="true"
-                android:clickable="true"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="10dp"
-                    android:scaleType="fitXY"
-                    android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_profile_host_room"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:drawableRight="@mipmap/more"
-                    android:gravity="center_vertical"
-                    android:paddingRight="10dp"
-                    android:text="房间管理" />
-            </LinearLayout>
+                android:layout_gravity="center_vertical"
+                android:drawableRight="@mipmap/more"
+                android:gravity="center_vertical"
+                android:paddingRight="10dp"
+                android:text="房间管理" />
+        </LinearLayout>
 
             <!--我的关注-->
             <LinearLayout
