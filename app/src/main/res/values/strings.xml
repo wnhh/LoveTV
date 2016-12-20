@@ -4,8 +4,6 @@
     <string name="secondTabhost">栏目</string>
     <string name="thirdTabhost">直播</string>
     <string name="fourthTabhost">我的</string>
-
-
     <!--充值界面-->
     <string name="coinyue">账户余额</string>
     <string name="chongzhi">充值</string>
