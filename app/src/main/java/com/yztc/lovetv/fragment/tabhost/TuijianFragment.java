@@ -1,5 +1,6 @@
 package com.yztc.lovetv.fragment.tabhost;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,9 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.yztc.lovetv.R;
+import com.yztc.lovetv.activity.ChannelManagerActivity;
+import com.yztc.lovetv.adapter.ChannelManagerAdapter;
 import com.yztc.lovetv.adapter.ViewPagerAdapter;
+import com.yztc.lovetv.fragment.tuijianfragment.AllFragment;
 import com.yztc.lovetv.fragment.tuijianfragment.Tuijian_Fragment_Vp;
 
 import java.util.ArrayList;
@@ -21,6 +26,7 @@ public class TuijianFragment extends Fragment {
     private TabLayout mTabLayout;
     private Toolbar mToolbar;
     private ViewPager mViewPager;
+    private ImageView mImageView;
 
     //数据源
     List<Fragment> mFragments;
@@ -49,9 +55,11 @@ public class TuijianFragment extends Fragment {
         mTabs.add("单机主机");
         mTabs.add("球球大作战");
         mFragments = new ArrayList<>();
-        for (int i=0;i<mTabs.size();i++){
-            Tuijian_Fragment_Vp fragmentVp = new Tuijian_Fragment_Vp();
-            mFragments.add(fragmentVp);
+        Tuijian_Fragment_Vp fragmentVp = new Tuijian_Fragment_Vp();
+        mFragments.add(fragmentVp);
+        for (int i=0;i<mTabs.size()-1;i++){
+            AllFragment allFragment = new AllFragment();
+            mFragments.add(allFragment);
         }
         ViewPagerAdapter fragmentAdapter = new ViewPagerAdapter(getChildFragmentManager(),mFragments,mTabs);
         mViewPager.setOffscreenPageLimit(mTabs.size()-1);
@@ -63,7 +71,14 @@ public class TuijianFragment extends Fragment {
         mTabLayout = (TabLayout) v.findViewById(R.id.tablayout);
         mToolbar = (Toolbar) v.findViewById(R.id.lm_fragment_toolbar);
         mViewPager = (ViewPager) v.findViewById(R.id.firstfragment_vp);
-
+        mImageView = (ImageView) v.findViewById(R.id.first_tablayout_fenlei);
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ChannelManagerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

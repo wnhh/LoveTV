@@ -7,6 +7,8 @@ import com.chad.library.adapter.base.entity.SectionEntity;
  */
 
 public class TuiJianItem {
+
+
 	private String bigPicUrl;
 	private String personalPicUrl;
 	private String name;

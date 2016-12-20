@@ -110,7 +110,7 @@ public class Tuijian_Fragment_Vp extends Fragment {
 
         //实例化小圆点
         vfit = new Retrofit.Builder()
-                .baseUrl(BaseUrl.VpPicture)
+                .baseUrl(BaseUrl.VPPICTURE)
                 .build();
         mApiService = vfit.create(VpPictureApiService.class);
         Call<ResponseBody> call = mApiService.getAdTypeBeanCall();
