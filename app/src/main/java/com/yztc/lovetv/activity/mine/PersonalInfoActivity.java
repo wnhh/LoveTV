@@ -26,6 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yztc.lovetv.R;
+import com.yztc.lovetv.activity.ConvertVActivity;
 
 import java.io.File;
 
@@ -127,8 +128,14 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 				show();
 				break;
 			case R.id.emailaddress_rl:
+				Intent in=new Intent(this, ConvertVActivity.class);
+				in.putExtra("conkey","绑定邮箱");
+				startActivity(in);
 				break;
 			case R.id.phone_rl:
+				Intent in1=new Intent(this, ConvertVActivity.class);
+				in1.putExtra("conkey","绑定手机");
+				startActivity(in1);
 				break;
 			case R.id.takePhoto_tv:
 				Intent intent=new Intent();

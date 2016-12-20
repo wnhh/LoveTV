@@ -1,0 +1,78 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.yztc.lovetv.fragment.other.PhotoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/grid_tiyantwo">
+
+            <EditText
+                android:id="@+id/phonenumber_edt"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="请输入手机号"
+                android:padding="12dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            >
+
+            <EditText
+                android:id="@+id/yanzhengmaphone_edt"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_weight="2"
+                android:background="@drawable/grid_tiyantwo"
+                android:hint="请输入验证码"
+                android:padding="12dp">
+
+            </EditText>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:scaleType="centerCrop"
+                android:layout_alignBottom="@id/yanzhengmaphone_edt"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/yanzhengmaphone_edt"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_launcher"
+                />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/nextstep_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/register_btn"
+            android:text="下一步"
+            android:textColor="#ffffff"
+            android:textSize="23sp"
+            />
+    </LinearLayout>
+
+</FrameLayout>
