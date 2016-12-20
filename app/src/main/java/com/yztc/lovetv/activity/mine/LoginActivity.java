@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.login_id:
-				String edt = name_edt.getEditableText().toString();
+				final String edt = name_edt.getEditableText().toString();
 				if (TextUtils.isEmpty(edt)) {
 					Toast.makeText(this, "用户名/手机号", Toast.LENGTH_SHORT).show();
 					return;
@@ -57,10 +57,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 					Toast.makeText(this, "输入密码", Toast.LENGTH_SHORT).show();
 					return;
 				}
-			/*	BmobUser.loginByAccount(edt, edt1, new LogInListener<UserEntity>() {
-					public void done(UserEntity user, BmobException e) {
-						if(user!=null){
+				BmobUser.loginByAccount(this, edt, edt1, new LogInListener<UserEntity>() {
+
+					@Override
+					public void done(UserEntity userEntity, BmobException e) {
+						if(userEntity!=null){
 							Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+							Intent loginbackintent=new Intent();
+							loginbackintent.putExtra("loginkey",edt);
+							setResult(600,loginbackintent);
+							finish();
 							name_edt.setText("");
 							pwd_edt.setText("");
 						}
@@ -69,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 							Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
 						}
 					}
-				});*/
+				});
 				break;
 			case R.id.intentregister_tv:
 				Intent in=new Intent(this,RegisterActivity.class);

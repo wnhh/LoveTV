@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.yztc.mydemotext.CountDownButton
+        <com.yztc.lovetv.myutil.CountDownButton
             android:id="@+id/yanzhengma_btn"
             android:layout_marginTop="10dp"
             android:layout_marginRight="3dp"

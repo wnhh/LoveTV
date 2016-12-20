@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.ConvertVActivity;
 import com.yztc.lovetv.activity.mine.ChongzhiActivity;
 import com.yztc.lovetv.activity.mine.HouseActivity;
 import com.yztc.lovetv.activity.mine.LoginActivity;
+import com.yztc.lovetv.activity.mine.PersonalInfoActivity;
 
 
 /**
@@ -31,7 +33,11 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 	private LinearLayout ll_zhongzirenwu;
 	private LinearLayout ll_gamecenter;
 	private ImageView touxiang_id;
-
+	public static final int REQUEST_LOGIN_CODE = 200;
+	public static final int REQUEST_BACK_CODE = 201;
+	private TextView myname_id;
+	//存返回码
+	private int backcode;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -56,16 +62,43 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 		ll_gamecenter = (LinearLayout) v.findViewById(R.id.ll_gamecenter);
 		ll_gamecenter.setOnClickListener(this);
 		touxiang_id = (ImageView) v.findViewById(R.id.touxiang_id);
-		touxiang_id.setOnClickListener(this);
+		touxiang_id.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if(backcode==600)
+				{
+					Intent loginintent = new Intent(getActivity(), PersonalInfoActivity.class);
+					startActivity(loginintent);
+				}
+				else
+				{
+					Intent loginintent = new Intent(getActivity(), LoginActivity.class);
+					startActivityForResult(loginintent, REQUEST_LOGIN_CODE);
+				}
+
+			}
+		});
+		myname_id = (TextView) v.findViewById(R.id.myname_id);
+		myname_id.setOnClickListener(this);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		backcode=resultCode;
+		switch (requestCode) {
+			case REQUEST_LOGIN_CODE:
+				if(resultCode==600) {
+					myname_id.setText(data.getStringExtra("loginkey"));
+				}
+				break;
+		}
 	}
 
 	@Override
 	public void onClick(View view) {
 		Intent intent = new Intent();
 		switch (view.getId()) {
-			case R.id.touxiang_id:
-				intent.setClass(getActivity(), LoginActivity.class);
-				break;
 			case R.id.chongzhi_btn:
 				intent.setClass(getActivity(), ChongzhiActivity.class);
 				break;
