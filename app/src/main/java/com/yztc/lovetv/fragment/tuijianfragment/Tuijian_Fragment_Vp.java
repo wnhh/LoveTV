@@ -1,4 +1,4 @@
-package com.yztc.lovetv.fragment.other;
+package com.yztc.lovetv.fragment.tuijianfragment;
 
 import android.graphics.Color;
 import android.os.Bundle;

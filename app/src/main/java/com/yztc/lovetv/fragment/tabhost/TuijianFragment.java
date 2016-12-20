@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.adapter.ViewPagerAdapter;
-import com.yztc.lovetv.fragment.other.Tuijian_Fragment_Vp;
+import com.yztc.lovetv.fragment.tuijianfragment.Tuijian_Fragment_Vp;
 
 import java.util.ArrayList;
 import java.util.List;
