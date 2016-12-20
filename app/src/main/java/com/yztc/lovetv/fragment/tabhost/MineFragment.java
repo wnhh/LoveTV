@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.ConvertVActivity;
 import com.yztc.lovetv.activity.mine.ChongzhiActivity;
 import com.yztc.lovetv.activity.mine.HouseActivity;
+import com.yztc.lovetv.activity.mine.LoginActivity;
 
 
 /**
@@ -28,6 +30,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 	private LinearLayout ll_kaibotixing;
 	private LinearLayout ll_zhongzirenwu;
 	private LinearLayout ll_gamecenter;
+	private ImageView touxiang_id;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,12 +55,17 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 		ll_zhongzirenwu.setOnClickListener(this);
 		ll_gamecenter = (LinearLayout) v.findViewById(R.id.ll_gamecenter);
 		ll_gamecenter.setOnClickListener(this);
+		touxiang_id = (ImageView) v.findViewById(R.id.touxiang_id);
+		touxiang_id.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View view) {
 		Intent intent = new Intent();
 		switch (view.getId()) {
+			case R.id.touxiang_id:
+				intent.setClass(getActivity(), LoginActivity.class);
+				break;
 			case R.id.chongzhi_btn:
 				intent.setClass(getActivity(), ChongzhiActivity.class);
 				break;
@@ -66,23 +74,23 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 				break;
 			case R.id.ll_myguanzhu:
 				intent.setClass(getActivity(), ConvertVActivity.class);
-				intent.putExtra("conkey","我的关注");
+				intent.putExtra("conkey", "我的关注");
 				break;
 			case R.id.ll_guankanlishi:
 				intent.setClass(getActivity(), ConvertVActivity.class);
-				intent.putExtra("conkey","观看历史");
+				intent.putExtra("conkey", "观看历史");
 				break;
 			case R.id.ll_kaibotixing:
 				intent.setClass(getActivity(), ConvertVActivity.class);
-				intent.putExtra("conkey","开播提醒");
+				intent.putExtra("conkey", "开播提醒");
 				break;
 			case R.id.ll_zhongzirenwu:
 				intent.setClass(getActivity(), ConvertVActivity.class);
-				intent.putExtra("conkey","种子任务");
+				intent.putExtra("conkey", "种子任务");
 				break;
 			case R.id.ll_gamecenter:
 				intent.setClass(getActivity(), ConvertVActivity.class);
-				intent.putExtra("conkey","游戏中心");
+				intent.putExtra("conkey", "游戏中心");
 				break;
 		}
 		startActivity(intent);

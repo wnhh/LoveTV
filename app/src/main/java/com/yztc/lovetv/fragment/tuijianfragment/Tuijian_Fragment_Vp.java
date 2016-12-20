@@ -74,8 +74,6 @@ public class Tuijian_Fragment_Vp extends Fragment {
         mViewPager.pause();
         super.onStop();
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
