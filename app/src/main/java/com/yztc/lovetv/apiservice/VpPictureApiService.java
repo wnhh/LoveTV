@@ -18,7 +18,7 @@ public interface VpPictureApiService {
 
 
     //Get请求动态添加参数
-    @GET("{path}.json?12201543&v=2.2.4&os=1&ver=4")
+    @GET("{path}.json?12211353&v=2.2.4&os=1&ver=4")
     Call<ResponseBody> getAllPathCall(
             @Path("path") String path
     );
