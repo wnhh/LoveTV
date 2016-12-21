@@ -24,6 +24,7 @@
                 android:layout_height="45dp"
                 android:layout_centerVertical="true"
                 android:background="@null"
+                android:inputType="number"
                 android:hint="请输入手机号"
                 android:padding="12dp"
                 />
@@ -52,9 +53,10 @@
             </EditText>
 
             <ImageView
+                android:id="@+id/phoneyzm_iv"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:layout_alignBottom="@id/yanzhengmaphone_edt"
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@id/yanzhengmaphone_edt"

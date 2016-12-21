@@ -34,7 +34,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 	private LinearLayout ll_gamecenter;
 	private ImageView touxiang_id;
 	public static final int REQUEST_LOGIN_CODE = 200;
-	public static final int REQUEST_BACK_CODE = 201;
+	public static final int REQUEST_LOGINBACK_CODE = 201;
 	private TextView myname_id;
 	//存返回码
 	private int backcode;
@@ -47,6 +47,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 	}
 
 	private void initView(View v) {
+		myname_id= (TextView) v.findViewById(R.id.myname_id);
 		chongzhiBtn = (Button) v.findViewById(R.id.chongzhi_btn);
 		chongzhiBtn.setOnClickListener(this);
 		houseguanlill = (LinearLayout) v.findViewById(R.id.ll_houseguanli);
@@ -68,7 +69,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 				if(backcode==600)
 				{
 					Intent loginintent = new Intent(getActivity(), PersonalInfoActivity.class);
-					startActivity(loginintent);
+					startActivityForResult(loginintent,REQUEST_LOGINBACK_CODE);
 				}
 				else
 				{
@@ -78,8 +79,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
 			}
 		});
-		myname_id = (TextView) v.findViewById(R.id.myname_id);
-		myname_id.setOnClickListener(this);
 	}
 
 	@Override
@@ -92,9 +91,14 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 					myname_id.setText(data.getStringExtra("loginkey"));
 				}
 				break;
+			case REQUEST_LOGINBACK_CODE:
+				if(resultCode==601) {
+					touxiang_id.setImageResource(R.mipmap.img_profile_touxiang_default_unknow);
+					myname_id.setText("点击登录");
+				}
+				break;
 		}
 	}
-
 	@Override
 	public void onClick(View view) {
 		Intent intent = new Intent();

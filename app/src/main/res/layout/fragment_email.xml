@@ -52,9 +52,10 @@
             </EditText>
 
             <ImageView
+                android:id="@+id/yanzhengpa_pic"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:layout_alignBottom="@id/yanzhengma_edt"
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@id/yanzhengma_edt"

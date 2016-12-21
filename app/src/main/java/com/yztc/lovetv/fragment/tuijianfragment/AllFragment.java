@@ -58,11 +58,11 @@ public class AllFragment extends Fragment {
                 .build();
         VpPictureApiService vpPictureApiService = retrofit.create(VpPictureApiService.class);
         Call<ResponseBody> call = vpPictureApiService.getAllPathCall(BaseUrl.ALLPATHFIRST);
-        call.enqueue(new Callback<ResponseBody>() {
+        /*call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Gson gson = new Gson();
-                String result = null;
+                String result = "";
                 try {
                     result = response.body().string();
                     Log.e("TAG", "onResponse: "+result );
@@ -88,7 +88,7 @@ public class AllFragment extends Fragment {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
             }
-        });
+        });*/
 
     }
 

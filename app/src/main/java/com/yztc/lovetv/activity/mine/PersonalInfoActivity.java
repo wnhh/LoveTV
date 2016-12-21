@@ -14,23 +14,23 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.ConvertVActivity;
+import com.yztc.lovetv.fragment.other.EmailFragment;
 
 import java.io.File;
 
-public class PersonalInfoActivity extends AppCompatActivity implements View.OnClickListener{
+public class PersonalInfoActivity extends AppCompatActivity implements View.OnClickListener {
 	private ImageView camera_iv;
 	public static final int REQUEST_CAMERA_CODE = 100;
 	public static final int REQUEST_GALLERY_CODE = 101;
@@ -45,6 +45,8 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 	private Dialog dialog;
 	//系统拍照图片地址
 	public static String file_path;
+	private Button back_login;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,20 +54,23 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 		file_path = Environment.getExternalStorageDirectory() + File.separator + "header.jpg";
 		initView();
 	}
+
 	private void initView() {
 		touxiang_rl = (RelativeLayout) findViewById(R.id.touxiang_rl);
 		emailaddress_rl = (RelativeLayout) findViewById(R.id.emailaddress_rl);
 		phone_rl = (RelativeLayout) findViewById(R.id.phone_rl);
-		touxiang_rl.setOnClickListener( this);
-		emailaddress_rl.setOnClickListener( this);
-		phone_rl.setOnClickListener( this);
-		camera_iv= (ImageView) findViewById(R.id.mine_touxiang_iv_icon);
+		touxiang_rl.setOnClickListener(this);
+		emailaddress_rl.setOnClickListener(this);
+		phone_rl.setOnClickListener(this);
+		camera_iv = (ImageView) findViewById(R.id.mine_touxiang_iv_icon);
+		back_login = (Button) findViewById(R.id.back_login);
+		back_login.setOnClickListener(this);
 	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		switch (requestCode)
-		{
+		switch (requestCode) {
 			case REQUEST_CAMERA_CODE:
 				File file = new File(file_path);
 				if (file.exists()) {
@@ -95,9 +100,10 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 
 		}
 	}
+
 	//实例化dialog
-	public void show(){
-		dialog = new Dialog(this,R.style.ActionSheetDialogStyle);
+	public void show() {
+		dialog = new Dialog(this, R.style.ActionSheetDialogStyle);
 		//填充对话框的布局
 		inflate = LayoutInflater.from(this).inflate(R.layout.item_bottomdialog, null);
 		//初始化控件
@@ -112,7 +118,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 		//获取当前Activity所在的窗体
 		Window dialogWindow = dialog.getWindow();
 		//设置Dialog从窗体底部弹出
-		dialogWindow.setGravity( Gravity.BOTTOM);
+		dialogWindow.setGravity(Gravity.BOTTOM);
 		//获得窗体的属性
 		WindowManager.LayoutParams lp = dialogWindow.getAttributes();
 		lp.y = 25;//设置Dialog距离底部的距离
@@ -120,25 +126,25 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 		dialogWindow.setAttributes(lp);
 		dialog.show();//显示对话框
 	}
+
 	@Override
 	public void onClick(View view) {
-		switch (view.getId())
-		{
+		switch (view.getId()) {
 			case R.id.touxiang_rl:
 				show();
 				break;
 			case R.id.emailaddress_rl:
-				Intent in=new Intent(this, ConvertVActivity.class);
-				in.putExtra("conkey","绑定邮箱");
+				Intent in = new Intent(this, ConvertVActivity.class);
+				in.putExtra("conkey", "绑定邮箱");
 				startActivity(in);
 				break;
 			case R.id.phone_rl:
-				Intent in1=new Intent(this, ConvertVActivity.class);
-				in1.putExtra("conkey","绑定手机");
+				Intent in1 = new Intent(this, ConvertVActivity.class);
+				in1.putExtra("conkey", "绑定手机");
 				startActivity(in1);
 				break;
 			case R.id.takePhoto_tv:
-				Intent intent=new Intent();
+				Intent intent = new Intent();
 				//隐式目的
 				intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
 				//根据文件获得文件的Uri
@@ -150,7 +156,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 				dialog.dismiss();
 				break;
 			case R.id.choosePhoto_tv:
-				Intent intent1=new Intent();
+				Intent intent1 = new Intent();
 				//隐式目的 - 进入系统相册
 				intent1.setAction(Intent.ACTION_GET_CONTENT);
 				intent1.setType("image/*");
@@ -161,8 +167,14 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 			case R.id.cancel_tv:
 				dialog.dismiss();
 				break;
+			case R.id.back_login:
+				Intent loginbackintent=new Intent();
+				setResult(601,loginbackintent);
+				finish();
+				break;
 		}
 	}
+
 	//打开图片剪切
 	private void gotoCrop(Uri inputRri) {
 		Intent intent = new Intent("com.android.camera.action.CROP");
@@ -179,6 +191,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 
 	/**
 	 * 画圆角图片
+	 *
 	 * @param bitmap
 	 * @param pixels
 	 * @return
