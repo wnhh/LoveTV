@@ -29,7 +29,7 @@ public class TuijianGetItemMethod {
         TuijianStringitem ttitem = new TuijianStringitem(true, "全民星秀", true);
         listTj.add(ttitem);
         for (int i = 0; i < tuijian.getRoom().get(itemPosition).getList().size(); i++) {
-            if (i == 4) {
+            if (i == tuijian.getRoom().get(itemPosition).getList().size()-1) {
                 break;
             }
             listTj.add(TuijianGetItemMethod.getItemMessage(tuijian,itemPosition,i));
