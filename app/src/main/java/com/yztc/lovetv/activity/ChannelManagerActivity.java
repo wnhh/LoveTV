@@ -1,12 +1,15 @@
 package com.yztc.lovetv.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +35,7 @@ import com.yztc.lovetv.myutil.PreferencesUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -48,12 +52,13 @@ public class ChannelManagerActivity extends AppCompatActivity {
 	private Toolbar manager_tb;
 	private RecyclerView channelone_tv,channeltwo_tv;
 	private int count;
+	//拖动
+	private int dragFlags,swipeFlags;
 	//数据源
 	List<String>strlist;
 	List<String>strlisttwo;
 	List<Itembean> itembeanList;
 	List<String> mTabs;
-
 	//适配器
 	private ChannelManagerAdapter cma;
 	private ChannelManagertwoAdapter cmatwo;
@@ -64,8 +69,6 @@ public class ChannelManagerActivity extends AppCompatActivity {
 		initData();
 		initView();
 	}
-
-
 	private void initData() {
 		strlist=new ArrayList<>();
 		strlisttwo=new ArrayList<>();
@@ -83,46 +86,28 @@ public class ChannelManagerActivity extends AppCompatActivity {
 					Gson gson = new Gson();
 					Tuijian tuijian = gson.fromJson(result, Tuijian.class);
 					for (int i = 0; i < tuijian.getRoom().size(); i++) {//第一次进来默认添加9个数据(在添加顶部导航是 推荐写死了)
-						String string = PreferencesUtils.getString(ChannelManagerActivity.this,TabhostContant.TUIJIAN_ITEM_NAME+"i");
-
-						if (string != null){
+						String string = PreferencesUtils.getString(ChannelManagerActivity.this,TabhostContant.TUIJIAN_ITEM_NAME+i);
+						if (!TextUtils.isEmpty(string)){
 							strlist.add(string);
 						}else{
 							strlisttwo.add(tuijian.getRoom().get(i).getName());
 						}
 					}
+					//recycler上设置adapter
+					cma=new ChannelManagerAdapter(ChannelManagerActivity.this,strlist);
+					channelone_tv.setAdapter(cma);
+					//recycler下设置adapter
+					cmatwo=new ChannelManagertwoAdapter(ChannelManagerActivity.this,strlisttwo);
+					channeltwo_tv.setAdapter(cmatwo);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-
 			@Override
 			public void onFailure(Call<ResponseBody> call, Throwable t) {
 
 			}
 		});
-
-//
-//	strlist.add("颜值控");
-//		strlist.add("英雄联盟");
-//		strlist.add("全民星宿");
-//		strlist.add("守望先锋");
-//		strlist.add("全民户外");
-//		strlist.add("炉石传说");
-//		strlist.add("手游专区");
-//		strlist.add("网友竞技");
-//		strlist.add("单机主机");
-//		strlist.add("球球大作战");
-//		strlisttwo.add("二次元区");
-//		strlisttwo.add("暴雪经典");
-//		strlisttwo.add("NBA2K");
-//		strlisttwo.add("王者荣耀");
-//		strlisttwo.add("QQ飞车");
-//		strlisttwo.add("FIFA");
-//		strlisttwo.add("穿越火线");
-//		strlisttwo.add("DNF");
-//		strlisttwo.add("DOTA2");
-//		strlisttwo.add("魔兽争霸3");
 	}
 
 	private void initView() {
@@ -136,16 +121,12 @@ public class ChannelManagerActivity extends AppCompatActivity {
 			}
 		});
 		tv= (TextView) findViewById(R.id.manager_tv);
+		//第一个recyclerview
 		channelone_tv = (RecyclerView) findViewById(R.id.channelone_tv);
-		channeltwo_tv = (RecyclerView) findViewById(R.id.channeltwo_tv);
-		cma=new ChannelManagerAdapter(this,strlist);
-		channelone_tv.setAdapter(cma);
 		channelone_tv.setLayoutManager(new GridLayoutManager(this,3,GridLayoutManager.VERTICAL,false));
 		//第二个recyclerview
-		cmatwo=new ChannelManagertwoAdapter(this,strlisttwo);
-		channeltwo_tv.setAdapter(cmatwo);
+		channeltwo_tv = (RecyclerView) findViewById(R.id.channeltwo_tv);
 		channeltwo_tv.setLayoutManager(new GridLayoutManager(this,3,GridLayoutManager.VERTICAL,false));
-
 		//监听
 		channelone_tv.addOnItemTouchListener(new OnItemClickListener() {
 			@Override
@@ -178,17 +159,89 @@ public class ChannelManagerActivity extends AppCompatActivity {
 				count++;
 				if(count%2==1) {
 					tv.setText("完成");
+					itemmove();
 				}
 				else
 				{
 					tv.setText("管理");
 					PreferencesUtils.clear(ChannelManagerActivity.this);
 					for (int i = 0;i<strlist.size(); i++) {
-						PreferencesUtils.putString(ChannelManagerActivity.this, TabhostContant.TUIJIAN_ITEM_NAME+i,strlist.get(i));
+						PreferencesUtils.putString(ChannelManagerActivity.this, TabhostContant.TUIJIAN_ITEM_NAME + i,strlist.get(i));
 					}
-					PreferencesUtils.putBoolean(getContext(),MyConstants.KEY_TEST,true);
+					PreferencesUtils.putBoolean(ChannelManagerActivity.this,MyConstants.KEY_TEST,true);
+					finish();
 				}
 			}
 		});
+	}
+	//设置recyclerview的拖动
+	public void itemmove()
+	{
+		ItemTouchHelper itemTouchHelper=new ItemTouchHelper(new ItemTouchHelper.Callback() {
+			@Override
+			public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+				if(channelone_tv.getLayoutManager() instanceof GridLayoutManager)
+				{
+					dragFlags=ItemTouchHelper.UP |
+							ItemTouchHelper.DOWN |
+							ItemTouchHelper.LEFT |
+							ItemTouchHelper.RIGHT;
+					swipeFlags=0;
+
+					return makeMovementFlags(dragFlags,swipeFlags);
+				}else
+				{
+					dragFlags=ItemTouchHelper.UP |
+							ItemTouchHelper.DOWN;
+					swipeFlags=0;
+					return makeMovementFlags(dragFlags,swipeFlags);
+				}
+
+			}
+			@Override
+			public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+				int fromPosition=viewHolder.getAdapterPosition();
+				int toPosition=target.getAdapterPosition();
+				if(fromPosition<toPosition)
+				{
+					for(int i=fromPosition;i<toPosition;i++)
+					{
+						Collections.swap(strlist,i,i+1);
+					}
+				}else
+				{
+					for(int i=fromPosition;i>toPosition;i--)
+					{
+						Collections.swap(strlist,i,i-1);
+					}
+				}
+				cma.notifyItemMoved(fromPosition,toPosition);
+				return true;
+			}
+
+			@Override
+			public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
+			}
+			@Override
+			public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+				if(actionState!=ItemTouchHelper.ACTION_STATE_IDLE)
+				{
+					//viewHolder.itemView.setBackgroundColor(Color.LTGRAY);
+				}
+				super.onSelectedChanged(viewHolder, actionState);
+			}
+			@Override
+			public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+				super.clearView(recyclerView, viewHolder);
+				viewHolder.itemView.setBackgroundColor(0);
+			}
+			@Override
+			public boolean isLongPressDragEnabled() {
+				//return super.isLongPressDragEnabled();
+				return true;
+			}
+		});
+		itemTouchHelper.attachToRecyclerView(channelone_tv);
 	}
 }

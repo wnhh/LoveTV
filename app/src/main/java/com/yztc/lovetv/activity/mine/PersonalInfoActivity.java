@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,6 @@ import android.widget.TextView;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.ConvertVActivity;
-import com.yztc.lovetv.fragment.other.EmailFragment;
 
 import java.io.File;
 
@@ -46,13 +46,32 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 	//系统拍照图片地址
 	public static String file_path;
 	private Button back_login;
+	private Intent intent;
+	private TextView mine_touxiang_tv_nicheng_name;
+	private Bitmap newBmp;
+	private Toolbar personal_tb;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_personal_info);
+		intent = getIntent();
 		file_path = Environment.getExternalStorageDirectory() + File.separator + "header.jpg";
+		initTB();
 		initView();
+	}
+
+	private void initTB() {
+		personal_tb = (Toolbar) findViewById(R.id.personal_tb);
+		personal_tb.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent backbitmap=new Intent();
+				backbitmap.putExtra("loginnamekey",newBmp);
+				setResult(602,backbitmap);
+				finish();
+			}
+		});
 	}
 
 	private void initView() {
@@ -65,6 +84,9 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 		camera_iv = (ImageView) findViewById(R.id.mine_touxiang_iv_icon);
 		back_login = (Button) findViewById(R.id.back_login);
 		back_login.setOnClickListener(this);
+		mine_touxiang_tv_nicheng_name = (TextView) findViewById(R.id.mine_touxiang_tv_nicheng_name);
+		mine_touxiang_tv_nicheng_name.setText(intent.getStringExtra("loginnamekey"));
+
 	}
 
 	@Override
@@ -89,7 +111,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 				if (data != null) {
 					Bitmap bmp = data.getParcelableExtra("data");
 					if (bmp != null) {
-						Bitmap newBmp = getRoundCornerBitmap(bmp, 360);
+						newBmp = getRoundCornerBitmap(bmp, 360);
 						if (newBmp != bmp) {
 							bmp.recycle();
 						}
@@ -168,8 +190,8 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 				dialog.dismiss();
 				break;
 			case R.id.back_login:
-				Intent loginbackintent=new Intent();
-				setResult(601,loginbackintent);
+				Intent loginbackintent = new Intent();
+				setResult(601, loginbackintent);
 				finish();
 				break;
 		}

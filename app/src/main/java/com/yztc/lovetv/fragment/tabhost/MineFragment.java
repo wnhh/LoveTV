@@ -2,8 +2,11 @@ package com.yztc.lovetv.fragment.tabhost;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +21,13 @@ import com.yztc.lovetv.activity.mine.ChongzhiActivity;
 import com.yztc.lovetv.activity.mine.HouseActivity;
 import com.yztc.lovetv.activity.mine.LoginActivity;
 import com.yztc.lovetv.activity.mine.PersonalInfoActivity;
+import com.yztc.lovetv.fragment.other.MyAttentionFragment;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MineFragment extends Fragment implements View.OnClickListener {
+public class MineFragment extends Fragment implements View.OnClickListener{
 
 	Button chongzhiBtn;
 	LinearLayout houseguanlill;
@@ -38,6 +42,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 	private TextView myname_id;
 	//存返回码
 	private int backcode;
+	private TextView picone;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -45,9 +50,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 		initView(v);
 		return v;
 	}
-
 	private void initView(View v) {
-		myname_id= (TextView) v.findViewById(R.id.myname_id);
+		myname_id = (TextView) v.findViewById(R.id.myname_id);
 		chongzhiBtn = (Button) v.findViewById(R.id.chongzhi_btn);
 		chongzhiBtn.setOnClickListener(this);
 		houseguanlill = (LinearLayout) v.findViewById(R.id.ll_houseguanli);
@@ -66,39 +70,57 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 		touxiang_id.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if(backcode==600)
-				{
+				if (backcode == 600 || backcode == 602) {
 					Intent loginintent = new Intent(getActivity(), PersonalInfoActivity.class);
-					startActivityForResult(loginintent,REQUEST_LOGINBACK_CODE);
-				}
-				else
-				{
+					loginintent.putExtra("loginnamekey", myname_id.getText().toString());
+					startActivityForResult(loginintent, REQUEST_LOGINBACK_CODE);
+				} else {
 					Intent loginintent = new Intent(getActivity(), LoginActivity.class);
 					startActivityForResult(loginintent, REQUEST_LOGIN_CODE);
 				}
 
 			}
 		});
+		picone = (TextView) v.findViewById(R.id.picone);
+
+		/*Bundle bundle=getArguments();
+		if(bundle!=null) {
+			String rlJkey = bundle.getString("RJLkey");
+			picone.setText(rlJkey);
+		}*/
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		backcode=resultCode;
+		backcode = resultCode;
 		switch (requestCode) {
 			case REQUEST_LOGIN_CODE:
-				if(resultCode==600) {
+				if (resultCode == 600) {
 					myname_id.setText(data.getStringExtra("loginkey"));
 				}
 				break;
 			case REQUEST_LOGINBACK_CODE:
-				if(resultCode==601) {
+				if (resultCode == 601) {
 					touxiang_id.setImageResource(R.mipmap.img_profile_touxiang_default_unknow);
 					myname_id.setText("点击登录");
+				}
+				if (resultCode == 602) {
+					Bitmap bp = data.getParcelableExtra("loginnamekey");
+					if (bp == null) {
+						touxiang_id.setImageResource(R.mipmap.ic_launcher);
+					}
+					touxiang_id.setImageBitmap(bp);
 				}
 				break;
 		}
 	}
+
 	@Override
 	public void onClick(View view) {
 		Intent intent = new Intent();

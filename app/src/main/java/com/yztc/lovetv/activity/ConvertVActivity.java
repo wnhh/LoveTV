@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.fragment.other.EmailFragment;
 import com.yztc.lovetv.fragment.other.GuanZhuFragment;
+import com.yztc.lovetv.fragment.other.MyAttentionFragment;
 import com.yztc.lovetv.fragment.other.PhotoFragment;
 
 public class ConvertVActivity extends AppCompatActivity {
@@ -68,7 +69,7 @@ public class ConvertVActivity extends AppCompatActivity {
 		}
 		if(intent.getStringExtra("conkey").equals("种子任务"))
 		{
-			addFragmentMethod(new GuanZhuFragment(),"GuanZhuFragment");
+			addFragmentMethod(new MyAttentionFragment(),"MyAttentionFragment");
 		}
 		if(intent.getStringExtra("conkey").equals("游戏中心"))
 		{
