@@ -11,15 +11,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.ChannelManagerActivity;
+import com.yztc.lovetv.activity.GridActivity;
 import com.yztc.lovetv.adapter.ChannelManagerAdapter;
 import com.yztc.lovetv.adapter.ViewPagerAdapter;
+import com.yztc.lovetv.apiservice.LitchiapiService;
+import com.yztc.lovetv.bean.Tuijian;
+import com.yztc.lovetv.contant.BaseUrl;
+import com.yztc.lovetv.contant.TabhostContant;
 import com.yztc.lovetv.fragment.tuijianfragment.AllFragment;
 import com.yztc.lovetv.fragment.tuijianfragment.Tuijian_Fragment_Vp;
+import com.yztc.lovetv.myutil.OkHttpUtils;
+import com.yztc.lovetv.myutil.PreferencesUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class TuijianFragment extends Fragment {
@@ -31,6 +46,7 @@ public class TuijianFragment extends Fragment {
     //数据源
     List<Fragment> mFragments;
     List<String> mTabs;
+    List<String> mAllTabs;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,17 +59,51 @@ public class TuijianFragment extends Fragment {
     private void initData() {
         mTabs = new ArrayList<>();
         mTabs.add("推荐");
-        mTabs.add("全部");
-        mTabs.add("颜值控");
-        mTabs.add("英雄联盟");
-        mTabs.add("全民星宿");
-        mTabs.add("守望先锋");
-        mTabs.add("全民户外");
-        mTabs.add("炉石传说");
-        mTabs.add("手游专区");
-        mTabs.add("网游竞技");
-        mTabs.add("单机主机");
-        mTabs.add("球球大作战");
+//        mTabs.add("全部");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BaseUrl.TUIJIANITEM)
+                .client(OkHttpUtils.newOkHttpClient(getContext()))
+                .build();
+        LitchiapiService litchiapiService = retrofit.create(LitchiapiService.class);
+        Call<ResponseBody> call = litchiapiService.getLitchCall(BaseUrl.TUIJIAN);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String result = response.body().string();
+                    Gson gson = new Gson();
+                    Tuijian tuijian = gson.fromJson(result, Tuijian.class);
+                    for (int i = 0; i < tuijian.getRoom().size(); i++) {//第一次进来默认添加9个数据(在添加顶部导航是 推荐写死了)
+                        String string = PreferencesUtils.getString(getContext(),TabhostContant.TUIJIAN_ITEM_NAME+"i");
+
+                        if (string != null){
+                            mTabs.add(string);
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+
+//        mTabs.add("推荐");
+//        mTabs.add("全部");
+//        mTabs.add("颜值控");
+//        mTabs.add("英雄联盟");
+//        mTabs.add("全民星宿");
+//        mTabs.add("守望先锋");
+//        mTabs.add("全民户外");
+//        mTabs.add("炉石传说");
+//        mTabs.add("手游专区");
+//        mTabs.add("网游竞技");
+//        mTabs.add("单机主机");
+//        mTabs.add("球球大作战");
         mFragments = new ArrayList<>();
         Tuijian_Fragment_Vp fragmentVp = new Tuijian_Fragment_Vp();
         mFragments.add(fragmentVp);

@@ -21,7 +21,7 @@ public interface LitchiapiService {
 	@GET("app/index/recommend/list-android.json?11212054&v=2.2.4&os=1&ver=4")
 	Observable<Tuijian> getLitchCall();
 	//动态的url
-	@GET("{path}?column=0&PageSize=10&pageIndex=1")
+	@GET("{path}?11212054&v=2.2.4&os=1&ver=4")
 	Call<ResponseBody> getLitchCall(@Path("path") String path);
 	//查询参数
 	@GET("GetFeeds")

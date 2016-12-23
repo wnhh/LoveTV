@@ -9,13 +9,28 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.adapter.GridPageAdapter;
+import com.yztc.lovetv.apiservice.LitchiapiService;
 import com.yztc.lovetv.bean.GridText;
+import com.yztc.lovetv.bean.Itembean;
+import com.yztc.lovetv.bean.Tuijian;
+import com.yztc.lovetv.contant.BaseUrl;
+import com.yztc.lovetv.contant.TabhostContant;
+import com.yztc.lovetv.myutil.OkHttpUtils;
+import com.yztc.lovetv.myutil.PreferencesUtils;
 import com.yztc.lovetv.viewall.FlowIndicator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class GridActivity extends AppCompatActivity {
 	//数据源
@@ -33,7 +48,38 @@ public class GridActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_grid);
 		initData();
 		initView();
+		initRetrofit();
 	}
+
+	private void initRetrofit() {
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl(BaseUrl.TUIJIANITEM)
+				.client(OkHttpUtils.newOkHttpClient(this))
+				.build();
+		LitchiapiService litchiapiService = retrofit.create(LitchiapiService.class);
+		Call<ResponseBody> call = litchiapiService.getLitchCall(BaseUrl.TUIJIAN);
+		call.enqueue(new Callback<ResponseBody>() {
+			@Override
+			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+				try {
+					String result = response.body().string();
+					Gson gson = new Gson();
+					Tuijian tuijian = gson.fromJson(result, Tuijian.class);
+					for (int i = 1; i < 10; i++) {//第一次进来默认添加9个数据(在添加顶部导航是 推荐写死了)
+						PreferencesUtils.putString(GridActivity.this, TabhostContant.TUIJIAN_ITEM_NAME+(i-1),tuijian.getRoom().get(i).getName());
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+			}
+		});
+	}
+
 	private void initData() {
 		lg=new ArrayList<>();
 		GridText gt=new GridText();
@@ -98,4 +144,6 @@ public class GridActivity extends AppCompatActivity {
 		gadapter=new GridPageAdapter(lg,GridActivity.this);
 		main_vp.setAdapter(gadapter);
 	}
+
+
 }

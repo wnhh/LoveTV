@@ -28,6 +28,7 @@ import com.yztc.lovetv.contant.BaseUrl;
 import com.yztc.lovetv.contant.TvUrl;
 import com.yztc.lovetv.method.TuijianGetItemMethod;
 import com.yztc.lovetv.myutil.OkHttpUtils;
+import com.yztc.lovetv.myutil.PreferencesUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class Tuijian_Fragment_Vp extends Fragment {
     List<String> liststr;
     List<TuijianStringitem> listTj;
     List<LunBoPictureBean> lunBoPictureBeans;
+    List<String> mItemName;
     //adapter
     private SectionAdapter sectionAdapter;
     private RelativeLayout ll_vp;
@@ -74,6 +76,7 @@ public class Tuijian_Fragment_Vp extends Fragment {
         mViewPager.pause();
         super.onStop();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -108,7 +111,6 @@ public class Tuijian_Fragment_Vp extends Fragment {
     private void initViewPager() {
         lunBoPictureBeans = new ArrayList<LunBoPictureBean>();
 
-        //实例化小圆点
         vfit = new Retrofit.Builder()
                 .baseUrl(BaseUrl.VPPICTURE)
                 .build();
@@ -150,6 +152,7 @@ public class Tuijian_Fragment_Vp extends Fragment {
     private void initRetrofit() {
         liststr = new ArrayList<>();
         listTj = new ArrayList<>();
+        mItemName = new ArrayList<>();
         TuijianStringitem ttitem = new TuijianStringitem(true, "精彩推荐", true);
         listTj.add(ttitem);
         //实例化Retrofit
@@ -177,30 +180,41 @@ public class Tuijian_Fragment_Vp extends Fragment {
 
                     @Override
                     public void onNext(Tuijian tuijian) {
+                        //推荐页
                         for (int i = 0; i < tuijian.getRoom().get(0).getList().size(); i++) {
                             if (i == 6) {
                                 break;
                             }
                             listTj.add(TuijianGetItemMethod.getItemMessage(tuijian, 0, i));
                         }
-                        //颜值控
-                        TuijianGetItemMethod.addItem("颜值控", listTj, tuijian, temp++);
-                        //英雄联盟
-                        TuijianGetItemMethod.addItem("英雄联盟", listTj, tuijian, temp++);
-                        //全民星秀
-                        TuijianGetItemMethod.addItem("全民星秀", listTj, tuijian, temp++);
-                        //守望先锋
-                        TuijianGetItemMethod.addItem("守望先锋", listTj, tuijian, temp++);
-                        //全民户外
-                        TuijianGetItemMethod.addItem("全民户外", listTj, tuijian, temp++);
-                        //炉石传说
-                        TuijianGetItemMethod.addItem("炉石传说", listTj, tuijian, temp++);
-                        //手游专区
-                        TuijianGetItemMethod.addItem("手游专区", listTj, tuijian, temp++);
-                        //网游竞技
-                        TuijianGetItemMethod.addItem("网游竞技", listTj, tuijian, temp++);
-                        //单机主机
-                        TuijianGetItemMethod.addItem("单机主机", listTj, tuijian, temp++);
+                        mItemName.clear();
+                        for (int j = 0; j < tuijian.getRoom().size() - 1; j++) {
+                            String string = PreferencesUtils.getString(getContext(), "Name" + j);
+                            if (!string.equals(null)) {
+                                mItemName.add(string);
+                            }
+                        }
+                        //推荐页后
+                        for (int len = 0; len < mItemName.size(); len++) {
+                            //颜值控
+                            TuijianGetItemMethod.addItem(mItemName.get(len), listTj, tuijian, temp++);
+//                            //英雄联盟
+//                            TuijianGetItemMethod.addItem("英雄联盟", listTj, tuijian, temp++);
+//                            //全民星秀
+//                            TuijianGetItemMethod.addItem("全民星秀", listTj, tuijian, temp++);
+//                            //守望先锋
+//                            TuijianGetItemMethod.addItem("守望先锋", listTj, tuijian, temp++);
+//                            //全民户外
+//                            TuijianGetItemMethod.addItem("全民户外", listTj, tuijian, temp++);
+//                            //炉石传说
+//                            TuijianGetItemMethod.addItem("炉石传说", listTj, tuijian, temp++);
+//                            //手游专区
+//                            TuijianGetItemMethod.addItem("手游专区", listTj, tuijian, temp++);
+//                            //网游竞技
+//                            TuijianGetItemMethod.addItem("网游竞技", listTj, tuijian, temp++);
+//                            //单机主机
+//                            TuijianGetItemMethod.addItem("单机主机", listTj, tuijian, temp++);
+                        }
                         sectionAdapter = new SectionAdapter(getContext(), listTj, 1);
                         sectionAdapter.addHeaderView(ll_vp);
                         tuijianitem_rv.setAdapter(sectionAdapter);

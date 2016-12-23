@@ -23,8 +23,12 @@ import com.yztc.lovetv.apiservice.LoginApiService;
 import com.yztc.lovetv.bean.FirstPagerBean;
 import com.yztc.lovetv.bean.Itembean;
 import com.yztc.lovetv.bean.TuiJianItem;
+import com.yztc.lovetv.bean.Tuijian;
 import com.yztc.lovetv.contant.BaseUrl;
+import com.yztc.lovetv.contant.TabhostContant;
+import com.yztc.lovetv.myutil.MyConstants;
 import com.yztc.lovetv.myutil.OkHttpUtils;
+import com.yztc.lovetv.myutil.PreferencesUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,9 +40,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static cn.bmob.newim.core.BmobIMClient.getContext;
+
 public class ChannelManagerActivity extends AppCompatActivity {
 
-    private TextView channelmanager_tv,manager_tv,tv;
+	private TextView channelmanager_tv,manager_tv,tv;
 	private Toolbar manager_tb;
 	private RecyclerView channelone_tv,channeltwo_tv;
 	private int count;
@@ -46,6 +52,7 @@ public class ChannelManagerActivity extends AppCompatActivity {
 	List<String>strlist;
 	List<String>strlisttwo;
 	List<Itembean> itembeanList;
+	List<String> mTabs;
 
 	//适配器
 	private ChannelManagerAdapter cma;
@@ -54,13 +61,14 @@ public class ChannelManagerActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_channel_manager);
-		initRetrofit();
 		initData();
 		initView();
 	}
 
-	private void initRetrofit() {
-        itembeanList = new ArrayList<>();
+
+	private void initData() {
+		strlist=new ArrayList<>();
+		strlisttwo=new ArrayList<>();
 		Retrofit retrofit = new Retrofit.Builder()
 				.baseUrl(BaseUrl.TUIJIANITEM)
 				.client(OkHttpUtils.newOkHttpClient(this))
@@ -71,17 +79,19 @@ public class ChannelManagerActivity extends AppCompatActivity {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 				try {
-					String result = response.body().string().replaceAll("-", "_");;
+					String result = response.body().string();
 					Gson gson = new Gson();
-                    FirstPagerBean firstPagerBean = gson.fromJson(result, FirstPagerBean.class);
-                    //因為接口中第一個數據是推薦  所以從下標
-                    for (int i = 1;i<firstPagerBean.getApp_focus().size();i++){
-                        Itembean itembean = new Itembean();
-                        itembean.setId(firstPagerBean.getApp_focus().get(i).getId());//獲取id
-                        //TODO  推薦的接口找錯了  明天重寫
-//                        itembean.setName(firstPagerBean.getApp_focus().get(i).get);
-                    }
-                } catch (IOException e) {
+					Tuijian tuijian = gson.fromJson(result, Tuijian.class);
+					for (int i = 0; i < tuijian.getRoom().size(); i++) {//第一次进来默认添加9个数据(在添加顶部导航是 推荐写死了)
+						String string = PreferencesUtils.getString(ChannelManagerActivity.this,TabhostContant.TUIJIAN_ITEM_NAME+"i");
+
+						if (string != null){
+							strlist.add(string);
+						}else{
+							strlisttwo.add(tuijian.getRoom().get(i).getName());
+						}
+					}
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
@@ -91,31 +101,28 @@ public class ChannelManagerActivity extends AppCompatActivity {
 
 			}
 		});
-	}
 
-	private void initData() {
-		strlist=new ArrayList<>();
-		strlisttwo=new ArrayList<>();
-		strlist.add("颜值控");
-		strlist.add("英雄联盟");
-		strlist.add("全民星宿");
-		strlist.add("守望先锋");
-		strlist.add("全民户外");
-		strlist.add("炉石传说");
-		strlist.add("手游专区");
-		strlist.add("网友竞技");
-		strlist.add("单机主机");
-		strlist.add("球球大作战");
-		strlisttwo.add("二次元区");
-		strlisttwo.add("暴雪经典");
-		strlisttwo.add("NBA2K");
-		strlisttwo.add("王者荣耀");
-		strlisttwo.add("QQ飞车");
-		strlisttwo.add("FIFA");
-		strlisttwo.add("穿越火线");
-		strlisttwo.add("DNF");
-		strlisttwo.add("DOTA2");
-		strlisttwo.add("魔兽争霸3");
+//
+//	strlist.add("颜值控");
+//		strlist.add("英雄联盟");
+//		strlist.add("全民星宿");
+//		strlist.add("守望先锋");
+//		strlist.add("全民户外");
+//		strlist.add("炉石传说");
+//		strlist.add("手游专区");
+//		strlist.add("网友竞技");
+//		strlist.add("单机主机");
+//		strlist.add("球球大作战");
+//		strlisttwo.add("二次元区");
+//		strlisttwo.add("暴雪经典");
+//		strlisttwo.add("NBA2K");
+//		strlisttwo.add("王者荣耀");
+//		strlisttwo.add("QQ飞车");
+//		strlisttwo.add("FIFA");
+//		strlisttwo.add("穿越火线");
+//		strlisttwo.add("DNF");
+//		strlisttwo.add("DOTA2");
+//		strlisttwo.add("魔兽争霸3");
 	}
 
 	private void initView() {
@@ -125,8 +132,7 @@ public class ChannelManagerActivity extends AppCompatActivity {
 		manager_tb.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent in=new Intent(ChannelManagerActivity.this,MainActivity.class);
-				startActivity(in);
+				finish();
 			}
 		});
 		tv= (TextView) findViewById(R.id.manager_tv);
@@ -176,6 +182,11 @@ public class ChannelManagerActivity extends AppCompatActivity {
 				else
 				{
 					tv.setText("管理");
+					PreferencesUtils.clear(ChannelManagerActivity.this);
+					for (int i = 0;i<strlist.size(); i++) {
+						PreferencesUtils.putString(ChannelManagerActivity.this, TabhostContant.TUIJIAN_ITEM_NAME+i,strlist.get(i));
+					}
+					PreferencesUtils.putBoolean(getContext(),MyConstants.KEY_TEST,true);
 				}
 			}
 		});
