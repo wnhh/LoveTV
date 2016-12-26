@@ -20,6 +20,7 @@ import com.yztc.lovetv.activity.mine.HouseActivity;
 import com.yztc.lovetv.activity.mine.LoginActivity;
 import com.yztc.lovetv.activity.mine.PersonalInfoActivity;
 import com.yztc.lovetv.activity.mine.SySettingActivity;
+import com.yztc.lovetv.activity.mine.TalkActivity;
 import com.yztc.lovetv.fragment.other.MyAttentionFragment;
 
 
@@ -43,6 +44,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 	private int backcode;
 	private TextView picone;
 	private ImageView huahua_id;
+	private ImageView talkIv;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +58,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 		myname_id = (TextView) v.findViewById(R.id.myname_id);
 		chongzhiBtn = (Button) v.findViewById(R.id.chongzhi_btn);
 		chongzhiBtn.setOnClickListener(this);
+		talkIv = (ImageView) v.findViewById(R.id.rebot_id);
+		talkIv.setOnClickListener(this);
 		houseguanlill = (LinearLayout) v.findViewById(R.id.ll_houseguanli);
 		houseguanlill.setOnClickListener(this);
 		ll_myguanzhu = (LinearLayout) v.findViewById(R.id.ll_myguanzhu);
@@ -164,6 +168,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 			case R.id.ll_gamecenter:
 				intent.setClass(getActivity(), ConvertVActivity.class);
 				intent.putExtra("conkey", "游戏中心");
+				break;
+			case R.id.rebot_id:
+				intent.setClass(getActivity(), TalkActivity.class);
 				break;
 		}
 		startActivity(intent);
