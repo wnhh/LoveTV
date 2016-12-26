@@ -60,7 +60,8 @@ public class TvUrl {
 	public static final String ZHUANGJIA = "http://www.quanmin.tv/json/categories/zhuangjiafengbao/list.json?11212128&v=2.2.4&os=1&ver=4";
 	//传奇专区
 	public static final String CHUANGQI = "http://www.quanmin.tv/json/categories/chuanqi/list.json?11212128&v=2.2.4&os=1&ver=4";
-
+	//游戏中心
+	public static final String  GAMECENTER="http://m.quanmin.tv/udata/getdata?_app=qmtv&cate=game_center&platform=android";
 	
 
 }
