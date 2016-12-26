@@ -47,10 +47,20 @@ public class TuijianFragment extends Fragment {
     List<Fragment> mFragments;
     List<String> mTabs;
     List<String> mAllTabs;
+
+    View v;
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(!hidden){
+            v.invalidate();
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_tuijian, container, false);
+       View v = inflater.inflate(R.layout.fragment_tuijian, container, false);
         initView(v);
         initData();
         return v;
@@ -58,6 +68,7 @@ public class TuijianFragment extends Fragment {
 
     private void initData() {
         mTabs = new ArrayList<>();
+        mFragments = new ArrayList<>();
         mTabs.add("推荐");
 //        mTabs.add("全部");
         Retrofit retrofit = new Retrofit.Builder()
@@ -74,12 +85,23 @@ public class TuijianFragment extends Fragment {
                     Gson gson = new Gson();
                     Tuijian tuijian = gson.fromJson(result, Tuijian.class);
                     for (int i = 0; i < tuijian.getRoom().size(); i++) {//第一次进来默认添加9个数据(在添加顶部导航是 推荐写死了)
-                        String string = PreferencesUtils.getString(getContext(),TabhostContant.TUIJIAN_ITEM_NAME+"i");
+                        String string = PreferencesUtils.getString(getContext(),TabhostContant.TUIJIAN_ITEM_NAME+i);
 
                         if (string != null){
                             mTabs.add(string);
                         }
                     }
+
+                    Tuijian_Fragment_Vp fragmentVp = new Tuijian_Fragment_Vp();
+                    mFragments.add(fragmentVp);
+                    for (int i=0;i<mTabs.size()-1;i++){
+                        AllFragment allFragment = new AllFragment();
+                        mFragments.add(allFragment);
+                    }
+                    ViewPagerAdapter fragmentAdapter = new ViewPagerAdapter(getChildFragmentManager(),mFragments,mTabs);
+                    mViewPager.setOffscreenPageLimit(mTabs.size()-1);
+                    mViewPager.setAdapter(fragmentAdapter);
+                    mTabLayout.setupWithViewPager(mViewPager);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -104,17 +126,8 @@ public class TuijianFragment extends Fragment {
 //        mTabs.add("网游竞技");
 //        mTabs.add("单机主机");
 //        mTabs.add("球球大作战");
-        mFragments = new ArrayList<>();
-        Tuijian_Fragment_Vp fragmentVp = new Tuijian_Fragment_Vp();
-        mFragments.add(fragmentVp);
-        for (int i=0;i<mTabs.size()-1;i++){
-            AllFragment allFragment = new AllFragment();
-            mFragments.add(allFragment);
-        }
-        ViewPagerAdapter fragmentAdapter = new ViewPagerAdapter(getChildFragmentManager(),mFragments,mTabs);
-        mViewPager.setOffscreenPageLimit(mTabs.size()-1);
-        mViewPager.setAdapter(fragmentAdapter);
-        mTabLayout.setupWithViewPager(mViewPager);
+
+
     }
 
     private void initView(View v) {

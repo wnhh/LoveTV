@@ -52,4 +52,5 @@ dependencies {
     compile 'cn.bmob.android:http-legacy:1.0'
     compile 'com.github.mcxtzhang:SwipeCaptcha:V1.0.0'
     testCompile 'junit:junit:4.12'
+    compile files('libs/com.baidu.android.localasr_1.1.22.jar')
 }

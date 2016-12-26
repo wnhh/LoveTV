@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +15,11 @@ import android.widget.TextView;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.ConvertVActivity;
+import com.yztc.lovetv.activity.mine.TalkActivity;
 import com.yztc.lovetv.activity.mine.ChongzhiActivity;
 import com.yztc.lovetv.activity.mine.HouseActivity;
 import com.yztc.lovetv.activity.mine.LoginActivity;
 import com.yztc.lovetv.activity.mine.PersonalInfoActivity;
-import com.yztc.lovetv.fragment.other.MyAttentionFragment;
 
 
 /**
@@ -37,6 +35,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 	private LinearLayout ll_zhongzirenwu;
 	private LinearLayout ll_gamecenter;
 	private ImageView touxiang_id;
+	private ImageView talkIv;
 	public static final int REQUEST_LOGIN_CODE = 200;
 	public static final int REQUEST_LOGINBACK_CODE = 201;
 	private TextView myname_id;
@@ -54,6 +53,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 		myname_id = (TextView) v.findViewById(R.id.myname_id);
 		chongzhiBtn = (Button) v.findViewById(R.id.chongzhi_btn);
 		chongzhiBtn.setOnClickListener(this);
+		talkIv = (ImageView) v.findViewById(R.id.rebot_id);
+		talkIv.setOnClickListener(this);
 		houseguanlill = (LinearLayout) v.findViewById(R.id.ll_houseguanli);
 		houseguanlill.setOnClickListener(this);
 		ll_myguanzhu = (LinearLayout) v.findViewById(R.id.ll_myguanzhu);
@@ -150,6 +151,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 			case R.id.ll_gamecenter:
 				intent.setClass(getActivity(), ConvertVActivity.class);
 				intent.putExtra("conkey", "游戏中心");
+				break;
+			case R.id.rebot_id:
+				intent.setClass(getActivity(), TalkActivity.class);
 				break;
 		}
 		startActivity(intent);
