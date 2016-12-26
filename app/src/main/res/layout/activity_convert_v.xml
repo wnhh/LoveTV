@@ -13,10 +13,11 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_convert"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@color/colorWhite"
         android:title="个人资料"
-        app:navigationIcon="@mipmap/live_hor_back_normal">
+        app:navigationIcon="@mipmap/live_hor_back_normal"
+        >
 
         <TextView
             android:id="@+id/convert_id"
@@ -25,7 +26,7 @@
             android:layout_gravity="center_horizontal"
             android:text="绑定邮箱"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             />
     </android.support.v7.widget.Toolbar>
     <FrameLayout

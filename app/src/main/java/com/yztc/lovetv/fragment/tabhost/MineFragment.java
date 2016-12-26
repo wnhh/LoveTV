@@ -15,17 +15,18 @@ import android.widget.TextView;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.ConvertVActivity;
-import com.yztc.lovetv.activity.mine.TalkActivity;
 import com.yztc.lovetv.activity.mine.ChongzhiActivity;
 import com.yztc.lovetv.activity.mine.HouseActivity;
 import com.yztc.lovetv.activity.mine.LoginActivity;
 import com.yztc.lovetv.activity.mine.PersonalInfoActivity;
+import com.yztc.lovetv.activity.mine.SySettingActivity;
+import com.yztc.lovetv.fragment.other.MyAttentionFragment;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MineFragment extends Fragment implements View.OnClickListener{
+public class MineFragment extends Fragment implements View.OnClickListener {
 
 	Button chongzhiBtn;
 	LinearLayout houseguanlill;
@@ -35,13 +36,14 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 	private LinearLayout ll_zhongzirenwu;
 	private LinearLayout ll_gamecenter;
 	private ImageView touxiang_id;
-	private ImageView talkIv;
 	public static final int REQUEST_LOGIN_CODE = 200;
 	public static final int REQUEST_LOGINBACK_CODE = 201;
 	private TextView myname_id;
 	//存返回码
 	private int backcode;
 	private TextView picone;
+	private ImageView huahua_id;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -49,12 +51,11 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 		initView(v);
 		return v;
 	}
+
 	private void initView(View v) {
 		myname_id = (TextView) v.findViewById(R.id.myname_id);
 		chongzhiBtn = (Button) v.findViewById(R.id.chongzhi_btn);
 		chongzhiBtn.setOnClickListener(this);
-		talkIv = (ImageView) v.findViewById(R.id.rebot_id);
-		talkIv.setOnClickListener(this);
 		houseguanlill = (LinearLayout) v.findViewById(R.id.ll_houseguanli);
 		houseguanlill.setOnClickListener(this);
 		ll_myguanzhu = (LinearLayout) v.findViewById(R.id.ll_myguanzhu);
@@ -83,12 +84,21 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 			}
 		});
 		picone = (TextView) v.findViewById(R.id.picone);
-
 		/*Bundle bundle=getArguments();
 		if(bundle!=null) {
 			String rlJkey = bundle.getString("RJLkey");
 			picone.setText(rlJkey);
 		}*/
+		MyAttentionFragment mf = new MyAttentionFragment();
+		mf.setSm(new MyAttentionFragment.SetValueMethod() {
+			@Override
+			public void setValue(String str) {
+				picone.setText(str);
+			}
+		});
+
+		huahua_id = (ImageView) v.findViewById(R.id.huahua_id);
+		huahua_id.setOnClickListener(this);
 	}
 
 	@Override
@@ -126,6 +136,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 	public void onClick(View view) {
 		Intent intent = new Intent();
 		switch (view.getId()) {
+			case R.id.huahua_id:
+				intent.setClass(getActivity(), SySettingActivity.class);
+				break;
 			case R.id.chongzhi_btn:
 				intent.setClass(getActivity(), ChongzhiActivity.class);
 				break;
@@ -151,9 +164,6 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 			case R.id.ll_gamecenter:
 				intent.setClass(getActivity(), ConvertVActivity.class);
 				intent.putExtra("conkey", "游戏中心");
-				break;
-			case R.id.rebot_id:
-				intent.setClass(getActivity(), TalkActivity.class);
 				break;
 		}
 		startActivity(intent);

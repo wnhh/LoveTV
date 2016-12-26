@@ -15,6 +15,7 @@ import com.yztc.lovetv.fragment.other.EmailFragment;
 import com.yztc.lovetv.fragment.other.GuanZhuFragment;
 import com.yztc.lovetv.fragment.other.MyAttentionFragment;
 import com.yztc.lovetv.fragment.other.PhotoFragment;
+import com.yztc.lovetv.fragment.other.TVInfoFragment;
 
 public class ConvertVActivity extends AppCompatActivity {
 
@@ -74,6 +75,10 @@ public class ConvertVActivity extends AppCompatActivity {
 		if(intent.getStringExtra("conkey").equals("游戏中心"))
 		{
 			addFragmentMethod(new GuanZhuFragment(),"GuanZhuFragment");
+		}
+		if(intent.getStringExtra("conkey").equals("关于我们"))
+		{
+			addFragmentMethod(new TVInfoFragment(),"TVInfoFragment");
 		}
 	}
 	//添加的fragment
