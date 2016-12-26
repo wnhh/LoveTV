@@ -1,6 +1,8 @@
 package com.yztc.lovetv.fragment.other;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,31 +15,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yztc.lovetv.R;
+import com.yztc.lovetv.activity.ConvertVActivity;
 import com.yztc.lovetv.fragment.tabhost.MineFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyAttentionFragment extends Fragment implements View.OnClickListener{
-
+public class MyAttentionFragment extends Fragment{
 
 	private TextView registerJL_tv;
 	private RelativeLayout RegisterJL_rl;
-	private MineFragment mf;
-	private SetValueMethod sm;
-	public void setSm(SetValueMethod sm) {
-		this.sm = sm;
-	}
 	public MyAttentionFragment() {
 		// Required empty public constructor
+		Bundle bundle=new Bundle();
+		bundle.putString("RJLkey","125");
+		this.setArguments(bundle);
 	}
-
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_my_attention, container, false);
-
 		initView(view);
 		return view;
 	}
@@ -48,34 +45,13 @@ public class MyAttentionFragment extends Fragment implements View.OnClickListene
 		registerJL_tv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Log.e("haha","----------------");
 				Toast.makeText(getContext(),"领取成功！",Toast.LENGTH_SHORT).show();
-				/*Bundle bundle=new Bundle();
-				bundle.putString("RJLkey","125");
-				MyAttentionFragment mf=new MyAttentionFragment();
-				mf.setArguments(bundle);*/
-				if(sm!=null)
-				{
-					sm.setValue("125");
-				}
 				RegisterJL_rl.setVisibility(View.GONE);
+				ConvertVActivity con= (ConvertVActivity) getActivity();
+				con.setTextValue("125");
 			}
 		});
-	}
 
-	@Override
-	public void onClick(View view) {
-		switch (view.getId())
-		{
-			case R.id.registerJL_tv:
-				break;
-
-		}
-
-	}
-	public interface SetValueMethod
-	{
-		void setValue(String str);
 	}
 
 }

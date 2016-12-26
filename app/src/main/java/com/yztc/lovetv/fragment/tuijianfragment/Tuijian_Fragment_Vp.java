@@ -49,7 +49,6 @@ import rx.schedulers.Schedulers;
  * A simple {@link Fragment} subclass.
  */
 public class Tuijian_Fragment_Vp extends Fragment {
-
     private int temp = 1;//接口中第几个
     private Retrofit rfit, vfit;
     private LitchiapiService litchApiService;
@@ -64,19 +63,16 @@ public class Tuijian_Fragment_Vp extends Fragment {
     //adapter
     private SectionAdapter sectionAdapter;
     private RelativeLayout ll_vp;
-
     @Override
     public void onResume() {
         mViewPager.resume();
         super.onResume();
     }
-
     @Override
     public void onStop() {
         mViewPager.pause();
         super.onStop();
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -130,8 +126,6 @@ public class Tuijian_Fragment_Vp extends Fragment {
                         lunBoPicture.setTitle(firstPagerBean.getApp_focus().get(i).getTitle());
                         lunBoPictureBeans.add(lunBoPicture);
                     }
-
-
                     //ViewPager适配器
                     //Adapter里动态生成ViewPager的布局
                     vpPagerAdapter vpPagerAdapter = new vpPagerAdapter(mViewPager, getContext(), lunBoPictureBeans);

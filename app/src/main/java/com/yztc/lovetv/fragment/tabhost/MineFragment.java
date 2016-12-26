@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,13 +40,13 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 	private ImageView touxiang_id;
 	public static final int REQUEST_LOGIN_CODE = 200;
 	public static final int REQUEST_LOGINBACK_CODE = 201;
+	public static final int REQUEST_ZHONGZIBACK_CODE = 202;
 	private TextView myname_id;
 	//存返回码
 	private int backcode;
 	private TextView picone;
 	private ImageView huahua_id;
 	private ImageView talkIv;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -53,7 +54,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 		initView(v);
 		return v;
 	}
-
 	private void initView(View v) {
 		myname_id = (TextView) v.findViewById(R.id.myname_id);
 		chongzhiBtn = (Button) v.findViewById(R.id.chongzhi_btn);
@@ -84,25 +84,22 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 					Intent loginintent = new Intent(getActivity(), LoginActivity.class);
 					startActivityForResult(loginintent, REQUEST_LOGIN_CODE);
 				}
-
 			}
 		});
 		picone = (TextView) v.findViewById(R.id.picone);
-		/*Bundle bundle=getArguments();
-		if(bundle!=null) {
-			String rlJkey = bundle.getString("RJLkey");
-			picone.setText(rlJkey);
-		}*/
-		MyAttentionFragment mf = new MyAttentionFragment();
-		mf.setSm(new MyAttentionFragment.SetValueMethod() {
-			@Override
-			public void setValue(String str) {
-				picone.setText(str);
-			}
-		});
+
 
 		huahua_id = (ImageView) v.findViewById(R.id.huahua_id);
 		huahua_id.setOnClickListener(this);
+
+		ll_zhongzirenwu.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent zz=new Intent(getContext(),ConvertVActivity.class);
+				zz.putExtra("conkey", "种子任务");
+				startActivityForResult(zz,REQUEST_ZHONGZIBACK_CODE);
+			}
+		});
 	}
 
 	@Override
@@ -133,6 +130,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 					touxiang_id.setImageBitmap(bp);
 				}
 				break;
+			case REQUEST_ZHONGZIBACK_CODE:
+				if(resultCode==800)
+				{
+					picone.setText(data.getStringExtra("haha"));
+				}
+				break;
 		}
 	}
 
@@ -160,10 +163,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 			case R.id.ll_kaibotixing:
 				intent.setClass(getActivity(), ConvertVActivity.class);
 				intent.putExtra("conkey", "开播提醒");
-				break;
-			case R.id.ll_zhongzirenwu:
-				intent.setClass(getActivity(), ConvertVActivity.class);
-				intent.putExtra("conkey", "种子任务");
 				break;
 			case R.id.ll_gamecenter:
 				intent.setClass(getActivity(), ConvertVActivity.class);

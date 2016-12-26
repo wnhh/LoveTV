@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.fragment.other.EmailFragment;
+import com.yztc.lovetv.fragment.other.GameCenterFragment;
 import com.yztc.lovetv.fragment.other.GuanZhuFragment;
 import com.yztc.lovetv.fragment.other.MyAttentionFragment;
 import com.yztc.lovetv.fragment.other.PhotoFragment;
@@ -23,6 +25,12 @@ public class ConvertVActivity extends AppCompatActivity {
 	private Toolbar tb_convert;
 	private Intent intent;
 	private FragmentManager frm;
+	private String getvalue;
+	public void setTextValue(String text) {
+		getvalue=text;
+		Log.e("aa","获得fragment的值   "+getvalue);
+
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,11 +43,16 @@ public class ConvertVActivity extends AppCompatActivity {
 				.add(R.id.convert_fl,new EmailFragment(),"EmailFragment")
 				.commit();*/
 	}
+
 	private void initToolBar() {
 		tb_convert = (Toolbar) findViewById(R.id.tb_convert);
 		tb_convert.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+
+				Intent backvalue=new Intent();
+				backvalue.putExtra("haha",getvalue);
+				setResult(800,backvalue);
 				finish();
 			}
 		});
@@ -74,7 +87,7 @@ public class ConvertVActivity extends AppCompatActivity {
 		}
 		if(intent.getStringExtra("conkey").equals("游戏中心"))
 		{
-			addFragmentMethod(new GuanZhuFragment(),"GuanZhuFragment");
+			addFragmentMethod(new GameCenterFragment(),"GameCenterFragment");
 		}
 		if(intent.getStringExtra("conkey").equals("关于我们"))
 		{
