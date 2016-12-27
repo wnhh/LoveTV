@@ -9,6 +9,7 @@ import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,12 +19,10 @@ import android.widget.Toast;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.bean.UserEntity;
-
-import org.w3c.dom.Text;
-
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
+import cn.bmob.v3.listener.SaveListener;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,14 +34,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 	private ImageView loginclose_btn;
 	private ImageView hideshow_btn;
 	private int count=1;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		initView();
 	}
-
 	private void initView() {
 		intentregister_tv = (TextView) findViewById(R.id.intentregister_tv);
 		register_tb = (Toolbar) findViewById(R.id.register_tb);
@@ -71,21 +68,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 					Toast.makeText(this, "输入密码", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				BmobUser.loginByAccount(this, edt, edt1, new LogInListener<UserEntity>() {
-
-					@Override
-					public void done(UserEntity userEntity, BmobException e) {
-						if (userEntity != null) {
-							Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-							Intent loginbackintent = new Intent();
-							loginbackintent.putExtra("loginkey", edt);
-							setResult(600, loginbackintent);
-							finish();
-						} else {
-							Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+				BmobUser bmobUser = BmobUser.getCurrentUser(this);
+				if(bmobUser != null){
+					// 允许用户使用应用
+				}else{
+					//缓存用户对象为空时， 可打开用户注册界面…
+					BmobUser.loginByAccount(LoginActivity.this, edt, edt1, new LogInListener<UserEntity>() {
+						@Override
+						public void done(UserEntity userEntity, BmobException e) {
+							if (userEntity != null) {
+								Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+								Intent loginbackintent = new Intent();
+								loginbackintent.putExtra("loginkey", edt);
+								setResult(600, loginbackintent);
+								finish();
+							} else {
+								Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+							}
 						}
-					}
-				});
+					});
+					/*BmobUser bu2 = new BmobUser();
+					bu2.setUsername("lucky1");
+					bu2.setPassword("123456");
+					bu2.login(LoginActivity.this, new SaveListener() {
+						@Override
+						public void onSuccess() {
+							Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+						}
+						@Override
+						public void onFailure(int i, String s) {
+							Log.e("hha","cuowuma-----------------"+i);
+						}
+					});*/
+				}
 				break;
 			case R.id.intentregister_tv:
 				Intent in = new Intent(this, RegisterActivity.class);
@@ -101,7 +116,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 				} else {
 					hideshow_btn.setImageResource(R.mipmap.btn_code_hide);
 					pwd_edt.setTransformationMethod(PasswordTransformationMethod.getInstance());
-
 				}
 				//切换后将EditText光标置于末尾
 				CharSequence charSequence = pwd_edt.getText();

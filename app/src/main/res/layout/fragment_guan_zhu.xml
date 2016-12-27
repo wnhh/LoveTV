@@ -3,10 +3,18 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="com.yztc.lovetv.fragment.other.GuanZhuFragment">
-
-    <TextView
+    <Button
+        android:id="@+id/ceshi_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="wrap_content"
+        android:text="测试设置假数据"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/guanzhu_rv"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>

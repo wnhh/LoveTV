@@ -25,13 +25,11 @@ public class SectionAdapter extends BaseSectionQuickAdapter<TuijianStringitem> {
     public SectionAdapter(Context context,List<TuijianStringitem> data,int Type) {
         super(R.layout.item_tuijian_jingcai_itemview, R.layout.item_tuijian_jingcai, data);
     }
-
     protected void convertHead(BaseViewHolder helper, final TuijianStringitem item) {
         helper.setText(R.id.perfitpro_tv, item.header);
         helper.setVisible(R.id.hahaha, item.isMore());
         helper.addOnClickListener(R.id.intent_ll);
     }
-
     @Override
     protected void convert(BaseViewHolder helper, TuijianStringitem item) {
         TuiJianItem itemtj = item.t;
@@ -42,7 +40,6 @@ public class SectionAdapter extends BaseSectionQuickAdapter<TuijianStringitem> {
         Glide.with(mContext).load(itemtj.getPersonalPicUrl()).transform(new RoundTransformation(context)).into((ImageView) helper.getView(R.id.rtouxiang_iv));
 
     }
-
     class RoundTransformation extends BitmapTransformation {
 
         public RoundTransformation(Context context) {
@@ -58,7 +55,6 @@ public class SectionAdapter extends BaseSectionQuickAdapter<TuijianStringitem> {
             }
             return roteBmp;
         }
-
         @Override
         public String getId() {
             return "glide";
