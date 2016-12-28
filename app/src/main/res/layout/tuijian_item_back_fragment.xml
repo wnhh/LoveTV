@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+    <!--头像 名字 简介-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:id="@+id/tuijian_back_iv_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:id="@+id/tuijian_back_tv_name"
+            android:singleLine="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tuijian_back_iv_icon"
+            android:layout_toRightOf="@id/tuijian_back_iv_icon"
+            android:text="MJR·"
+            android:layout_margin="@dimen/dp_4"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            />
+        <TextView
+            android:id="@+id/tuijian_back_tv_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:text="来来来"
+            android:singleLine="true"
+            android:gravity="bottom"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tuijian_back_iv_icon"
+            android:layout_alignBottom="@id/tuijian_back_iv_icon"
+            android:layout_below="@id/name_tv"
+            android:textColor="@color/colorfont"
+            android:textSize="11sp"/>
+
+        <ImageView
+            android:id="@+id/setswitch_back_iv"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:scaleType="fitXY"
+            android:background="@mipmap/close"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

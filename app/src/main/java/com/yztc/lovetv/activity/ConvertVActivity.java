@@ -15,6 +15,7 @@ import com.yztc.lovetv.R;
 import com.yztc.lovetv.fragment.other.EmailFragment;
 import com.yztc.lovetv.fragment.other.GameCenterFragment;
 import com.yztc.lovetv.fragment.other.GuanZhuFragment;
+import com.yztc.lovetv.fragment.other.LivingRemindFragment;
 import com.yztc.lovetv.fragment.other.MyAttentionFragment;
 import com.yztc.lovetv.fragment.other.PhotoFragment;
 import com.yztc.lovetv.fragment.other.TVInfoFragment;
@@ -77,9 +78,9 @@ public class ConvertVActivity extends AppCompatActivity {
 		{
 			addFragmentMethod(new GuanZhuFragment(),"GuanZhuFragment");
 		}
-		if(intent.getStringExtra("conkey").equals("观看历史"))
+		if(intent.getStringExtra("conkey").equals("开播提醒"))
 		{
-			addFragmentMethod(new GuanZhuFragment(),"GuanZhuFragment");
+			addFragmentMethod(new LivingRemindFragment(),"LivingRemindFragment");
 		}
 		if(intent.getStringExtra("conkey").equals("种子任务"))
 		{
