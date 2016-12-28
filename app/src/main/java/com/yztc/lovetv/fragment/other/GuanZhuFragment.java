@@ -20,7 +20,6 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class GuanZhuFragment extends Fragment {
-
 	//数据源
 	private List<BackNeedData> bnd;
 	private RecyclerView guanzhu_rv;
