@@ -35,7 +35,6 @@ public class BackDataOperateManager {
         }
         backNeedDataDao.insertInTx(bnds);
     }
-
     //删除一条数据
     public void delete(BackNeedData bnd) throws Exception{
         if (bnd == null) {

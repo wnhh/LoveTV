@@ -15,6 +15,7 @@ import com.yztc.lovetv.bean.UserEntity;
 import com.yztc.lovetv.myutil.CountDownButton;
 
 import cn.bmob.v3.BmobSMS;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 //import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
@@ -49,8 +50,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 		register_id = (Button) findViewById(R.id.register_id);
 		yanzhengma_btn.setOnClickListener(this);
 		register_id.setOnClickListener(this);
-
-
+		register_tb.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				finish();
+			}
+		});
 	}
 
 	@Override
@@ -64,7 +69,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 				}
 				//CustomDialog cd=new CustomDialog(this);
 				//cd.show();
-				Log.e("tag","   手机号：" + edt);
 					/*BmobSMS.requestSMSCode(edt, "模板名称", new QueryListener<Integer>() {
 						public void done(Integer smsId, BmobException ex) {
 							//15524612278
@@ -97,13 +101,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 					Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				user = new UserEntity();
+			/*	user = new UserEntity();
 				user.setUsername(edt2);
 				user.setPassword(edt3);
-				user.setMobilePhoneNumber(edt);
+				user.setMobilePhoneNumber(edt);*/
 				//验证验证码
 				/*BmobSMS.verifySmsCode(edt, edt1, new UpdateListener() {
-
 					public void done(BmobException ex) {
 						if(ex==null){//短信验证码已验证成功
 							//Log.i("smile", "验证通过");
@@ -129,6 +132,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 						}
 					}
 				});*/
+				BmobUser bu = new BmobUser();
+				bu.setUsername(edt2);
+				bu.setPassword(edt3);
+				//注意：不能用save方法进行注册
+				bu.signUp(this, new SaveListener() {
+					@Override
+					public void onSuccess() {
+						Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+						finish();
+					}
+
+					@Override
+					public void onFailure(int i, String s) {
+						Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+					}
+				});
 				break;
 		}
 	}

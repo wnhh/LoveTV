@@ -34,14 +34,11 @@ public class LivingRemindFragment extends Fragment {
 	//适配器
 	private BackDataTwoAdapter bap;
 	private RecyclerView remindbackrv;
-	private int count;
 	private ImageView remindiv;
 
 	public LivingRemindFragment() {
 		// Required empty public constructor
 	}
-
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -50,22 +47,26 @@ public class LivingRemindFragment extends Fragment {
 		remindbackrv = (RecyclerView) view.findViewById(R.id.remindbackrv);
 		View itemview = inflater.inflate(R.layout.tuijian_item_back_fragment,null, false);
 		remindiv = (ImageView) itemview.findViewById(R.id.setswitch_back_iv);
+		initData();
 		remindbackrv.addOnItemTouchListener(new OnItemClickListener() {
 			@Override
 			public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-				count++;
-				if (count % 2 == 1) {
+				boolean switchBtn = bnd.get(0).getSwitchBtn();
+				switchBtn=!switchBtn;
+				if(switchBtn) {
 					remindiv.setImageResource(R.mipmap.open);
-				} else {
-					remindiv.setImageResource(R.mipmap.close);
+					bap.notifyDataSetChanged();
 				}
+				else {
+					remindiv.setImageResource(R.mipmap.close);
+					bap.notifyDataSetChanged();
+				}
+
 			}
 		});
-		initData();
 		initView(view);
 		return view;
 	}
-
 	private void initData() {
 		try {
 			bnd = bmg.getAll();

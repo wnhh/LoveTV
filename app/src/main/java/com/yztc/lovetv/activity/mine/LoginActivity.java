@@ -68,10 +68,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 					Toast.makeText(this, "输入密码", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				BmobUser bmobUser = BmobUser.getCurrentUser(this);
-				if(bmobUser != null){
+				//BmobUser bmobUser = BmobUser.getCurrentUser(this);
+				/*if(bmobUser != null){
 					// 允许用户使用应用
-				}else{
+				}*/
 					//缓存用户对象为空时， 可打开用户注册界面…
 					BmobUser.loginByAccount(LoginActivity.this, edt, edt1, new LogInListener<UserEntity>() {
 						@Override
@@ -87,20 +87,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 							}
 						}
 					});
-					/*BmobUser bu2 = new BmobUser();
-					bu2.setUsername("lucky1");
-					bu2.setPassword("123456");
-					bu2.login(LoginActivity.this, new SaveListener() {
-						@Override
-						public void onSuccess() {
-							Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-						}
-						@Override
-						public void onFailure(int i, String s) {
-							Log.e("hha","cuowuma-----------------"+i);
-						}
-					});*/
-				}
 				break;
 			case R.id.intentregister_tv:
 				Intent in = new Intent(this, RegisterActivity.class);

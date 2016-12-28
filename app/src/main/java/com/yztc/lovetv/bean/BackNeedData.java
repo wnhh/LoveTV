@@ -1,5 +1,6 @@
 package com.yztc.lovetv.bean;
 
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
@@ -23,76 +24,69 @@ public class BackNeedData {
 	private String username;
 	//简单介绍
 	private String titleInfo;
-
-	@Generated(hash = 83167873)
+	private boolean switchBtn;
+	@Generated(hash = 1160251141)
 	public BackNeedData(long id, String userId, String inId, String bigImg,
-						String headImg, String username, String titleInfo) {
-		this.id = id;
-		this.userId = userId;
-		this.inId = inId;
-		this.bigImg = bigImg;
-		this.headImg = headImg;
-		this.username = username;
-		this.titleInfo = titleInfo;
+									String headImg, String username, String titleInfo, boolean switchBtn) {
+					this.id = id;
+					this.userId = userId;
+					this.inId = inId;
+					this.bigImg = bigImg;
+					this.headImg = headImg;
+					this.username = username;
+					this.titleInfo = titleInfo;
+					this.switchBtn = switchBtn;
 	}
-
 	@Generated(hash = 1504762173)
 	public BackNeedData() {
 	}
-
 	public long getId() {
-		return this.id;
+					return this.id;
 	}
-
 	public void setId(long id) {
-		this.id = id;
+					this.id = id;
 	}
-
 	public String getUserId() {
-		return this.userId;
+					return this.userId;
 	}
-
 	public void setUserId(String userId) {
-		this.userId = userId;
+					this.userId = userId;
 	}
-
 	public String getInId() {
-		return this.inId;
+					return this.inId;
 	}
-
 	public void setInId(String inId) {
-		this.inId = inId;
+					this.inId = inId;
 	}
-
 	public String getBigImg() {
-		return this.bigImg;
+					return this.bigImg;
 	}
-
 	public void setBigImg(String bigImg) {
-		this.bigImg = bigImg;
+					this.bigImg = bigImg;
 	}
-
 	public String getHeadImg() {
-		return this.headImg;
+					return this.headImg;
 	}
-
 	public void setHeadImg(String headImg) {
-		this.headImg = headImg;
+					this.headImg = headImg;
 	}
-
 	public String getUsername() {
-		return this.username;
+					return this.username;
 	}
-
 	public void setUsername(String username) {
-		this.username = username;
+					this.username = username;
 	}
-
 	public String getTitleInfo() {
-		return this.titleInfo;
+					return this.titleInfo;
+	}
+	public void setTitleInfo(String titleInfo) {
+					this.titleInfo = titleInfo;
+	}
+	public boolean getSwitchBtn() {
+					return this.switchBtn;
+	}
+	public void setSwitchBtn(boolean switchBtn) {
+					this.switchBtn = switchBtn;
 	}
 
-	public void setTitleInfo(String titleInfo) {
-		this.titleInfo = titleInfo;
-	}
 }

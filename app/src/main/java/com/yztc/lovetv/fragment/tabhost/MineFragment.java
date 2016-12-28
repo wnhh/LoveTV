@@ -4,6 +4,7 @@ package com.yztc.lovetv.fragment.tabhost;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,6 +48,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 	private TextView picone;
 	private ImageView huahua_id;
 	private ImageView talkIv;
+	//存用户名
+	private String str;
+	private boolean flag;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -101,12 +105,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 			}
 		});
 	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-	}
-
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -114,7 +112,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 		switch (requestCode) {
 			case REQUEST_LOGIN_CODE:
 				if (resultCode == 600) {
-					myname_id.setText(data.getStringExtra("loginkey"));
+					str=data.getStringExtra("loginkey");
+					myname_id.setText(str);
+					flag=true;
 				}
 				break;
 			case REQUEST_LOGINBACK_CODE:
@@ -138,7 +138,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 				break;
 		}
 	}
-
 	@Override
 	public void onClick(View view) {
 		Intent intent = new Intent();

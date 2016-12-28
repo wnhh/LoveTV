@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ public class GuanZhuFragment extends Fragment {
 				back.setHeadImg("http://image.quanmin.tv/avatar/a099a68fc2e3164d18b82985b9130b7c?imageView2/2/w/300/");
 				back.setUsername("wnax");
 				back.setTitleInfo("为我证明");
+				back.setSwitchBtn(false);
 				try {
 					bmg.insert(back);
 				} catch (Exception e) {
@@ -55,6 +57,7 @@ public class GuanZhuFragment extends Fragment {
 	private void initData() {
 		try {
 			bnd = bmg.getAll();
+			Log.e("hahaha","11111111111111111111"+bnd.size());
 			bap = new BackDataAdapter(getContext(), bnd);
 		} catch (Exception e) {
 			e.printStackTrace();
