@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -12,34 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.google.gson.Gson;
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.ChannelManagerActivity;
-import com.yztc.lovetv.activity.GridActivity;
-import com.yztc.lovetv.adapter.ChannelManagerAdapter;
 import com.yztc.lovetv.adapter.ViewPagerAdapter;
-import com.yztc.lovetv.apiservice.LitchiapiService;
 import com.yztc.lovetv.bean.TabItemBean;
-import com.yztc.lovetv.bean.Tuijian;
-import com.yztc.lovetv.contant.BaseUrl;
-import com.yztc.lovetv.contant.TabhostContant;
 import com.yztc.lovetv.db.TabItemBeanManager;
 import com.yztc.lovetv.fragment.tuijianfragment.AllFragment;
 import com.yztc.lovetv.fragment.tuijianfragment.Tuijian_Fragment_Vp;
-import com.yztc.lovetv.myutil.OkHttpUtils;
-import com.yztc.lovetv.myutil.PreferencesUtils;
 
-import org.greenrobot.greendao.annotation.Id;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 public class TuijianFragment extends Fragment {
@@ -63,13 +46,14 @@ public class TuijianFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        View v = inflater.inflate(R.layout.fragment_tuijian, container, false);
-        mTabItemBeanManager = new TabItemBeanManager(getContext());
+        mTabItemBeanManager = new TabItemBeanManager(getActivity());
         initView(v);
         try {
             initData();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return v;
     }
 
@@ -116,7 +100,9 @@ public class TuijianFragment extends Fragment {
                     AllFragment allFragment = new AllFragment();
                     mFragments.add(allFragment);
                 }
-                ViewPagerAdapter fragmentAdapter = new ViewPagerAdapter(getChildFragmentManager(),mFragments,mTabs);
+
+                FragmentManager manager = getChildFragmentManager();
+                ViewPagerAdapter fragmentAdapter = new ViewPagerAdapter(manager,mFragments,mTabs);
                 mViewPager.setOffscreenPageLimit(mTabs.size()-1);
                 mViewPager.setAdapter(fragmentAdapter);
                 mTabLayout.setupWithViewPager(mViewPager);
