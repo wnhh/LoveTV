@@ -39,8 +39,6 @@ public class BackDataAdapter extends BaseQuickAdapter<BackNeedData> {
             Glide.with(mContext).load(allFragmentBean.getBigImg()).placeholder(R.mipmap.live_default).into((ImageView) baseViewHolder.getView(R.id.tuijian_iv_all));
             //简介
             baseViewHolder.setText(R.id.tuijian_tv_introduce, allFragmentBean.getTitleInfo());
-
-
     }
     //头像变成圆的
     class RoundTransformation extends BitmapTransformation {
