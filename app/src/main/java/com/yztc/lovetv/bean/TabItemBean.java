@@ -14,32 +14,32 @@ public class TabItemBean {
 
     private String itemName;//item名字
 
+    private String name;//接口名字
+
     private int itemId;
 
     private String bigImg;//具体图片
 
     private String iconImg;//头像
 
-    private String name;//名字
-
     private String viewCount;//观看人数
 
     private String info;//简介
 
-   @Generated(hash = 30396989)
-   public TabItemBean(Long _id, String itemName, int itemId, String bigImg,
-           String iconImg, String name, String viewCount, String info) {
-       this._id = _id;
-       this.itemName = itemName;
-       this.itemId = itemId;
-       this.bigImg = bigImg;
-       this.iconImg = iconImg;
-       this.name = name;
-       this.viewCount = viewCount;
-       this.info = info;
-   }
+   @Generated(hash = 123481063)
+public TabItemBean(Long _id, String itemName, String name, int itemId,
+        String bigImg, String iconImg, String viewCount, String info) {
+    this._id = _id;
+    this.itemName = itemName;
+    this.name = name;
+    this.itemId = itemId;
+    this.bigImg = bigImg;
+    this.iconImg = iconImg;
+    this.viewCount = viewCount;
+    this.info = info;
+}
 
-   @Generated(hash = 1363306915)
+@Generated(hash = 1363306915)
    public TabItemBean() {
    }
 

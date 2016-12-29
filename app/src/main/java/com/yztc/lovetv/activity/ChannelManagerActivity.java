@@ -61,8 +61,7 @@ public class ChannelManagerActivity extends AppCompatActivity {
 	//数据源
 	List<String>strlist;
 	List<String>strlisttwo;
-	List<Itembean> itembeanList;
-	List<String> mTabs;
+	Tuijian tuijian;
 	TabItemBeanManager mTabItemBeanManager;
 	//适配器
 	private ChannelManagerAdapter cma;
@@ -90,7 +89,7 @@ public class ChannelManagerActivity extends AppCompatActivity {
 				try {
 					String result = response.body().string();
 					Gson gson = new Gson();
-					Tuijian tuijian = gson.fromJson(result, Tuijian.class);
+					tuijian = gson.fromJson(result, Tuijian.class);
 					for (int i = 0; i < tuijian.getRoom().size(); i++) {//第一次进来默认添加9个数据(在添加顶部导航是 推荐写死了)
 						isSave = false;
                         List<TabItemBean> all = mTabItemBeanManager.getAll();
@@ -98,11 +97,11 @@ public class ChannelManagerActivity extends AppCompatActivity {
                             if (tabItemBean.getItemName().equals(tuijian.getRoom().get(i).getName())){
                                 strlist.add(tabItemBean.getItemName());
 								isSave = true;
-                            }else if(!isSave && i!=1){
-								isSave = true;
-                                strlisttwo.add(tuijian.getRoom().get(i).getName());
                             }
                         }
+						if(i!=0 && !isSave){
+							strlisttwo.add(tuijian.getRoom().get(i).getName());
+						}
 					}
 					//recycler上设置adapter
 					cma=new ChannelManagerAdapter(ChannelManagerActivity.this,strlist);
@@ -180,9 +179,14 @@ public class ChannelManagerActivity extends AppCompatActivity {
 					try {
 						mTabItemBeanManager.deleteAll();
 						for (int i = 0;i<strlist.size(); i++) {
-							TabItemBean tabItemBean = new TabItemBean();
-							tabItemBean.setItemName(strlist.get(i));
-							tabs.add(tabItemBean);
+							for (int j = 0; j < tuijian.getRoom().size(); j++) {
+								if (strlist.get(i).equals(tuijian.getRoom().get(j).getName())) {
+									TabItemBean tabItemBean = new TabItemBean();
+									tabItemBean.setItemName(strlist.get(i));
+									tabItemBean.setName(tuijian.getRoom().get(j).getSlug());
+									tabs.add(tabItemBean);
+								}
+							}
 						}
 						mTabItemBeanManager.insertAll(tabs);
 						TuijianFragment.isUpdate = true;

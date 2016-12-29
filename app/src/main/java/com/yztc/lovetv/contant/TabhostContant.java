@@ -10,4 +10,5 @@ public class TabhostContant {
     public static final String TAB_ZHIBO = "TAB_ZHIBO";
     public static final String TAB_MINE = "TAB_MINE";
     public static final String TUIJIAN_ITEM_NAME = "NAME";
+    public static final String URL_KEY = "URL_KEY";
 }

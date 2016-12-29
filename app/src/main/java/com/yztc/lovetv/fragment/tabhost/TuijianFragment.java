@@ -17,8 +17,12 @@ import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.ChannelManagerActivity;
 import com.yztc.lovetv.adapter.ViewPagerAdapter;
 import com.yztc.lovetv.bean.TabItemBean;
+import com.yztc.lovetv.bean.TuijianFragmentUrlListBean;
+import com.yztc.lovetv.contant.TabhostContant;
+import com.yztc.lovetv.contant.TvUrl;
 import com.yztc.lovetv.db.TabItemBeanManager;
 import com.yztc.lovetv.fragment.tuijianfragment.AllFragment;
+import com.yztc.lovetv.fragment.tuijianfragment.ItemFragment;
 import com.yztc.lovetv.fragment.tuijianfragment.Tuijian_Fragment_Vp;
 
 import java.util.ArrayList;
@@ -74,11 +78,34 @@ public class TuijianFragment extends Fragment {
     private void initData() throws Exception {
         mTabs = new ArrayList<>();
         mFragments = new ArrayList<>();
+
+        //首页推荐和Fragment是固定的
         mTabs.add("推荐");
+        Tuijian_Fragment_Vp fragmentVp = new Tuijian_Fragment_Vp();
+        mFragments.add(fragmentVp);
+
+        //得到数据库存储tab的集合
         List<TabItemBean> all = mTabItemBeanManager.getAll();
         Log.e("TAG","all"+all.size());
+
+        //遍历tab集合添加tab的数据   根据数量添加fragment
         for (TabItemBean tabItemBean : all) {
             mTabs.add(tabItemBean.getItemName());
+            ItemFragment itemFragment = new ItemFragment();
+            Bundle bundle = new Bundle();
+            String url = null;
+            //根据数据库跟tab数据相同的接口名称  通过判断得到接口网址
+            List<TuijianFragmentUrlListBean> lists = TuijianFragmentUrlListBean.getLists();
+            for (TuijianFragmentUrlListBean list : lists) {
+               if( list.getName().equals(tabItemBean.getName())){
+                   url = list.getName();
+                   break;
+               }
+            }
+            //通过bundle传值将接口传过去
+            bundle.putString(TabhostContant.URL_KEY,url );
+            itemFragment.setArguments(bundle);
+            mFragments.add(itemFragment);
         }
 
 //        mTabs.add("全部");
@@ -94,12 +121,7 @@ public class TuijianFragment extends Fragment {
 //        mTabs.add("球球大作战");
 
 
-                Tuijian_Fragment_Vp fragmentVp = new Tuijian_Fragment_Vp();
-                mFragments.add(fragmentVp);
-                for (int i=0;i<mTabs.size()-1;i++) {
-                    AllFragment allFragment = new AllFragment();
-                    mFragments.add(allFragment);
-                }
+
 
                 FragmentManager manager = getChildFragmentManager();
                 ViewPagerAdapter fragmentAdapter = new ViewPagerAdapter(manager,mFragments,mTabs);
