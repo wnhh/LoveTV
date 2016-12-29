@@ -26,10 +26,11 @@ public class TuijianGetItemMethod {
     }
     //添加item的方法
     public static void addItem(String name,List<TuijianStringitem> listTj ,Tuijian tuijian,int itemPosition ){
-        TuijianStringitem ttitem = new TuijianStringitem(true, "全民星秀", true);
+        TuijianStringitem ttitem = new TuijianStringitem(true, tuijian.getRoom().get(itemPosition).getName(), true);
         listTj.add(ttitem);
         for (int i = 0; i < tuijian.getRoom().get(itemPosition).getList().size(); i++) {
-            if (i == tuijian.getRoom().get(itemPosition).getList().size()-1) {
+            if (i == tuijian.getRoom().get(itemPosition).getList().size()) {
+
                 break;
             }
             listTj.add(TuijianGetItemMethod.getItemMessage(tuijian,itemPosition,i));

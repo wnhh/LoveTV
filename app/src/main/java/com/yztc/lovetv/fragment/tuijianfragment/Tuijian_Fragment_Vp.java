@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.google.gson.Gson;
@@ -22,18 +22,19 @@ import com.yztc.lovetv.apiservice.LitchiapiService;
 import com.yztc.lovetv.apiservice.VpPictureApiService;
 import com.yztc.lovetv.bean.FirstPagerBean;
 import com.yztc.lovetv.bean.LunBoPictureBean;
+import com.yztc.lovetv.bean.TabItemBean;
 import com.yztc.lovetv.bean.TuijianStringitem;
 import com.yztc.lovetv.bean.Tuijian;
 import com.yztc.lovetv.contant.BaseUrl;
+import com.yztc.lovetv.contant.TabhostContant;
 import com.yztc.lovetv.contant.TvUrl;
+import com.yztc.lovetv.db.TabItemBeanManager;
 import com.yztc.lovetv.method.TuijianGetItemMethod;
 import com.yztc.lovetv.myutil.OkHttpUtils;
 import com.yztc.lovetv.myutil.PreferencesUtils;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,6 +61,7 @@ public class Tuijian_Fragment_Vp extends Fragment {
     List<TuijianStringitem> listTj;
     List<LunBoPictureBean> lunBoPictureBeans;
     List<String> mItemName;
+    private TabItemBeanManager mTabItemBeanManager;
     //adapter
     private SectionAdapter sectionAdapter;
     private RelativeLayout ll_vp;
@@ -81,9 +83,11 @@ public class Tuijian_Fragment_Vp extends Fragment {
         mViewPager = (RollPagerView) inflate.findViewById(R.id.vp_mainad);
         mViewPager.setHintView(new ColorPointHintView(getContext(), Color.WHITE, Color.GRAY));
         ll_vp = (RelativeLayout) inflate.findViewById(R.id.ll_vp);
+        mTabItemBeanManager = new TabItemBeanManager(getContext());
+        initRetrofit();
         initViewPager();
         initRecyclerView(v);
-        initRetrofit();
+
         return v;
     }
 
@@ -104,6 +108,8 @@ public class Tuijian_Fragment_Vp extends Fragment {
                 .build();
     }
 
+
+    //轮播图
     private void initViewPager() {
         lunBoPictureBeans = new ArrayList<LunBoPictureBean>();
 
@@ -153,45 +159,32 @@ public class Tuijian_Fragment_Vp extends Fragment {
         rfit = new Retrofit.Builder()
                 .baseUrl(BaseUrl.TUIJIANITEM)
                 .client(OkHttpUtils.newOkHttpClient(getContext()))//进入单例模式保证线程安全
-                .addConverterFactory(GsonConverterFactory.create())//Gson解析
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         litchApiService = rfit.create(LitchiapiService.class);
-        //通过Rxjava进行在新线程里获得json数据并set值
-        litchApiService.getLitchCall()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Tuijian>() {
-                    @Override
-                    public void onCompleted() {
-
+        Call<ResponseBody> call = litchApiService.getLitchCall();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String json = response.body().string();
+                    Gson gson = new Gson();
+                    Tuijian tuijian = gson.fromJson(json, Tuijian.class);
+                    //推荐页
+                    for (int i = 0; i < tuijian.getRoom().get(0).getList().size(); i++) {
+                        if (i == 6) {
+                            break;
+                        }
+                        listTj.add(TuijianGetItemMethod.getItemMessage(tuijian, 0, i));
+                    }
+                    List<TabItemBean> all = mTabItemBeanManager.getAll();
+                    for (TabItemBean tabItemBean : all) {
+                        mItemName.add(tabItemBean.getItemName());
                     }
 
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(Tuijian tuijian) {
-                        //推荐页
-                        for (int i = 0; i < tuijian.getRoom().get(0).getList().size(); i++) {
-                            if (i == 6) {
-                                break;
-                            }
-                            listTj.add(TuijianGetItemMethod.getItemMessage(tuijian, 0, i));
-                        }
-                        mItemName.clear();
-                        for (int j = 0; j < tuijian.getRoom().size() - 1; j++) {
-                            String string = PreferencesUtils.getString(getContext(), "Name" + j);
-                            if (!string.equals(null)) {
-                                mItemName.add(string);
-                            }
-                        }
-                        //推荐页后
-                        for (int len = 0; len < mItemName.size(); len++) {
-                            //颜值控
-                            TuijianGetItemMethod.addItem(mItemName.get(len), listTj, tuijian, temp++);
+                    //推荐页后
+                    for (int len = 0; len < mItemName.size(); len++) {
+                        //颜值控
+                        TuijianGetItemMethod.addItem(mItemName.get(len), listTj, tuijian, temp++);
 //                            //英雄联盟
 //                            TuijianGetItemMethod.addItem("英雄联盟", listTj, tuijian, temp++);
 //                            //全民星秀
@@ -208,15 +201,21 @@ public class Tuijian_Fragment_Vp extends Fragment {
 //                            TuijianGetItemMethod.addItem("网游竞技", listTj, tuijian, temp++);
 //                            //单机主机
 //                            TuijianGetItemMethod.addItem("单机主机", listTj, tuijian, temp++);
-                        }
-                        sectionAdapter = new SectionAdapter(getContext(), listTj, 1);
-                        sectionAdapter.addHeaderView(ll_vp);
-                        tuijianitem_rv.setAdapter(sectionAdapter);
-                        tuijianitem_rv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                     }
-                });
+                    sectionAdapter = new SectionAdapter(getContext(), listTj, 1);
+                    sectionAdapter.addHeaderView(ll_vp);
+                    tuijianitem_rv.setAdapter(sectionAdapter);
+                    tuijianitem_rv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
-
 
 }

@@ -2,16 +2,17 @@ package com.yztc.lovetv.bean;
 
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * Created by My on 2016/12/27.
  */
 @Entity
 public class BackNeedData {
+
 	@Id
-	private long id;  //主键
+	private Long _id;  //主键
 	//用户id
 	private String userId;
 	//跳转的id
@@ -25,10 +26,10 @@ public class BackNeedData {
 	//简单介绍
 	private String titleInfo;
 	private boolean switchBtn;
-	@Generated(hash = 1160251141)
-	public BackNeedData(long id, String userId, String inId, String bigImg,
+	@Generated(hash = 447235357)
+	public BackNeedData(Long _id, String userId, String inId, String bigImg,
 									String headImg, String username, String titleInfo, boolean switchBtn) {
-					this.id = id;
+					this._id = _id;
 					this.userId = userId;
 					this.inId = inId;
 					this.bigImg = bigImg;
@@ -40,11 +41,11 @@ public class BackNeedData {
 	@Generated(hash = 1504762173)
 	public BackNeedData() {
 	}
-	public long getId() {
-					return this.id;
+	public Long get_id() {
+					return this._id;
 	}
-	public void setId(long id) {
-					this.id = id;
+	public void set_id(Long _id) {
+					this._id = _id;
 	}
 	public String getUserId() {
 					return this.userId;
@@ -88,5 +89,4 @@ public class BackNeedData {
 	public void setSwitchBtn(boolean switchBtn) {
 					this.switchBtn = switchBtn;
 	}
-
 }

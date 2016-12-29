@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,11 @@ import com.yztc.lovetv.activity.GridActivity;
 import com.yztc.lovetv.adapter.ChannelManagerAdapter;
 import com.yztc.lovetv.adapter.ViewPagerAdapter;
 import com.yztc.lovetv.apiservice.LitchiapiService;
+import com.yztc.lovetv.bean.TabItemBean;
 import com.yztc.lovetv.bean.Tuijian;
 import com.yztc.lovetv.contant.BaseUrl;
 import com.yztc.lovetv.contant.TabhostContant;
+import com.yztc.lovetv.db.TabItemBeanManager;
 import com.yztc.lovetv.fragment.tuijianfragment.AllFragment;
 import com.yztc.lovetv.fragment.tuijianfragment.Tuijian_Fragment_Vp;
 import com.yztc.lovetv.myutil.OkHttpUtils;
@@ -48,73 +51,44 @@ public class TuijianFragment extends Fragment {
     List<String> mTabs;
     List<String> mAllTabs;
 
-    View v;
+    TabItemBeanManager mTabItemBeanManager;
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        if(!hidden){
-            v.invalidate();
-        }
-    }
+    public static boolean isUpdate;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        View v = inflater.inflate(R.layout.fragment_tuijian, container, false);
+        mTabItemBeanManager = new TabItemBeanManager(getContext());
         initView(v);
-        initData();
+        try {
+            initData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return v;
     }
 
-    private void initData() {
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isUpdate){
+            isUpdate = false;
+
+        }
+    }
+
+    private void initData() throws Exception {
         mTabs = new ArrayList<>();
         mFragments = new ArrayList<>();
         mTabs.add("推荐");
-//        mTabs.add("全部");
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BaseUrl.TUIJIANITEM)
-                .client(OkHttpUtils.newOkHttpClient(getContext()))
-                .build();
-        LitchiapiService litchiapiService = retrofit.create(LitchiapiService.class);
-        Call<ResponseBody> call = litchiapiService.getLitchCall(BaseUrl.TUIJIAN);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    String result = response.body().string();
-                    Gson gson = new Gson();
-                    Tuijian tuijian = gson.fromJson(result, Tuijian.class);
-                    for (int i = 0; i < tuijian.getRoom().size(); i++) {//第一次进来默认添加9个数据(在添加顶部导航是 推荐写死了)
-                        String string = PreferencesUtils.getString(getContext(),TabhostContant.TUIJIAN_ITEM_NAME+i);
+        List<TabItemBean> all = mTabItemBeanManager.getAll();
+        Log.e("TAG","all"+all.size());
+        for (TabItemBean tabItemBean : all) {
+            mTabs.add(tabItemBean.getItemName());
+        }
 
-                        if (string != null){
-                            mTabs.add(string);
-                        }
-                    }
-
-                    Tuijian_Fragment_Vp fragmentVp = new Tuijian_Fragment_Vp();
-                    mFragments.add(fragmentVp);
-                    for (int i=0;i<mTabs.size()-1;i++){
-                        AllFragment allFragment = new AllFragment();
-                        mFragments.add(allFragment);
-                    }
-                    ViewPagerAdapter fragmentAdapter = new ViewPagerAdapter(getChildFragmentManager(),mFragments,mTabs);
-                    mViewPager.setOffscreenPageLimit(mTabs.size()-1);
-                    mViewPager.setAdapter(fragmentAdapter);
-                    mTabLayout.setupWithViewPager(mViewPager);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-
-
-//        mTabs.add("推荐");
 //        mTabs.add("全部");
 //        mTabs.add("颜值控");
 //        mTabs.add("英雄联盟");
@@ -126,6 +100,24 @@ public class TuijianFragment extends Fragment {
 //        mTabs.add("网游竞技");
 //        mTabs.add("单机主机");
 //        mTabs.add("球球大作战");
+
+
+                Tuijian_Fragment_Vp fragmentVp = new Tuijian_Fragment_Vp();
+                mFragments.add(fragmentVp);
+                for (int i=0;i<mTabs.size()-1;i++) {
+                    AllFragment allFragment = new AllFragment();
+                    mFragments.add(allFragment);
+                }
+                ViewPagerAdapter fragmentAdapter = new ViewPagerAdapter(getChildFragmentManager(),mFragments,mTabs);
+                mViewPager.setOffscreenPageLimit(mTabs.size()-1);
+                mViewPager.setAdapter(fragmentAdapter);
+                mTabLayout.setupWithViewPager(mViewPager);
+
+
+
+
+
+
 
 
     }

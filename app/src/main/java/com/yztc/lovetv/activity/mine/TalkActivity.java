@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,6 +27,8 @@ import java.util.List;
 public class TalkActivity extends AppCompatActivity {
     private ListView mChatView;//展示消息的ListView
     private EditText mMsg;//输的消息
+    private ImageView mAddIv;//添加的图标
+    private ImageView mSend;//发送的按钮
     private List<ChatMessage> mDatas = new ArrayList<>();//存储聊天消息
     private ChatMessageAdapter mAdapter;
     private LinearLayout mLinearLayout;//back返回
@@ -51,6 +54,8 @@ public class TalkActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        mSend = (ImageView) findViewById(R.id.chat_from_icon);
+        mAddIv = (ImageView) findViewById(R.id.id_chat_add);
         mLinearLayout = (LinearLayout) findViewById(R.id.talk_ll_back);
         mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +63,8 @@ public class TalkActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 
 
@@ -85,6 +92,7 @@ public class TalkActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(msg))
         {
             Toast.makeText(this, "您还没有填写信息呢...", Toast.LENGTH_SHORT).show();
+
             return;
         }
 

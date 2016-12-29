@@ -67,11 +67,13 @@ public class BackDataOperateManager {
     //根据id查找一条数据
     public BackNeedData getStudent(Long id) throws Exception{
         List<BackNeedData> list = backNeedDataDao.queryBuilder()
-                .where(BackNeedDataDao.Properties.Id.eq(id))
-                .list();
+                .where(BackNeedDataDao.Properties._id.eq(id))
+        .list();
         if (list == null || list.size() == 0) {
             return null;
         }
         return list.get(0);
     }
+
+
 }

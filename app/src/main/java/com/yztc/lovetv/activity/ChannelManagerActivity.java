@@ -25,10 +25,13 @@ import com.yztc.lovetv.apiservice.LitchiapiService;
 import com.yztc.lovetv.apiservice.LoginApiService;
 import com.yztc.lovetv.bean.FirstPagerBean;
 import com.yztc.lovetv.bean.Itembean;
+import com.yztc.lovetv.bean.TabItemBean;
 import com.yztc.lovetv.bean.TuiJianItem;
 import com.yztc.lovetv.bean.Tuijian;
 import com.yztc.lovetv.contant.BaseUrl;
 import com.yztc.lovetv.contant.TabhostContant;
+import com.yztc.lovetv.db.TabItemBeanManager;
+import com.yztc.lovetv.fragment.tabhost.TuijianFragment;
 import com.yztc.lovetv.myutil.MyConstants;
 import com.yztc.lovetv.myutil.OkHttpUtils;
 import com.yztc.lovetv.myutil.PreferencesUtils;
@@ -59,6 +62,7 @@ public class ChannelManagerActivity extends AppCompatActivity {
 	List<String>strlisttwo;
 	List<Itembean> itembeanList;
 	List<String> mTabs;
+	TabItemBeanManager mTabItemBeanManager;
 	//适配器
 	private ChannelManagerAdapter cma;
 	private ChannelManagertwoAdapter cmatwo;
@@ -66,6 +70,7 @@ public class ChannelManagerActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_channel_manager);
+		mTabItemBeanManager = new TabItemBeanManager(this);
 		initData();
 		initView();
 	}
@@ -86,12 +91,15 @@ public class ChannelManagerActivity extends AppCompatActivity {
 					Gson gson = new Gson();
 					Tuijian tuijian = gson.fromJson(result, Tuijian.class);
 					for (int i = 0; i < tuijian.getRoom().size(); i++) {//第一次进来默认添加9个数据(在添加顶部导航是 推荐写死了)
-						String string = PreferencesUtils.getString(ChannelManagerActivity.this,TabhostContant.TUIJIAN_ITEM_NAME+i);
-						if (!TextUtils.isEmpty(string)){
-							strlist.add(string);
-						}else{
-							strlisttwo.add(tuijian.getRoom().get(i).getName());
-						}
+                        List<TabItemBean> all = mTabItemBeanManager.getAll();
+                        for (TabItemBean tabItemBean : all) {
+                            if (tabItemBean.getItemName().equals(tuijian.getRoom().get(i).getName())){
+                                strlist.add(tabItemBean.getItemName());
+								break;
+                            }else {
+                                strlisttwo.add(tuijian.getRoom().get(i).getName());
+                            }
+                        }
 					}
 					//recycler上设置adapter
 					cma=new ChannelManagerAdapter(ChannelManagerActivity.this,strlist);
@@ -99,7 +107,7 @@ public class ChannelManagerActivity extends AppCompatActivity {
 					//recycler下设置adapter
 					cmatwo=new ChannelManagertwoAdapter(ChannelManagerActivity.this,strlisttwo);
 					channeltwo_tv.setAdapter(cmatwo);
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -168,6 +176,7 @@ public class ChannelManagerActivity extends AppCompatActivity {
 					for (int i = 0;i<strlist.size(); i++) {
 						PreferencesUtils.putString(ChannelManagerActivity.this, TabhostContant.TUIJIAN_ITEM_NAME + i,strlist.get(i));
 					}
+					TuijianFragment.isUpdate = true;
 					PreferencesUtils.putBoolean(ChannelManagerActivity.this,MyConstants.KEY_TEST,true);
 					finish();
 				}

@@ -90,28 +90,16 @@
             android:layout_width="fill_parent"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true">
-            <LinearLayout
-                android:id="@+id/ll_talk_person"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_5">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/person"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/talk"
-                    android:textSize="@dimen/sp_12"
-                    android:text="转人工"/>
+                <Button
+                    android:id="@+id/iv_talk_person"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
+                    android:background="@drawable/selector_zhuanrengong"/>
 
-            </LinearLayout>
-
-            <Button
+            <ImageView
                 android:id="@+id/id_chat_send"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
@@ -119,8 +107,17 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:onClick="sendMessage"
-                android:text="发送"
-                android:background="@drawable/send_selector"/>
+                android:background="@drawable/ivsend_selector"/>
+
+            <ImageView
+                android:id="@+id/id_chat_add"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"
+                android:background="@drawable/talk_add_selector"/>
 
             <EditText
                 android:id="@+id/id_chat_msg"
@@ -130,7 +127,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@id/id_chat_send"
-                android:layout_toRightOf="@id/ll_talk_person"
+                android:layout_toRightOf="@id/iv_talk_person"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="18sp"

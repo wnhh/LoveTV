@@ -19,7 +19,7 @@ import rx.Observable;
 public interface LitchiapiService {
 	//get请求固定请求路径
 	@GET("app/index/recommend/list-android.json?11212054&v=2.2.4&os=1&ver=4")
-	Observable<Tuijian> getLitchCall();
+	Call<ResponseBody> getLitchCall();
 	//动态的url
 	@GET("{path}?11212054&v=2.2.4&os=1&ver=4")
 	Call<ResponseBody> getLitchCall(@Path("path") String path);

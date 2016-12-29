@@ -6,35 +6,37 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.adapter.GridPageAdapter;
 import com.yztc.lovetv.apiservice.LitchiapiService;
+import com.yztc.lovetv.bean.BackNeedData;
 import com.yztc.lovetv.bean.GridText;
-import com.yztc.lovetv.bean.Itembean;
+import com.yztc.lovetv.bean.TabItemBean;
 import com.yztc.lovetv.bean.Tuijian;
 import com.yztc.lovetv.contant.BaseUrl;
 import com.yztc.lovetv.contant.TabhostContant;
+import com.yztc.lovetv.db.BackDataOperateManager;
+import com.yztc.lovetv.db.TabItemBeanManager;
 import com.yztc.lovetv.myutil.OkHttpUtils;
 import com.yztc.lovetv.myutil.PreferencesUtils;
 import com.yztc.lovetv.viewall.FlowIndicator;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static cn.bmob.newim.core.BmobIMClient.getContext;
+
 public class GridActivity extends AppCompatActivity {
 	//数据源
 	private List<GridText> lg;
+	private List<TabItemBean> mTabItemBeanList;
 	//适配器
 	private GridPageAdapter gadapter;
 	//viewpager
@@ -42,10 +44,15 @@ public class GridActivity extends AppCompatActivity {
 	private ViewPager main_vp;
 	private TextView mian_tiyan;
 	private FlowIndicator fl;
+
+	//创建数据库
+	TabItemBeanManager itemBeanManager;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_grid);
+		itemBeanManager =  new TabItemBeanManager(this);
 		initData();
 		initView();
 		initRetrofit();
@@ -65,10 +72,18 @@ public class GridActivity extends AppCompatActivity {
 					String result = response.body().string();
 					Gson gson = new Gson();
 					Tuijian tuijian = gson.fromJson(result, Tuijian.class);
+					mTabItemBeanList = new ArrayList<TabItemBean>();
 					for (int i = 1; i < 10; i++) {//第一次进来默认添加9个数据(在添加顶部导航是 推荐写死了)
-						PreferencesUtils.putString(GridActivity.this, TabhostContant.TUIJIAN_ITEM_NAME+(i-1),tuijian.getRoom().get(i).getName());
+						TabItemBean tabItemBean = new TabItemBean();
+						tabItemBean.setItemId(tuijian.getRoom().get(i).getId());
+						tabItemBean.setItemName(tuijian.getRoom().get(i).getName());
+						Log.e("TAG", "name "+ tuijian.getRoom().get(i).getName());
+						mTabItemBeanList.add(tabItemBean);
+						itemBeanManager.insert(tabItemBean);
 					}
-				} catch (IOException e) {
+					Log.e("TAG", "size "+ mTabItemBeanList.size());
+//					itemBeanManager.insertAll(mTabItemBeanList);
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
