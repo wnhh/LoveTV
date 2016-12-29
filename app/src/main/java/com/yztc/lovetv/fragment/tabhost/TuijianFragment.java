@@ -29,6 +29,8 @@ import com.yztc.lovetv.fragment.tuijianfragment.Tuijian_Fragment_Vp;
 import com.yztc.lovetv.myutil.OkHttpUtils;
 import com.yztc.lovetv.myutil.PreferencesUtils;
 
+import org.greenrobot.greendao.annotation.Id;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +58,7 @@ public class TuijianFragment extends Fragment {
     public static boolean isUpdate;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,15 +75,16 @@ public class TuijianFragment extends Fragment {
 
     @Override
     public void onResume() {
-        super.onResume();
-        if (isUpdate){
-            isUpdate = false;
+        if (isUpdate) {
             try {
+                isUpdate = false;
                 initData();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        super.onResume();
+
     }
 
     private void initData() throws Exception {

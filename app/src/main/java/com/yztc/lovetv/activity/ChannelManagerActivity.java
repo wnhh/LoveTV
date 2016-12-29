@@ -97,8 +97,8 @@ public class ChannelManagerActivity extends AppCompatActivity {
                         for (TabItemBean tabItemBean : all) {
                             if (tabItemBean.getItemName().equals(tuijian.getRoom().get(i).getName())){
                                 strlist.add(tabItemBean.getItemName());
-								break;
-                            }else if(!isSave){
+								isSave = true;
+                            }else if(!isSave && i != 1){
 								isSave = true;
                                 strlisttwo.add(tuijian.getRoom().get(i).getName());
                             }
