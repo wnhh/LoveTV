@@ -51,6 +51,7 @@ import static cn.bmob.newim.core.BmobIMClient.getContext;
 
 public class ChannelManagerActivity extends AppCompatActivity {
 
+	private boolean isSave;
 	private TextView channelmanager_tv,manager_tv,tv;
 	private Toolbar manager_tb;
 	private RecyclerView channelone_tv,channeltwo_tv;
@@ -91,12 +92,14 @@ public class ChannelManagerActivity extends AppCompatActivity {
 					Gson gson = new Gson();
 					Tuijian tuijian = gson.fromJson(result, Tuijian.class);
 					for (int i = 0; i < tuijian.getRoom().size(); i++) {//第一次进来默认添加9个数据(在添加顶部导航是 推荐写死了)
+						isSave = false;
                         List<TabItemBean> all = mTabItemBeanManager.getAll();
                         for (TabItemBean tabItemBean : all) {
                             if (tabItemBean.getItemName().equals(tuijian.getRoom().get(i).getName())){
                                 strlist.add(tabItemBean.getItemName());
 								break;
-                            }else {
+                            }else if(!isSave){
+								isSave = true;
                                 strlisttwo.add(tuijian.getRoom().get(i).getName());
                             }
                         }
@@ -167,8 +170,7 @@ public class ChannelManagerActivity extends AppCompatActivity {
 				count++;
 				if(count%2==1) {
 					tv.setText("完成");
-					itemmove(channelone_tv,strlist);
-					itemmove(channeltwo_tv,strlisttwo);
+					itemmove();
 				}
 				else
 				{
@@ -194,7 +196,7 @@ public class ChannelManagerActivity extends AppCompatActivity {
 		});
 	}
 	//设置recyclerview的拖动
-	public void itemmove(RecyclerView recyclerView, final List<String> strList)
+	public void itemmove()
 	{
 		ItemTouchHelper itemTouchHelper=new ItemTouchHelper(new ItemTouchHelper.Callback() {
 			@Override
@@ -225,13 +227,13 @@ public class ChannelManagerActivity extends AppCompatActivity {
 				{
 					for(int i=fromPosition;i<toPosition;i++)
 					{
-						Collections.swap(strList,i,i+1);
+						Collections.swap(strlist,i,i+1);
 					}
 				}else
 				{
 					for(int i=fromPosition;i>toPosition;i--)
 					{
-						Collections.swap(strList,i,i-1);
+						Collections.swap(strlist,i,i-1);
 					}
 				}
 				cma.notifyItemMoved(fromPosition,toPosition);
@@ -261,6 +263,6 @@ public class ChannelManagerActivity extends AppCompatActivity {
 				return true;
 			}
 		});
-		itemTouchHelper.attachToRecyclerView(recyclerView);
+		itemTouchHelper.attachToRecyclerView(channelone_tv);
 	}
 }
