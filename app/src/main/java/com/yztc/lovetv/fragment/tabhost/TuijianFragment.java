@@ -75,7 +75,11 @@ public class TuijianFragment extends Fragment {
         super.onResume();
         if (isUpdate){
             isUpdate = false;
-
+            try {
+                initData();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

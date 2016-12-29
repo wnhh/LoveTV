@@ -167,29 +167,39 @@ public class ChannelManagerActivity extends AppCompatActivity {
 				count++;
 				if(count%2==1) {
 					tv.setText("完成");
-					itemmove();
+					itemmove(channelone_tv,strlist);
+					itemmove(channeltwo_tv,strlisttwo);
 				}
 				else
 				{
 					tv.setText("管理");
-					PreferencesUtils.clear(ChannelManagerActivity.this);
-					for (int i = 0;i<strlist.size(); i++) {
-						PreferencesUtils.putString(ChannelManagerActivity.this, TabhostContant.TUIJIAN_ITEM_NAME + i,strlist.get(i));
+					List<TabItemBean> tabs = new ArrayList<>();
+
+					try {
+						mTabItemBeanManager.deleteAll();
+						for (int i = 0;i<strlist.size(); i++) {
+							TabItemBean tabItemBean = new TabItemBean();
+							tabItemBean.setItemName(strlist.get(i));
+							tabs.add(tabItemBean);
+						}
+						mTabItemBeanManager.insertAll(tabs);
+						TuijianFragment.isUpdate = true;
+						finish();
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-					TuijianFragment.isUpdate = true;
-					PreferencesUtils.putBoolean(ChannelManagerActivity.this,MyConstants.KEY_TEST,true);
-					finish();
+
 				}
 			}
 		});
 	}
 	//设置recyclerview的拖动
-	public void itemmove()
+	public void itemmove(RecyclerView recyclerView, final List<String> strList)
 	{
 		ItemTouchHelper itemTouchHelper=new ItemTouchHelper(new ItemTouchHelper.Callback() {
 			@Override
 			public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-				if(channelone_tv.getLayoutManager() instanceof GridLayoutManager)
+				if(recyclerView.getLayoutManager() instanceof GridLayoutManager)
 				{
 					dragFlags=ItemTouchHelper.UP |
 							ItemTouchHelper.DOWN |
@@ -215,13 +225,13 @@ public class ChannelManagerActivity extends AppCompatActivity {
 				{
 					for(int i=fromPosition;i<toPosition;i++)
 					{
-						Collections.swap(strlist,i,i+1);
+						Collections.swap(strList,i,i+1);
 					}
 				}else
 				{
 					for(int i=fromPosition;i>toPosition;i--)
 					{
-						Collections.swap(strlist,i,i-1);
+						Collections.swap(strList,i,i-1);
 					}
 				}
 				cma.notifyItemMoved(fromPosition,toPosition);
@@ -251,6 +261,6 @@ public class ChannelManagerActivity extends AppCompatActivity {
 				return true;
 			}
 		});
-		itemTouchHelper.attachToRecyclerView(channelone_tv);
+		itemTouchHelper.attachToRecyclerView(recyclerView);
 	}
 }
