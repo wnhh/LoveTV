@@ -30,7 +30,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        Log.e("Tsag",""+mFragments.size());
+        Log.e("Tsag"," 00000"+mFragments.size());
         return mFragments!=null ? mFragments.size() : 0;
     }
 

@@ -27,98 +27,98 @@ public class TuijianFragmentUrlListBean {
         lists.add(urlBean);
         //全民星秀
         TuijianFragmentUrlListBean urlBean3 = new TuijianFragmentUrlListBean();
-        urlBean.setName("beauty");
-        urlBean.setUrl(TvUrl.SHOW);
+        urlBean3.setName("beauty");
+        urlBean3.setUrl(TvUrl.SHOW);
         lists.add(urlBean3);
         //守望先锋
         TuijianFragmentUrlListBean urlBean4 = new TuijianFragmentUrlListBean();
-        urlBean.setName("overwatch");
-        urlBean.setUrl(TvUrl.SHOUWANG);
+        urlBean4.setName("overwatch");
+        urlBean4.setUrl(TvUrl.SHOUWANG);
         lists.add(urlBean4);
         //全民户外
         TuijianFragmentUrlListBean urlBean5 = new TuijianFragmentUrlListBean();
-        urlBean.setName("huwai");
-        urlBean.setUrl(TvUrl.HUWAI);
+        urlBean5.setName("huwai");
+        urlBean5.setUrl(TvUrl.HUWAI);
         lists.add(urlBean5);
         //炉石传说
         TuijianFragmentUrlListBean urlBean6 = new TuijianFragmentUrlListBean();
-        urlBean.setName("heartstone");
-        urlBean.setUrl(TvUrl.LUSHI);
+        urlBean6.setName("heartstone");
+        urlBean6.setUrl(TvUrl.LUSHI);
         lists.add(urlBean6);
         //手游专区
         TuijianFragmentUrlListBean urlBean7 = new TuijianFragmentUrlListBean();
-        urlBean.setName("mobilegame");
-        urlBean.setUrl(TvUrl.SHOUYOU);
+        urlBean7.setName("mobilegame");
+        urlBean7.setUrl(TvUrl.SHOUYOU);
         lists.add(urlBean7);
         //网游竞技
         TuijianFragmentUrlListBean urlBean8 = new TuijianFragmentUrlListBean();
-        urlBean.setName("webgame");
-        urlBean.setUrl(TvUrl.WANGYOU);
+        urlBean8.setName("webgame");
+        urlBean8.setUrl(TvUrl.WANGYOU);
         lists.add(urlBean8);
         //单机主机
         TuijianFragmentUrlListBean urlBean9 = new TuijianFragmentUrlListBean();
-        urlBean.setName("tvgame");
-        urlBean.setUrl(TvUrl.DANJI);
+        urlBean9.setName("tvgame");
+        urlBean9.setUrl(TvUrl.DANJI);
         lists.add(urlBean9);
         //球球大作战
         TuijianFragmentUrlListBean urlBean10 = new TuijianFragmentUrlListBean();
-        urlBean.setName("qiuqiu");
-        urlBean.setUrl(TvUrl.QIUQIU);
+        urlBean10.setName("qiuqiu");
+        urlBean10.setUrl(TvUrl.QIUQIU);
         lists.add(urlBean10);
         //穿越火线
         TuijianFragmentUrlListBean urlBean11 = new TuijianFragmentUrlListBean();
-        urlBean.setName("cfpc");
-        urlBean.setUrl(TvUrl.CF);
+        urlBean11.setName("cfpc");
+        urlBean11.setUrl(TvUrl.CF);
         lists.add(urlBean11);
         //QQ飞车
         TuijianFragmentUrlListBean urlBean12 = new TuijianFragmentUrlListBean();
-        urlBean.setName("qqfeiche");
-        urlBean.setUrl(TvUrl.FEICHE);
+        urlBean12.setName("qqfeiche");
+        urlBean12.setUrl(TvUrl.FEICHE);
         lists.add(urlBean12);
         //NBA2K
         TuijianFragmentUrlListBean urlBean13 = new TuijianFragmentUrlListBean();
-        urlBean.setName("nba2k");
-        urlBean.setUrl(TvUrl.KONLINE);
+        urlBean13.setName("nba2k");
+        urlBean13.setUrl(TvUrl.KONLINE);
         lists.add(urlBean13);
         //FIFA
         TuijianFragmentUrlListBean urlBean14 = new TuijianFragmentUrlListBean();
-        urlBean.setName("fifa");
-        urlBean.setUrl(TvUrl.FIFA);
-        lists.add(urlBean);
+        urlBean14.setName("fifa");
+        urlBean14.setUrl(TvUrl.FIFA);
+        lists.add(urlBean14);
         //魔兽争霸3
         TuijianFragmentUrlListBean urlBean15 = new TuijianFragmentUrlListBean();
-        urlBean.setName("war3");
-        urlBean.setUrl(TvUrl.WOW);
+        urlBean15.setName("war3");
+        urlBean15.setUrl(TvUrl.WOW);
         lists.add(urlBean15);
         //王者荣耀
         TuijianFragmentUrlListBean urlBean16 = new TuijianFragmentUrlListBean();
-        urlBean.setName("wangzhe");
-        urlBean.setUrl(TvUrl.WANGZHE);
-        lists.add(urlBean);
+        urlBean16.setName("wangzhe");
+        urlBean16.setUrl(TvUrl.WANGZHE);
+        lists.add(urlBean16);
         //我的世界
         TuijianFragmentUrlListBean urlBean17 = new TuijianFragmentUrlListBean();
-        urlBean.setName("minecraft");
-        urlBean.setUrl(TvUrl.SHIJIE);
+        urlBean17.setName("minecraft");
+        urlBean17.setUrl(TvUrl.SHIJIE);
         lists.add(urlBean17);
         //DNF
         TuijianFragmentUrlListBean urlBean18 = new TuijianFragmentUrlListBean();
-        urlBean.setName("dnf");
-        urlBean.setUrl(TvUrl.DNF);
+        urlBean18.setName("dnf");
+        urlBean18.setUrl(TvUrl.DNF);
         lists.add(urlBean18);
         //暴雪经典
         TuijianFragmentUrlListBean urlBean19 = new TuijianFragmentUrlListBean();
-        urlBean.setName("blizzard");
-        urlBean.setUrl(TvUrl.BAOFENG);
+        urlBean19.setName("blizzard");
+        urlBean19.setUrl(TvUrl.BAOFENG);
         lists.add(urlBean19);
         //DOTA2
         TuijianFragmentUrlListBean urlBean20 = new TuijianFragmentUrlListBean();
-        urlBean.setName("dota2");
-        urlBean.setUrl(TvUrl.DOTA);
+        urlBean20.setName("dota2");
+        urlBean20.setUrl(TvUrl.DOTA);
         lists.add(urlBean20);
         //二次元区
         TuijianFragmentUrlListBean urlBean21 = new TuijianFragmentUrlListBean();
-        urlBean.setName("erciyuan");
-        urlBean.setUrl(TvUrl.ERCIYUAN);
+        urlBean21.setName("erciyuan");
+        urlBean21.setUrl(TvUrl.ERCIYUAN);
         lists.add(urlBean21);
         return lists;
     }

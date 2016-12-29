@@ -28,17 +28,19 @@ public class ItemFragment extends Fragment {
 
     RecyclerView itemFragmentRv ;
     List<AllFragmentBean> itemFragmentBeans;
-
-
+    private String url;
+    public  void seturl(String url)
+    {
+        this.url=url;
+        //String url = savedInstanceState.getString(TabhostContant.URL_KEY,null);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_item, container, false);
-        String url = savedInstanceState.getString(TabhostContant.URL_KEY,null);
         initRecyclerView(v,url);
         return v;
     }
-
     private void initRecyclerView(View v,String url) {
         itemFragmentBeans = new ArrayList<>();
         itemFragmentRv = (RecyclerView) v.findViewById(R.id.tuijian_itemfragment);

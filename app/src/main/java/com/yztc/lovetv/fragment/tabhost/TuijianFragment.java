@@ -103,8 +103,9 @@ public class TuijianFragment extends Fragment {
                }
             }
             //通过bundle传值将接口传过去
-            bundle.putString(TabhostContant.URL_KEY,url );
-            itemFragment.setArguments(bundle);
+            itemFragment.seturl(url);
+           // bundle.putString(TabhostContant.URL_KEY,url );
+            //itemFragment.setArguments(bundle);
             mFragments.add(itemFragment);
         }
 
@@ -120,19 +121,12 @@ public class TuijianFragment extends Fragment {
 //        mTabs.add("单机主机");
 //        mTabs.add("球球大作战");
 
-
-
-
+        Log.e("Tsag"," 00000");
                 FragmentManager manager = getChildFragmentManager();
                 ViewPagerAdapter fragmentAdapter = new ViewPagerAdapter(manager,mFragments,mTabs);
                 mViewPager.setOffscreenPageLimit(mTabs.size()-1);
                 mViewPager.setAdapter(fragmentAdapter);
                 mTabLayout.setupWithViewPager(mViewPager);
-
-
-
-
-
 
 
 
