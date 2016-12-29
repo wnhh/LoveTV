@@ -1,5 +1,6 @@
 package com.yztc.lovetv.activity.mine;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yztc.lovetv.R;
+import com.yztc.lovetv.base.BaseApplication;
+import com.yztc.lovetv.bean.BackNeedData;
 import com.yztc.lovetv.bean.UserEntity;
+import com.yztc.lovetv.db.BackDataOperateManager;
+
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
@@ -33,13 +38,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 	private Button login_id;
 	private ImageView loginclose_btn;
 	private ImageView hideshow_btn;
-	private int count=1;
+	private int count = 1;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		initView();
 	}
+
 	private void initView() {
 		intentregister_tv = (TextView) findViewById(R.id.intentregister_tv);
 		register_tb = (Toolbar) findViewById(R.id.register_tb);
@@ -68,25 +76,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 					Toast.makeText(this, "输入密码", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				//BmobUser bmobUser = BmobUser.getCurrentUser(this);
-				/*if(bmobUser != null){
-					// 允许用户使用应用
-				}*/
-					//缓存用户对象为空时， 可打开用户注册界面…
-					BmobUser.loginByAccount(LoginActivity.this, edt, edt1, new LogInListener<UserEntity>() {
-						@Override
-						public void done(UserEntity userEntity, BmobException e) {
-							if (userEntity != null) {
-								Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-								Intent loginbackintent = new Intent();
-								loginbackintent.putExtra("loginkey", edt);
-								setResult(600, loginbackintent);
-								finish();
-							} else {
-								Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
-							}
-						}
-					});
+				BaseApplication application = (BaseApplication) getApplication();
+				application.loginIn(edt, edt1,this);
 				break;
 			case R.id.intentregister_tv:
 				Intent in = new Intent(this, RegisterActivity.class);

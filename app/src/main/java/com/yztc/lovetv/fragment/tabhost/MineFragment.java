@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,10 @@ import com.yztc.lovetv.activity.mine.LoginActivity;
 import com.yztc.lovetv.activity.mine.PersonalInfoActivity;
 import com.yztc.lovetv.activity.mine.SySettingActivity;
 import com.yztc.lovetv.activity.mine.TalkActivity;
+import com.yztc.lovetv.db.BackDataOperateManager;
 import com.yztc.lovetv.fragment.other.MyAttentionFragment;
+
+import cn.bmob.v3.BmobUser;
 
 
 /**
@@ -51,12 +55,32 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 	//存用户名
 	private String str;
 	private boolean flag;
+	private BackDataOperateManager bdp;
+	private  BmobUser bmobUser;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_mine, container, false);
+		bdp=new BackDataOperateManager(getContext());
 		initView(v);
+		isLogin();
 		return v;
+	}
+	public void isLogin()
+	{
+		bmobUser = BmobUser.getCurrentUser(getContext());
+		if(bmobUser!=null) {
+			String inId = null;
+			try {
+				inId = bdp.getAll().get(0).getInId();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (!TextUtils.isEmpty(inId)) {
+				flag = true;
+				myname_id.setText(inId);
+			}
+		}
 	}
 	private void initView(View v) {
 		myname_id = (TextView) v.findViewById(R.id.myname_id);
@@ -80,7 +104,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 		touxiang_id.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (backcode == 600 || backcode == 602) {
+				if (backcode == 600 || backcode == 602||flag==true) {
 					Intent loginintent = new Intent(getActivity(), PersonalInfoActivity.class);
 					loginintent.putExtra("loginnamekey", myname_id.getText().toString());
 					startActivityForResult(loginintent, REQUEST_LOGINBACK_CODE);
@@ -91,8 +115,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 			}
 		});
 		picone = (TextView) v.findViewById(R.id.picone);
-
-
 		huahua_id = (ImageView) v.findViewById(R.id.huahua_id);
 		huahua_id.setOnClickListener(this);
 
@@ -121,6 +143,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 				if (resultCode == 601) {
 					touxiang_id.setImageResource(R.mipmap.img_profile_touxiang_default_unknow);
 					myname_id.setText("点击登录");
+					flag=false;
 				}
 				if (resultCode == 602) {
 					Bitmap bp = data.getParcelableExtra("loginnamekey");

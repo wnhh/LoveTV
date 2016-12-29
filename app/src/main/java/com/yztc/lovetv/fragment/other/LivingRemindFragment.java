@@ -27,7 +27,6 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class LivingRemindFragment extends Fragment {
-
 	//数据源
 	private List<BackNeedData> bnd;
 	private BackDataOperateManager bmg;
@@ -51,7 +50,7 @@ public class LivingRemindFragment extends Fragment {
 		remindbackrv.addOnItemTouchListener(new OnItemClickListener() {
 			@Override
 			public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-				boolean switchBtn = bnd.get(0).getSwitchBtn();
+				boolean switchBtn = bnd.get(1).getSwitchBtn();
 				switchBtn=!switchBtn;
 				if(switchBtn) {
 					remindiv.setImageResource(R.mipmap.open);
@@ -61,7 +60,6 @@ public class LivingRemindFragment extends Fragment {
 					remindiv.setImageResource(R.mipmap.close);
 					bap.notifyDataSetChanged();
 				}
-
 			}
 		});
 		initView(view);

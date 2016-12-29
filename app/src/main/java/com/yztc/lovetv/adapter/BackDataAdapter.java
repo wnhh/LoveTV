@@ -2,6 +2,7 @@ package com.yztc.lovetv.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -30,14 +31,15 @@ public class BackDataAdapter extends BaseQuickAdapter<BackNeedData> {
     }
     @Override
     protected void convert(BaseViewHolder baseViewHolder, BackNeedData allFragmentBean) {
-        //名字
-        baseViewHolder.setText(R.id.tuijian_tv_name,allFragmentBean.getUsername());
-        //头像
-        Glide.with(mContext).load(allFragmentBean.getHeadImg()).transform(new RoundTransformation(mContext)).into((ImageView) baseViewHolder.getView(R.id.tuijian_iv_icon));
-        //视频截图
-        Glide.with(mContext).load(allFragmentBean.getBigImg()).placeholder(R.mipmap.live_default).into((ImageView) baseViewHolder.getView(R.id.tuijian_iv_all));
-        //简介
-        baseViewHolder.setText(R.id.tuijian_tv_introduce,allFragmentBean.getTitleInfo());
+            //名字
+            baseViewHolder.setText(R.id.tuijian_tv_name, allFragmentBean.getUsername());
+            //头像
+            Glide.with(mContext).load(allFragmentBean.getHeadImg()).transform(new RoundTransformation(mContext)).into((ImageView) baseViewHolder.getView(R.id.tuijian_iv_icon));
+            //视频截图
+            Glide.with(mContext).load(allFragmentBean.getBigImg()).placeholder(R.mipmap.live_default).into((ImageView) baseViewHolder.getView(R.id.tuijian_iv_all));
+            //简介
+            baseViewHolder.setText(R.id.tuijian_tv_introduce, allFragmentBean.getTitleInfo());
+
 
     }
     //头像变成圆的

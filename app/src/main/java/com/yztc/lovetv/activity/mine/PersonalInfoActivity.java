@@ -27,8 +27,11 @@ import android.widget.TextView;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.ConvertVActivity;
+import com.yztc.lovetv.base.BaseApplication;
 
 import java.io.File;
+
+import cn.bmob.v3.BmobUser;
 
 public class PersonalInfoActivity extends AppCompatActivity implements View.OnClickListener {
 	private ImageView camera_iv;
@@ -73,7 +76,6 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 			}
 		});
 	}
-
 	private void initView() {
 		touxiang_rl = (RelativeLayout) findViewById(R.id.touxiang_rl);
 		emailaddress_rl = (RelativeLayout) findViewById(R.id.emailaddress_rl);
@@ -119,7 +121,6 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 					}
 				}
 				break;
-
 		}
 	}
 
@@ -148,7 +149,6 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 		dialogWindow.setAttributes(lp);
 		dialog.show();//显示对话框
 	}
-
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
@@ -193,6 +193,8 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
 				Intent loginbackintent = new Intent();
 				setResult(601, loginbackintent);
 				finish();
+				BaseApplication ba= (BaseApplication) getApplication();
+				ba.loginOut();
 				break;
 		}
 	}
