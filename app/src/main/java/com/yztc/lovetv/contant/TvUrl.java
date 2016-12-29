@@ -1,15 +1,20 @@
 package com.yztc.lovetv.contant;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by My on 2016/12/14.
  */
 
 public class TvUrl {
 
+
 	//首页轮播图
 	public static final String LUNBO = "http://www.quanmin.tv/json/page/app-data/info.json?v=2.2.4&os=1&ver=4";
 	//推荐
 	public static final String TUIAJIN = "http://www.quanmin.tv/json/app/index/recommend/";
+
 	//英雄联盟
 	public static final String LOL ="http://www.quanmin.tv/json/categories/lol/list.json?11212123&v=2.2.4&os=1&ver=4";
 	//全民星秀
@@ -62,6 +67,8 @@ public class TvUrl {
 	public static final String CHUANGQI = "http://www.quanmin.tv/json/categories/chuanqi/list.json?11212128&v=2.2.4&os=1&ver=4";
 	//游戏中心
 	public static final String  GAMECENTER = "http://m.quanmin.tv/udata/";
+	//我的世界
+	public static final String SHIJIE = "http://www.quanmin.tv/json/categories/minecraft/list.json?12201617&v=2.2.4&os=1&ver=4";
 	
 
 }

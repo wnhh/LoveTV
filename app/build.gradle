@@ -43,6 +43,7 @@ dependencies {
     compile 'cn.bmob.android:http-legacy:1.0'
     compile 'com.github.mcxtzhang:SwipeCaptcha:V1.0.0'
     compile 'org.greenrobot:greendao:3.2.0'
+    compile 'com.android.support:support-v4:25.0.1'
     testCompile 'junit:junit:4.12'
 }
 

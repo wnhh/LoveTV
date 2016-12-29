@@ -17,6 +17,7 @@ import com.yztc.lovetv.apiservice.VpPictureApiService;
 import com.yztc.lovetv.bean.AllFragmentBean;
 import com.yztc.lovetv.bean.TuijianAllBean;
 import com.yztc.lovetv.contant.BaseUrl;
+import com.yztc.lovetv.contant.TabhostContant;
 import com.yztc.lovetv.myutil.OkHttpUtils;
 
 import java.io.IOException;
@@ -34,31 +35,33 @@ import retrofit2.Retrofit;
  */
 public class AllFragment extends Fragment {
     RecyclerView allItem ;
-    Retrofit retrofit;
     List<AllFragmentBean> allFragmentBeans;
+    Retrofit retrofit;
+    String url;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        url = savedInstanceState.getString(TabhostContant.URL_KEY,null);
         View v = inflater.inflate(R.layout.fragment_all, container, false);
-        initRecyclerView(v);
+        initRecyclerView(v,url);
         return v;
     }
 
-    private void initRecyclerView(View v) {
+    private void initRecyclerView(View v,String url) {
         allFragmentBeans = new ArrayList<>();
         allItem = (RecyclerView) v.findViewById(R.id.tuijian_all);
-        initRetrofit();
+        initRetrofit(url);
     }
 
-    private void initRetrofit() {
+    private void initRetrofit(String url) {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BaseUrl.VPPICTURE)
                 .client(OkHttpUtils.newOkHttpClient(getContext()))
                 .build();
         VpPictureApiService vpPictureApiService = retrofit.create(VpPictureApiService.class);
-        Call<ResponseBody> call = vpPictureApiService.getAllPathCall(BaseUrl.ALLPATHFIRST);
-        /*call.enqueue(new Callback<ResponseBody>() {
+        Call<ResponseBody> call = vpPictureApiService.getAllPathCall(url);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Gson gson = new Gson();
@@ -88,7 +91,7 @@ public class AllFragment extends Fragment {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
             }
-        });*/
+        });
 
     }
 

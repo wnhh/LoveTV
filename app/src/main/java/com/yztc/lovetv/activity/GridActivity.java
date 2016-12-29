@@ -77,6 +77,7 @@ public class GridActivity extends AppCompatActivity {
 						TabItemBean tabItemBean = new TabItemBean();
 						tabItemBean.setItemId(tuijian.getRoom().get(i).getId());
 						tabItemBean.setItemName(tuijian.getRoom().get(i).getName());
+						tabItemBean.setName(tuijian.getRoom().get(i).getSlug());//接口名称
 						Log.e("TAG", "name "+ tuijian.getRoom().get(i).getName());
 						mTabItemBeanList.add(tabItemBean);
 						itemBeanManager.insert(tabItemBean);
