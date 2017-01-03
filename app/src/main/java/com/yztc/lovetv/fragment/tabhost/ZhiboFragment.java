@@ -19,7 +19,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.google.gson.Gson;
 import com.yztc.lovetv.R;
+import com.yztc.lovetv.activity.DetailActivity;
+import com.yztc.lovetv.activity.LiveActivity;
 import com.yztc.lovetv.activity.SearchActivity;
+import com.yztc.lovetv.activity.ShowActivity;
 import com.yztc.lovetv.adapter.LiveActivityAdapter;
 import com.yztc.lovetv.bean.Totalshowbean;
 import com.yztc.lovetv.bean.TotaoshowText;
@@ -73,7 +76,7 @@ public class ZhiboFragment extends Fragment implements View.OnClickListener{
                 bundle.putInt("value",url);
                 Log.e("url","url是"+url);
                 intent.putExtras(bundle);
-                intent.setClass(getContext(),SearchActivity.class);
+                intent.setClass(getContext(),ShowActivity.class);
                 startActivity(intent);
             }
         });
