@@ -20,6 +20,7 @@ import com.yztc.lovetv.bean.Totalshowbean;
 import com.yztc.lovetv.bean.TotaoshowText;
 import com.yztc.lovetv.myutil.MyTask;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class DetailActivity extends AppCompatActivity {
     private GridLayoutManager layoutManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     private List<String> list=new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +49,15 @@ public class DetailActivity extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                Intent intent=new Intent();
+                Intent intent=new Intent(getApplicationContext(),ShowActivity.class);
                 Log.e("kim","有没有进去---------------------------------");
                 int a=Integer.valueOf(tobao.get(i).getRoomNumId());
-
+//                Websites websites=new Websites();
+//               // websites.setSites(a);
+//                EventBus.getDefault().post(websites);
+                intent.putExtra("value",a);
+                Log.e("aaaaa","有没有传输网址"+a);
+                startActivity(intent);
             }
         });
     }
@@ -85,6 +92,7 @@ public class DetailActivity extends AppCompatActivity {
                     TotaoshowText show=new TotaoshowText();
                     if (showbean.getData().get(i).getIntro()==""){
                         show.setBrief(showbean.getData().get(i).getTitle());
+                        Log.e("Test","+++++++++++++++++=="+showbean.getData().get(i).getTitle());
                     }else {
                         show.setBrief(showbean.getData().get(i).getIntro());
                     }

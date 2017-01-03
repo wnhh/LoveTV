@@ -9,12 +9,16 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.bean.TotaoshowText;
+import com.yztc.lovetv.myutil.BitmapUtils;
 
 import java.util.List;
 
@@ -31,42 +35,7 @@ public class LiveActivityAdapter extends BaseQuickAdapter<TotaoshowText> {
         this.context=context;
     }
 
-    //设置图形为圆形
-    public class CircleTransform implements Transformation {
-        @Override
-        public Bitmap transform(Bitmap source) {
-            int size = Math.min(source.getWidth(), source.getHeight());
 
-            int x = (source.getWidth() - size) / 2;
-            int y = (source.getHeight() - size) / 2;
-
-            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
-            if (squaredBitmap != source) {
-                source.recycle();
-            }
-            Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
-            Log.e("kim","----------------------");
-            Canvas canvas = new Canvas(bitmap);
-            Paint paint = new Paint();
-            BitmapShader shader = new BitmapShader(squaredBitmap,
-                    BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);//定义一个渲染器
-            paint.setShader(shader);//设置渲染器
-            paint.setAntiAlias(true);
-
-            float r = size / 2f;
-            canvas.drawCircle(r, r, r, paint);//绘制图形
-
-            squaredBitmap.recycle();
-            Log.e("kkk","aaa---"+bitmap);
-            return bitmap;
-
-        }
-
-        @Override
-        public String key() {
-            return "circle";
-        }
-    }
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, TotaoshowText totalshowtext) {
@@ -74,11 +43,34 @@ public class LiveActivityAdapter extends BaseQuickAdapter<TotaoshowText> {
         baseViewHolder.setText(R.id.brief_tv,totalshowtext.getBrief());
         baseViewHolder.setText(R.id.num,totalshowtext.getWatchNum());
         if(!TextUtils.isEmpty(totalshowtext.getLiveShotId())) {
-            Picasso.with(mContext).load(totalshowtext.getLiveShotId()).placeholder(R.mipmap.live_default).into((ImageView) baseViewHolder.getView(R.id.pic));
+            Glide.with(mContext).load(totalshowtext.getLiveShotId()).placeholder(R.mipmap.live_default).into((ImageView) baseViewHolder.getView(R.id.pic));
         }
         //图形转换空指针报错
         if (!TextUtils.isEmpty(totalshowtext.getHeadImageId())){
-            Picasso.with(mContext).load(totalshowtext.getHeadImageId()).transform(new CircleTransform()).placeholder(R.mipmap.head).into((ImageView) baseViewHolder.getView(R.id.head_iv));
+            Glide.with(mContext).load(totalshowtext.getHeadImageId()).transform(new LiveActivityAdapter.RoundTransformation(mContext)).into((ImageView) baseViewHolder.getView(R.id.head_iv));
+        }
+    }
+
+    //头像变成圆的
+    class RoundTransformation extends BitmapTransformation {
+
+        public RoundTransformation(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected Bitmap transform(BitmapPool pool, Bitmap toTransform,
+                                   int outWidth, int outHeight) {
+            Bitmap roteBmp = BitmapUtils.getRoundCornerBitmap(toTransform, 360);
+            if (roteBmp != toTransform) {
+                toTransform.recycle();
+            }
+            return roteBmp;
+        }
+
+        @Override
+        public String getId() {
+            return "glide";
         }
     }
 }

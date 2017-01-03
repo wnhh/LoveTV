@@ -1,0 +1,65 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yztc.lovetv.fragment.contntfragment.ChatFragment">
+
+    <ListView
+        android:id="@+id/chatview_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EEEEEE"
+        android:fadingEdge="none"
+        android:divider="#aaaaaa"
+        android:dividerHeight="0px">
+    </ListView>
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:id="@+id/chat_input"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="#EEEEEE"
+        android:weightSum="8">
+        <ImageView
+            android:id="@+id/hot_iv"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/live_hotword_normal"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"
+            android:background="@drawable/searchbox">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="不发弹幕真的不寂寞吗"
+
+                android:background="@null"/>
+            <ImageView
+                android:id="@+id/chat_iv"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/gift_selector" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/gift_iv"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/live_gift"/>
+    </LinearLayout>
+</FrameLayout>
