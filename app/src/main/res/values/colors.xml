@@ -12,4 +12,5 @@
     <color name="px_background">#EEEEEE</color>
     <color name="black">#000000</color>
     <color name="talk">#2FB9C3</color>
+    <color name="edit_background">#FAFAFA</color>
 </resources>

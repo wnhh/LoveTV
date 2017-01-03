@@ -11,6 +11,9 @@ import com.yztc.lovetv.bean.BackNeedData;
 import com.yztc.lovetv.bean.UserEntity;
 import com.yztc.lovetv.db.BackDataOperateManager;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -24,9 +27,12 @@ import cn.bmob.v3.listener.SaveListener;
 public class BaseApplication extends Application{
     private  BmobUser bmobUser;
     private BackDataOperateManager bmp;
+    private static Executor executor;//线程池
     @Override
     public void onCreate() {
         super.onCreate();
+        executor = Executors.newCachedThreadPool();//初始化线程池
+
         //一次性的初始化操作
         //Application的onCreate()优先于Activity的onCreate()方法调用的
         //第一：默认初始化
@@ -88,4 +94,11 @@ public class BaseApplication extends Application{
     {
         BmobUser.logOut(this);
     }
+
+    public static Executor getExecutor() {
+        return executor;
+    }
+
+
+
 }

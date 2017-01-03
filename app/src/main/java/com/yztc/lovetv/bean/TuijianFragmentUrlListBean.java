@@ -16,15 +16,15 @@ public class TuijianFragmentUrlListBean {
     public static List<TuijianFragmentUrlListBean> getLists() {
         List<TuijianFragmentUrlListBean> lists = new ArrayList<>();
         //颜值控
-        TuijianFragmentUrlListBean urlBean = new TuijianFragmentUrlListBean();
-        urlBean.setName("love");
-        urlBean.setUrl(TvUrl.YANZHI);
-        lists.add(urlBean);
+        TuijianFragmentUrlListBean urlBean1 = new TuijianFragmentUrlListBean();
+        urlBean1.setName("love");
+        urlBean1.setUrl(TvUrl.YANZHI);
+        lists.add(urlBean1);
         //英雄联盟
         TuijianFragmentUrlListBean urlBean2 = new TuijianFragmentUrlListBean();
         urlBean2.setName("lol");
         urlBean2.setUrl(TvUrl.LOL);
-        lists.add(urlBean);
+        lists.add(urlBean2);
         //全民星秀
         TuijianFragmentUrlListBean urlBean3 = new TuijianFragmentUrlListBean();
         urlBean3.setName("beauty");

@@ -15,6 +15,8 @@ import android.widget.ImageView;
 
 import com.yztc.lovetv.R;
 import com.yztc.lovetv.activity.ChannelManagerActivity;
+import com.yztc.lovetv.activity.ConvertVActivity;
+import com.yztc.lovetv.activity.SearchActivity;
 import com.yztc.lovetv.adapter.ViewPagerAdapter;
 import com.yztc.lovetv.bean.TabItemBean;
 import com.yztc.lovetv.bean.TuijianFragmentUrlListBean;
@@ -29,11 +31,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TuijianFragment extends Fragment {
+public class TuijianFragment extends Fragment implements View.OnClickListener {
     private TabLayout mTabLayout;
     private Toolbar mToolbar;
     private ViewPager mViewPager;
-    private ImageView mImageView;
+    private ImageView mfenleiIv,mGuanzhuIv,mSearchIv;
 
     //数据源
     List<Fragment> mFragments;
@@ -88,24 +90,24 @@ public class TuijianFragment extends Fragment {
         List<TabItemBean> all = mTabItemBeanManager.getAll();
         Log.e("TAG","all"+all.size());
 
-        //遍历tab集合添加tab的数据   根据数量添加fragment
-        for (TabItemBean tabItemBean : all) {
-            mTabs.add(tabItemBean.getItemName());
-            ItemFragment itemFragment = new ItemFragment();
-            Bundle bundle = new Bundle();
-            String url = null;
-            //根据数据库跟tab数据相同的接口名称  通过判断得到接口网址
-            List<TuijianFragmentUrlListBean> lists = TuijianFragmentUrlListBean.getLists();
-            for (TuijianFragmentUrlListBean list : lists) {
-               if( list.getName().equals(tabItemBean.getName())){
-                   url = list.getName();
-                   break;
-               }
+                //遍历tab集合添加tab的数据   根据数量添加fragment
+                for (TabItemBean tabItemBean : all) {
+                    mTabs.add(tabItemBean.getItemName());
+                    ItemFragment itemFragment = new ItemFragment();
+                    Bundle bundle = new Bundle();
+                    String url = null;
+                    //根据数据库跟tab数据相同的接口名称  通过判断得到接口网址
+                    List<TuijianFragmentUrlListBean> lists = TuijianFragmentUrlListBean.getLists();
+                    for (TuijianFragmentUrlListBean list : lists) {
+                        if( list.getName().equals(tabItemBean.getName())){
+                            url = list.getUrl();
+                            break;
+                        }
             }
             //通过bundle传值将接口传过去
-            itemFragment.seturl(url);
-           // bundle.putString(TabhostContant.URL_KEY,url );
-            //itemFragment.setArguments(bundle);
+//            itemFragment.seturl(url);
+            bundle.putString(TabhostContant.URL_KEY,url );
+            itemFragment.setArguments(bundle);
             mFragments.add(itemFragment);
         }
 
@@ -136,14 +138,30 @@ public class TuijianFragment extends Fragment {
         mTabLayout = (TabLayout) v.findViewById(R.id.tablayout);
         mToolbar = (Toolbar) v.findViewById(R.id.lm_fragment_toolbar);
         mViewPager = (ViewPager) v.findViewById(R.id.firstfragment_vp);
-        mImageView = (ImageView) v.findViewById(R.id.first_tablayout_fenlei);
-        mImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ChannelManagerActivity.class);
-                startActivity(intent);
-            }
-        });
+        mfenleiIv = (ImageView) v.findViewById(R.id.first_tablayout_fenlei);
+        mfenleiIv.setOnClickListener(this);
+        mGuanzhuIv = (ImageView) v.findViewById(R.id.toolbar_save);
+        mGuanzhuIv.setOnClickListener(this);
+        mSearchIv = (ImageView) v.findViewById(R.id.toolbar_search);
+        mSearchIv.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()){
+            case R.id.toolbar_save:
+                intent.setClass(getActivity(), ConvertVActivity.class);
+                intent.putExtra("conkey", "我的关注");
+                break;
+            case R.id.toolbar_search:
+                intent.setClass(getContext(), SearchActivity.class);
+                break;
+            case R.id.first_tablayout_fenlei:
+                intent.setClass(getContext(),ChannelManagerActivity.class);
+                break;
+        }
+        startActivity(intent);
+
+    }
 }

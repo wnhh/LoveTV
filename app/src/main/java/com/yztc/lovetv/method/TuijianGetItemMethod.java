@@ -19,6 +19,7 @@ public class TuijianGetItemMethod {
         ti.setPersonalPicUrl(tuijian.getRoom().get(itemPosition).getList().get(position).getAvatar());
         ti.setIntroduce(tuijian.getRoom().get(itemPosition).getList().get(position).getTitle());
         ti.setName(tuijian.getRoom().get(itemPosition).getList().get(position).getNick());
+        ti.setuId(tuijian.getRoom().get(itemPosition).getList().get(position).getUid());
         TuijianStringitem tti = new TuijianStringitem(ti);
         tti.setMore(true);
 

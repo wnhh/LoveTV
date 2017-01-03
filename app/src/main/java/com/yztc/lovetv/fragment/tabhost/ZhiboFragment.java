@@ -70,11 +70,9 @@ public class ZhiboFragment extends Fragment implements View.OnClickListener{
             @Override
             public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
                 Intent intent=new Intent();
-                Log.e("kim","有没有进去---------------------------------");
                 int url=Integer.valueOf(totaoshowTexts.get(i).getRoomNumId());
                 Bundle bundle=new Bundle();
                 bundle.putInt("value",url);
-                Log.e("url","url是"+url);
                 intent.putExtras(bundle);
                 intent.setClass(getContext(),ShowActivity.class);
                 startActivity(intent);

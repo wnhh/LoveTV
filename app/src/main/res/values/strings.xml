@@ -33,6 +33,9 @@
     <string name="phone">手机号</string>
     <string name="name">haha</string>
     <string name="tuichudenglu">退出登录</string>
+    <string name="searchHistory">搜索历史</string>
+    <string name="changyongchannle">长按频道拖拽排序,单击删除</string>
+    <string name="qitachannle">点击添加为常用频道</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

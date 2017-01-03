@@ -14,6 +14,16 @@ public class TuiJianItem {
 	private String name;
 	private String introduce;
 
+	public int getuId() {
+		return uId;
+	}
+
+	public void setuId(int uId) {
+		this.uId = uId;
+	}
+
+	private int uId;
+
 	public String getBigPicUrl() {
 		return bigPicUrl;
 	}

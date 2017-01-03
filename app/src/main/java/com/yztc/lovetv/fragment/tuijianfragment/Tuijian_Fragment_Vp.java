@@ -1,5 +1,6 @@
 package com.yztc.lovetv.fragment.tuijianfragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
 import com.yztc.lovetv.R;
+import com.yztc.lovetv.activity.ShowActivity;
 import com.yztc.lovetv.adapter.SectionAdapter;
 import com.yztc.lovetv.adapter.vpPagerAdapter;
 import com.yztc.lovetv.apiservice.LitchiapiService;
@@ -98,7 +100,7 @@ public class Tuijian_Fragment_Vp extends Fragment {
             public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
                 TuijianStringitem ts = listTj.get(i);
                 if (ts.isHeader) {
-                    //陈雨晗你可以写跳转了！
+                    //跳转
                 }
             }
         });
@@ -202,7 +204,7 @@ public class Tuijian_Fragment_Vp extends Fragment {
 //                            //单机主机
 //                            TuijianGetItemMethod.addItem("单机主机", listTj, tuijian, temp++);
                     }
-                    sectionAdapter = new SectionAdapter(getContext(), listTj, 1);
+                    sectionAdapter = new SectionAdapter(getContext(), listTj);
                     sectionAdapter.addHeaderView(ll_vp);
                     tuijianitem_rv.setAdapter(sectionAdapter);
                     tuijianitem_rv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));

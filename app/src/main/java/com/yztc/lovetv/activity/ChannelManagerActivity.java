@@ -56,6 +56,8 @@ public class ChannelManagerActivity extends AppCompatActivity {
 	private Toolbar manager_tb;
 	private RecyclerView channelone_tv,channeltwo_tv;
 	private int count;
+	private TextView changyongText;
+	private TextView qitaText;
 	//拖动
 	private int dragFlags,swipeFlags;
 	//数据源
@@ -123,6 +125,8 @@ public class ChannelManagerActivity extends AppCompatActivity {
 	private void initView() {
 		channelmanager_tv = (TextView) findViewById(R.id.channelmanager_tv);
 		manager_tv = (TextView) findViewById(R.id.manager_tv);
+		changyongText = (TextView) findViewById(R.id.changyong_text);
+		qitaText = (TextView) findViewById(R.id.qita_text);
 		manager_tb = (Toolbar) findViewById(R.id.manager_tb);
 		manager_tb.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -169,11 +173,15 @@ public class ChannelManagerActivity extends AppCompatActivity {
 				count++;
 				if(count%2==1) {
 					tv.setText("完成");
+					changyongText.setVisibility(View.VISIBLE);
+					qitaText.setVisibility(View.VISIBLE);
 					itemmove();
 				}
 				else
 				{
 					tv.setText("管理");
+					changyongText.setVisibility(View.GONE);
+					qitaText.setVisibility(View.GONE);
 					List<TabItemBean> tabs = new ArrayList<>();
 
 					try {

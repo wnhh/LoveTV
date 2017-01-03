@@ -49,7 +49,7 @@
         android:background="@color/colorWhite"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
@@ -63,11 +63,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="@dimen/dp_10"
                 android:text="常用频道"
                 android:textColor="#000000"
                 android:textSize="15sp"/>
-        </LinearLayout>
+            <TextView
+                android:id="@+id/changyong_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/changyongchannle"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorfont"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginRight="@dimen/dp_10"
+                android:visibility="gone"/>
+        </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/channelone_tv"
@@ -85,7 +95,7 @@
         android:background="@color/colorWhite"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
@@ -100,11 +110,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="@dimen/dp_10"
                 android:text="其他频道"
                 android:textColor="#000000"
                 android:textSize="15sp"/>
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/qita_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/qitachannle"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorfont"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginRight="@dimen/dp_10"
+                android:visibility="gone"/>
+        </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/channeltwo_tv"

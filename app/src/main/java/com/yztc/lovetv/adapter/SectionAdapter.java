@@ -1,7 +1,10 @@
 package com.yztc.lovetv.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -11,6 +14,7 @@ import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.yztc.lovetv.R;
+import com.yztc.lovetv.activity.ShowActivity;
 import com.yztc.lovetv.bean.TuiJianItem;
 import com.yztc.lovetv.bean.TuijianStringitem;
 import com.yztc.lovetv.myutil.BitmapUtils;
@@ -22,8 +26,10 @@ import java.util.List;
  */
 public class SectionAdapter extends BaseSectionQuickAdapter<TuijianStringitem> {
     private Context context;
-    public SectionAdapter(Context context,List<TuijianStringitem> data,int Type) {
+    TuiJianItem itemtj;
+    public SectionAdapter(Context context,List<TuijianStringitem> data) {
         super(R.layout.item_tuijian_jingcai_itemview, R.layout.item_tuijian_jingcai, data);
+        this.context = context;
     }
     protected void convertHead(BaseViewHolder helper, final TuijianStringitem item) {
         helper.setText(R.id.perfitpro_tv, item.header);
@@ -32,7 +38,7 @@ public class SectionAdapter extends BaseSectionQuickAdapter<TuijianStringitem> {
     }
     @Override
     protected void convert(BaseViewHolder helper, TuijianStringitem item) {
-        TuiJianItem itemtj = item.t;
+        itemtj = item.t;
           helper.setText(R.id.introdece_tv, itemtj.getIntroduce())
                 .setText(R.id.name_tv, itemtj.getName());
 

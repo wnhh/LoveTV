@@ -4,51 +4,69 @@
     android:id="@+id/activity_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yztc.lovetv.activity.SearchActivity">
+    tools:context="com.yztc.lovetv.activity.SearchActivity"
+    android:background="@color/background">
 
-
-    <android.support.v7.widget.Toolbar
+    <View
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="@dimen/px_1"
+        android:background="@color/px_background"/>
+
+    <RelativeLayout
+        android:id="@+id/edt_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:background="@color/colorWhite"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/iv_search_back"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/dp_10"
+            android:src="@mipmap/btn_back"/>
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_5"
+            android:layout_centerInParent="true"
+            android:background="@drawable/search_shape">
 
             <ImageView
-                android:clickable="true"
-                android:id="@+id/search_btn"
+                android:id="@+id/iv_search_search_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_search_back"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true" />
+                android:layout_margin="@dimen/dp_5"
+                android:src="@mipmap/ic_search_left"
+                android:layout_centerVertical="true"/>
 
-            <ImageView
-                android:layout_centerVertical="true"
-                android:paddingLeft="70dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_search_left" />
-
-            <EditText
-                android:layout_width="230dp"
-                android:layout_height="25dp"
-                android:textSize="15sp"
-                android:hint="你想要搜索什么"
-                android:background="@drawable/searchbox"
-                android:layout_centerInParent="true"/>
-
-            <TextView
-                android:clickable="true"
-                android:id="@+id/searchbar_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/selector_toolbar_search"/>
+        <EditText
+            android:id="@+id/edt_search"
+            android:layout_width="@dimen/dp_240"
+            android:layout_height="@dimen/dp_30"
+            android:hint="请输入关键字"
+            android:layout_toRightOf="@id/iv_search_search_icon"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/sp_12"
+            android:textColorHint="@color/colorfont"
+            android:background="@null"
+            android:textCursorDrawable="@drawable/editcustor_size"/>
 
         </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/iv_search_search"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dp_10"
+            android:clickable="true"
+            android:background="@drawable/btn_search_seletor"/>
+
+    </RelativeLayout>
 </RelativeLayout>

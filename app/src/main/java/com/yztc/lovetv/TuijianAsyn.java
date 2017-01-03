@@ -35,7 +35,9 @@ public class TuijianAsyn extends AsyncTask<Void,Void,String> {
 
     @Override
     protected void onPostExecute(String aVoid) {
-        getJson.finish(aVoid);
+        if (aVoid != null) {
+            getJson.finish(aVoid);
+        }
         super.onPostExecute(aVoid);
     }
 

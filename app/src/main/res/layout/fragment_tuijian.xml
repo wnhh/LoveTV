@@ -28,26 +28,23 @@
                 android:src="@mipmap/compony_logo"
                 android:layout_alignParentLeft="true"/>
 
+            <!--搜索-->
             <ImageView
                 android:id="@+id/toolbar_search"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/btn_nav_search_normal"
+                android:background="@drawable/btn_search_seletor"
+                android:clickable="true"
                 android:layout_alignParentRight="true" />
 
+            <!--关注-->
             <ImageView
                 android:id="@+id/toolbar_save"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/btn_focus_normal"
+                android:clickable="true"
+                android:background="@drawable/btn_guanzhu_seletor"
                 android:layout_toLeftOf="@id/toolbar_search"
-                android:layout_marginRight="10dp"/>
-
-            <ImageView
-                android:id="@+id/toolbar_gif"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_toLeftOf="@id/toolbar_save"
                 android:layout_marginRight="10dp"/>
         </RelativeLayout>
         </android.support.v7.widget.Toolbar>
