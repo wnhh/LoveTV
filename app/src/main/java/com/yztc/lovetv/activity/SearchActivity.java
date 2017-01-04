@@ -115,6 +115,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     searchListViewAdapter.notifyDataSetChanged();
                 } catch (Exception e) {
                     e.printStackTrace();
+                    e.getMessage();
                 }
                 break;
 
