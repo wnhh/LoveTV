@@ -34,7 +34,12 @@ public class SectionAdapter extends BaseSectionQuickAdapter<TuijianStringitem> {
     protected void convertHead(BaseViewHolder helper, final TuijianStringitem item) {
         helper.setText(R.id.perfitpro_tv, item.header);
         helper.setVisible(R.id.hahaha, item.isMore());
-        helper.addOnClickListener(R.id.intent_ll);
+        helper.setOnClickListener(R.id.tv_chouchou, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转到具体页面复用fragment；
+            }
+        });
     }
     @Override
     protected void convert(BaseViewHolder helper, TuijianStringitem item) {

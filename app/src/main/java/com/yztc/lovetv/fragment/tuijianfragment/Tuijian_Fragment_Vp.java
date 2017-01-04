@@ -52,7 +52,8 @@ import rx.schedulers.Schedulers;
  * A simple {@link Fragment} subclass.
  */
 public class Tuijian_Fragment_Vp extends Fragment {
-    private int temp = 1;//接口中第几个
+
+    private int temp = 1;
     private Retrofit rfit, vfit;
     private LitchiapiService litchApiService;
     private VpPictureApiService mApiService;
@@ -64,6 +65,7 @@ public class Tuijian_Fragment_Vp extends Fragment {
     List<LunBoPictureBean> lunBoPictureBeans;
     List<String> mItemName;
     private TabItemBeanManager mTabItemBeanManager;
+    private Tuijian tuijian;
     //adapter
     private SectionAdapter sectionAdapter;
     private RelativeLayout ll_vp;
@@ -86,9 +88,9 @@ public class Tuijian_Fragment_Vp extends Fragment {
         mViewPager.setHintView(new ColorPointHintView(getContext(), Color.WHITE, Color.GRAY));
         ll_vp = (RelativeLayout) inflate.findViewById(R.id.ll_vp);
         mTabItemBeanManager = new TabItemBeanManager(getContext());
+        initRecyclerView(v);
         initRetrofit();
         initViewPager();
-        initRecyclerView(v);
 
         return v;
     }
@@ -102,9 +104,14 @@ public class Tuijian_Fragment_Vp extends Fragment {
                 if (ts.isHeader) {
                     //跳转
                 }
+//                else{
+//                    Intent intent=new Intent(getContext(),ShowActivity.class);
+//                    int uid=tuijian.getRoom().get(temp).getList().get(i).getUid();
+//                    intent.putExtra("value",uid);
+//                    startActivity(intent);
+//                }
             }
         });
-
         rfit = new Retrofit.Builder()
                 .baseUrl(TvUrl.TUIAJIN)
                 .build();
@@ -170,7 +177,7 @@ public class Tuijian_Fragment_Vp extends Fragment {
                 try {
                     String json = response.body().string();
                     Gson gson = new Gson();
-                    Tuijian tuijian = gson.fromJson(json, Tuijian.class);
+                    tuijian = gson.fromJson(json, Tuijian.class);
                     //推荐页
                     for (int i = 0; i < tuijian.getRoom().get(0).getList().size(); i++) {
                         if (i == 6) {
